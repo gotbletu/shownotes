@@ -1,0 +1,51 @@
+#-------- FFMPEG Screencasting
+# compile ffmpeg:       http://ubuntuforums.org/showthread.php?t=786095
+# proper screencast:    http://ubuntuforums.org/showthread.php?t=1392026
+
+# Original Code:
+ffmpeg -f alsa -ac 2 -i hw:0,0 -f x11grab -r 30 -s $(xwininfo -root | grep 'geometry' | awk '{print $2;}') -i :0.0 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 -y screencast_out.mkv
+
+# -y = will overwrite output file
+
+#Note: if u have problems with preset errors,
+# run 'x264 -h' look for supported presets and replace it, like
+# ultrafast, superfast, fast ...etc
+
+
+#Note 2: If you like to scale down your videos at the same time when recording
+# add in for example
+# -vf "scale=1280:720"
+
+
+
+#============================================
+# This is What i Use
+
+# Using FFmpeg, fullscreen capture scaled down to 16:9(1280:720) for youtube upload
+ffx-fullscreen-hw() { ffmpeg -f alsa -ac 2 -i hw:0,0 -f x11grab -r 30 \
+        -s $(xwininfo -root | grep 'geometry' | awk '{print $2;}') -i :0.0 \
+        -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 \
+        -vf "scale=1280:720" \
+        -y ~/Public/screencast/aa_screencast_baking.mkv ;}
+
+ffx-fullscreen-pulse() { ffmpeg -f alsa -ac 2 -i pulse -f x11grab -r 30 \
+        -s $(xwininfo -root | grep 'geometry' | awk '{print $2;}') -i :0.0 \
+        -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 \
+        -vf "scale=1280:720" \
+        -y ~/Public/screencast/aa_screencast_baking.mkv ;}
+
+
+# Using FFmpeg, select specific single window with mouse to capture
+ffx-windowspecific-hw() { ffmpeg -f alsa -ac 2 -i hw:0,0 -f x11grab -r 30 \
+        -s $(xwininfo -frame | grep -oEe 'geometry [0-9]+x[0-9]+' | grep -oEe '[0-9]+x[0-9]+') \
+        -i :0.0+$(xwininfo -frame | grep -oEe 'Corners:\s+\+[0-9]+\+[0-9]+' \
+        | grep -oEe '[0-9]+\+[0-9]+' | sed -e 's/\+/,/' ) \
+        -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 \
+        -y ~/Public/screencast/aa_screencast_baking.mkv ;}
+
+ffx-windowspecific-pulse() { ffmpeg -f alsa -ac 2 -i pulse -f x11grab -r 30 \
+        -s $(xwininfo -frame | grep -oEe 'geometry [0-9]+x[0-9]+' | grep -oEe '[0-9]+x[0-9]+') \
+        -i :0.0+$(xwininfo -frame | grep -oEe 'Corners:\s+\+[0-9]+\+[0-9]+' \
+        | grep -oEe '[0-9]+\+[0-9]+' | sed -e 's/\+/,/' ) \
+        -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 \
+        -y ~/Public/screencast/aa_screencast_baking.mkv ;}
