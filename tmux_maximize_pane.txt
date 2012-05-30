@@ -1,0 +1,17 @@
+# maximize / unmaximize panes 
+
+
+# NEW CODE, requires 1 hotkey only to switch back and fort
+# credit youtuber: Gnomeye
+
+bind } run "if [[ $(tmux list-window) =~ tmux-zoom ]]; then tmux last-window; tmux swap-pane -s tmux-zoom.0; tmux kill-window -t tmux-zoom; else tmux new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read'; tmux swap-pane -s tmux-zoom.0; tmux select-window -t tmux-zoom;fi"
+
+
+#============================================
+# OLD CODE, requires 2 hotkey
+# credit : http://superuser.com/questions/238702/maximizing-a-pane-in-tmux/357799#357799
+
+unbind }
+bind } new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \; swap-pane -s tmux-zoom.0 \; select-window -t tmux-zoom
+unbind {
+bind { last-window \; swap-pane -s tmux-zoom.0 \; kill-window -t tmux-zoom
