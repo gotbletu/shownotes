@@ -1,0 +1,11 @@
+Wiimote.A = KEY_ENTER
+Wiimote.B = KEY_ESC
+Wiimote.Up = KEY_UP
+Wiimote.Down = KEY_DOWN
+Wiimote.Left = KEY_LEFT
+Wiimote.Right = KEY_RIGHT
+Wiimote.Minus = KEY_MINUS
+Wiimote.Plus = KEY_EQUAL
+Wiimote.Home = KEY_X
+Wiimote.1 = KEY_SPACE
+Wiimote.2 = KEY_I
