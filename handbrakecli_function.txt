@@ -1,0 +1,5 @@
+# just add it to your ~/.bashrc or zshrc
+
+ipod5g () {
+        HandBrakeCLI -i "$2" -o "${1%.*}.m4v" --preset="iPod"
+}
