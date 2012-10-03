@@ -1,0 +1,5 @@
+# supports MS 2007/2010 doc / docx files, dont upload any sensitive data
+
+doc2pdf () {
+        curl -# -F inputDocument=@"$1" http://www.doc2pdf.net/convert/document.pdf > "${1%.*}.pdf"
+}
