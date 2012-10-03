@@ -1,0 +1,7 @@
+# Change Wallpaper on LXDE using pcmanfm
+
+# from the command line
+pcmanfm -w "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"
+
+# create hotkey
+bash -c 'pcmanfm -w "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"'
