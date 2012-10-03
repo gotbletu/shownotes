@@ -1,5 +1,16 @@
 # just add it to your ~/.bashrc or zshrc
 
+# update version, i think this one is better since,
+# it will not try to overwrite files with the same extensions
+# just add extra name b4 the extension (filename.ipod5g.mp4)
+# loL i learn this the hard way
+
+ipod5g () {
+        HandBrakeCLI -i "$1" -o "${1%.*}.ipod5g.mp4" --preset="iPod"
+}
+
+# old version
 ipod5g () {
         HandBrakeCLI -i "$1" -o "${1%.*}.m4v" --preset="iPod"
 }
+
