@@ -5,3 +5,7 @@ pcmanfm -w "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"
 
 # create hotkey
 bash -c 'pcmanfm -w "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"'
+
+# auto change with cron example:
+# run echo $DISPLAY to get your display
+* * * * * DISPLAY=:0 pcmanfm -w "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"
