@@ -1,0 +1,17 @@
+#-------- Transmission CLI {{{
+#------------------------------------------------------
+# lightweight torrent daemon, has option for cli, webui, ncurses, and gui frontend 
+tsm-clearcompleted() {
+        transmission-remote -l | grep 100% | grep Done | \
+        awk '{print $1}' | xargs -n 1 -I % transmission-remote -t % -r ;}
+tsm() { transmission-remote -l ;} # list items
+tsm-altspeedenable() { transmission-remote --alt-speed ;}
+tsm-altspeeddisable() {	transmission-remote --no-alt-speed ;}
+tsm-add() { transmission-remote -a "$1" ;}
+tsm-pause() { transmission-remote -t"$1" --stop ;}
+tsm-start() { transmission-remote -t"$1" --start ;}
+tsm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # will delete data also
+tsm-remove() { transmission-remote -t"$1" -r ;} # does not delete data
+tsm-info() { transmission-remote -t"$1" -i ;}
+tsm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
+#}}}
