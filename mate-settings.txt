@@ -1,0 +1,37 @@
+caja = nautilus
+marco = matacity
+pluma = gedit
+atril = evince
+engrampa = file roller
+mateconf-editor
+mate-terminal
+mate-applets
+mate-video-player = totem
+
+# Enable Compositing
+mateconftool-2 --set '/apps/marco/general/compositing_manager' --type boolean "true"
+
+# Middle Click Titlebar To Minimize
+mateconftool-2 --set "/apps/marco/general/action_middle_click_titlebar" --type string "minimize"
+
+# Button Placement - Standard Right Side
+mateconftool-2 --set "/apps/marco/general/button_layout" --type string "menu:minimize,maximize,close"
+# mateconftool-2 --set "/apps/marco/general/button_layout" --type string ":close"
+
+# Disable Desktop Icons - Computer,Home Folder, Mounted Drives
+mateconftool-2 --set "/apps/caja/desktop/computer_icon_visible" --type boolean "false"
+mateconftool-2 --set "/apps/caja/desktop/home_icon_visible" --type boolean "false"
+mateconftool-2 --set "/apps/caja/desktop/network_icon_visible" --type boolean "false"
+mateconftool-2 --set "/apps/caja/desktop/trash_icon_visible" --type boolean "false"
+mateconftool-2 --set "/apps/caja/desktop/volumes_visible" --type boolean "false"
+
+#Disable Screensaver & Change Idle Time
+mateconftool-2 --set '/apps/mate-screensaver/idle_activation_enabled' --type boolean "false"
+mateconftool-2 --set '/apps/mate-screensaver/lock_enabled' --type boolean "false"
+	# in minutes
+mateconftool-2 --set '/desktop/mate/session/idle_delay' --type integer "60"
+
+# Power Management - Values are in seconds
+mateconftool-2 --set '/apps/mate-power-manager/timeout/sleep_computer_ac' --type integer "7200"
+mateconftool-2 --set '/apps/mate-power-manager/timeout/sleep_display_ac' --type integer "3600"
+# mateconftool-2 --set '/apps/mate-power-manager/disks/spindown_enable_ac' --type boolean "true"
