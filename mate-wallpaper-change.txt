@@ -1,0 +1,19 @@
+# hotkey
+------------
+bash -c 'mateconftool-2 --type string --set /desktop/mate/background/picture_filename "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"'
+
+
+# note: the reason we are not using cron is because theres a bug in mateconftools/gconftools
+#	 that doesnt allow it to, there is a workaround but alot of hassel
+
+# script to auto change wallpaper
+---------------------------------
+#!/bin/bash
+while true; do
+
+# in seconds
+sleep 3600
+
+mateconftool-2 --type string --set /desktop/mate/background/picture_filename "$(find ~/Pictures/Wallpapers -type f | shuf -n1)"
+
+done
