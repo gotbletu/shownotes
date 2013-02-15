@@ -1,0 +1,55 @@
+Enlightenment E17 Settings
+
+
+1. Change mouse pointer focus
+Menu>Settings>All >Windows>Window Focus
+Click Window to Focus
+
+2. Disable Main Menu Click
+Menu>Settings>All>Input>Mouse Bindings
+	# Mouse Button > Left; Menu > Show Main Menu
+Delete
+
+3. Screensaver / Suspend timeout
+Menu>Settings>All >Screen>Blanking
+90mins
+Suspend on blank
+Suspend even if AC
+
+4. Compositing
+Menu>Settings>Modules>Look>Composite
+	Load
+Menu>Settings>All>Look>Composite>Advance
+	Effects:
+		# disable guake fullscreen lag
+		Apps:
+			Style:none
+		Engine:
+			OpenGL
+
+5. Panel Settings
+Right-click on panel > Settings
+OR
+Menu>Settings>Shelf>Shelf>Settings
+	Position:
+		Bottom-Left
+	Size:
+		32 pixel
+		Shrink to Content Width
+	AutoHide:
+		Hide timeout: 0.2
+		Hide duration: 0.05
+
+6. Change Titlebar Double click
+Menu>Settings>All>Advanced>SignalBindings
+
+	e.event.titlebar > mouse.down.1.double > maximize
+
+
+7. Placement Center
+Menu>Settings>All>Windows> Windows Display
+	New Windows > Place at mouse pointer
+
+8. Hide Desktop Icons
+Menu>Settings>All>File>FileManager>Display
+	Icons on Desktop
