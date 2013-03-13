@@ -8,7 +8,7 @@
 #       http://gotbletu.blogspot.com/ | http://www.youtube.com/user/gotbletu
 #
 #	description: search mp3skull.com from command line, then streams music using mplayer
-#	useage: mp3skull-cli <search term>
+#	useage: mp3skull <search term>
 #	requires: mplayer lynx (wget for download)
 #	date: March 12, 2013
         keyword="$(echo "http://mp3skull.com/mp3/$@.html" | sed 's/ /\_/g')"
