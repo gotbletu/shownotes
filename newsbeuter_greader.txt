@@ -1,0 +1,7 @@
+urls-source "googlereader"
+googlereader-login "username"
+googlereader-password "yourpass"
+
+googlereader-flag-share "h"
+googlereader-flag-star "s"
+
