@@ -1,0 +1,4 @@
+# send link to podbeuter queue
+
+podqueue() { echo "$1 \"$HOME/Downloads/$(echo "$1" | awk -F'/' '{ print $NF }')\"" >> ~/.newsbeuter/queue ;}
+

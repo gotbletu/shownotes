@@ -1,0 +1,9 @@
+" ~/.vimrc
+" copy or paste from X11 clipboard
+" http://vim.wikia.com/wiki/GNU/Linux_clipboard_copy/paste_with_xclip
+" requires: xclip
+" usage: visual mode select then hit F6 to copy
+" 	hit F7 to paste from GUI to vim without formating issues
+vmap <F6> :!xclip -f -sel clip<CR>
+map <F7> mz:-1r !xclip -o -sel clip<CR>`z
+
