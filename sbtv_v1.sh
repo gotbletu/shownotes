@@ -3,6 +3,8 @@
 # requires: xdotool
 # xdotool getmouselocation
 # xdotool mousemove x y
+# made by gotbleu
+# improved by jonny
 
 # ------------------------------------------------------
 # y cordinates ranges (top to bottom)
@@ -17,8 +19,8 @@ BOX4=$(shuf -i 285-357 -n 1)
 
 # x & y cordinates ranges for the right green arrow
 # will select a random number within that range
-X_ARROW=$(shuf -i 366-375 -n 1)	# left to right
-Y_ARROW=$(shuf -i 540-565 -n 1) # top to bottom
+X_ARROW=$(shuf -i 369-373 -n 1)	# left to right
+Y_ARROW=$(shuf -i 555-560 -n 1) # top to bottom
 
 # sound play when finish
 alertme() {
@@ -27,7 +29,7 @@ alertme() {
 #-----------------------------------------------------
 
 # sleep timer before next click (dont need to change this)
-SLPNUM=$(shuf -i 55-80 -n 1)
+SLPNUM=$(shuf -i 65-90 -n 1)
 
 
 # made it move 2 times to the same box
@@ -72,6 +74,19 @@ method_a() {
 	alertme
 }
 
+method_c() {
+        # initial sleep time delay; so u can move your terminal/apps out of the way
+        sleep 3
+        video_one && video_two && video_three && video_four
+        arrow_click
+	ever
+}
+
+ever() {
+	video_one && video_two && video_three && video_four
+        arrow_click
+	method_c
+}
 # start from box3
 method_b() {
 	# initial sleep time delay; so u can move your terminal/apps out of the way
@@ -111,11 +126,13 @@ shit_b() {
 if [[ "$1" == 1 ]]; then
 	method_a
 elif [[ "$1" == 2 ]]; then
-	method_b	
+	method_b
 elif [[ "$1" == 1shit ]]; then
 	shit_a
 elif [[ "$1" == 2shit ]]; then
 	shit_b
+elif [[ "$1" == 3 ]]; then
+        method_c
 else
-	echo "enter argument 1, 2, 1shit, or 2shit. example: sbtv 2"
+	echo "enter argument 1, 2, 3, 1shit, or 2shit. example: sbtv 2"
 fi
