@@ -1,0 +1,14 @@
+## for ~/.tmux.conf
+
+# Urlviewer; grab links from any tmux window/pane and open it with external apps
+# https://wiki.archlinux.org/index.php/Tmux#Browsing_URL.27s
+bind-key u capture-pane \; save-buffer /tmp/tmux-buffer \; new-window -n "urlview" '$SHELL -c "urlview < /tmp/tmux-buffer"'
+
+
+
+## for ~/.urlview
+
+# set browser
+# http://does-not-exist.org/mail-archives/mutt-users/msg18479.html
+COMMAND exec >> /tmp/urlview.out 2>&1; set -x; firefox
+
