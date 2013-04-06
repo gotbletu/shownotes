@@ -41,5 +41,5 @@ if [ -f ${DIR}/${FILE} ]; then
   xsel ${XSEL_ARGS} < ${DIR}/${FILE}
   # Paste into the current application.
   xdotool key ctrl+v		#gui paste
-  xdotool key ctrl+shift+v	#cli
+#  xdotool key ctrl+shift+v	#cli
 fi

@@ -46,5 +46,5 @@ if [ "${TEXT}" ]; then
   echo -n ${TEXT} | xsel ${XSEL_ARGS}
   # Paste into the current application.
   xdotool key ctrl+v		#gui paste
-  xdotool key ctrl+shift+v	#cli
+#  xdotool key ctrl+shift+v	#cli
 fi
