@@ -1,0 +1,11 @@
+# old compiz grid 0.8 edge binding commands, change tile with mouse click on each hotcorner
+
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_1' 'keyup Control_L' 'keyup Alt_L'
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_2' 'keyup Control_L' 'keyup Alt_L'
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_3' 'keyup Control_L' 'keyup Alt_L'
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_4' 'keyup Control_L' 'keyup Alt_L'
+
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_6' 'keyup Control_L' 'keyup Alt_L'
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_7' 'keyup Control_L' 'keyup Alt_L'
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_8' 'keyup Control_L' 'keyup Alt_L'
+xte 'keydown Control_L' 'keydown Alt_L' 'key KP_9' 'keyup Control_L' 'keyup Alt_L'
