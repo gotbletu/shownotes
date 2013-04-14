@@ -1,0 +1,5 @@
+# for ~/.tmux.conf
+# urlscan as context and url view
+bind-key U capture-pane \; save-buffer /tmp/tmux-buffer \; \
+	new-window -n "urlscan" '$SHELL -c "urlscan -c < /tmp/tmux-buffer"'
+
