@@ -1,0 +1,103 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+PS1='[\u@ \W]\$ '
+
+
+alias hello='echo "hello tubers"'
+
+
+#reload bashrc
+alias brc='source ~/.bashrc'
+
+
+alias ff='feh -B white -g 1000x900'
+
+# functions
+
+function ff2 { feh -B white -g 1000x900 ;}
+
+ff3() { feh -B white -g 1000x900 ;}
+
+ff4() {
+ feh -B white -g 1000x900
+feh -B white -g 1000x900
+feh -B white -g 1000x900
+feh -B white -g 1000x900
+feh -B white -g 1000x900
+feh -B white -g 1000x900
+
+
+}
+
+
+
+convert2video() { ffmpeg -i "$1" -codec dfdsf -o "$2" ;}
+convert2images() { convert $@ ;}
+
+
+
+alias name='  code here '
+alias name=" code here "
+
+function name {  code here ;}
+name() { code here ;}
+name() {
+
+code here
+
+}
+
+
+
+alias mount='mount | column -t'
+alias nvlc='nvlc --no-color'
+alias weechat='weechat-curses'
+alias trash='trash-put'
+alias wget='wget -c'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+
+
+
+py-help27() { python2.7 -c "help('$1')" ;}
+
+function :h { vim +":h $1" +'wincmd o' +'nnoremap q :q!<CR>' ;}
+
+calc() { python -ic "from __future__ import division; from math import *; from random import *" ;}
+
+
+cmdfu() { curl "http://www.commandlinefu.com/commands/matching/$(echo "$@" \
+	| sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;}
+
+down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
+
+# uses ip or ifconfig, good on older or newer system
+m-ip() {
+        echo "--------------- Network Information ---------------"
+	# newer system like arch
+	ip addr | awk '/global/ {print $1,$2}' | cut -d\/ -f1
+	ip addr | awk '/global/ {print $3,$4}'
+	ip addr | awk '/ether/ {print $1,$2}'
+	ip addr | awk '/scope link/ {print $1,$2}' | cut -d\/ -f1
+	# older system like debian
+        ifconfig | awk '/inet addr/ {print $1,$2}' | awk -F: '{print $1,$2}'
+        ifconfig | awk '/Bcast/ {print $3}' | awk -F: '{print $1,$2}'
+        ifconfig | awk '/inet addr/ {print $4}' | awk -F: '{print $1,$2}'
+        ifconfig | awk '/HWaddr/ {print $4,$5}'
+        ifconfig | awk '/Scope:Link/ {print $1,$3}' | cut -d\/ -f1
+        echo Current IP $(curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+")
+        echo "---------------------------------------------------"
+}
+
+
+
