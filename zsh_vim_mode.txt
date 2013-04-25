@@ -3,6 +3,12 @@
 # enable vim mode on commmand line
 bindkey -v
 
+# no delay entering normal mode
+# https://coderwall.com/p/h63etq
+# https://github.com/pda/dotzsh/blob/master/keyboard.zsh#L10
+# 10ms for key sequences
+KEYTIMEOUT=1
+
 # show vim status
 # http://zshwiki.org/home/examples/zlewidgets
 function zle-line-init zle-keymap-select {
