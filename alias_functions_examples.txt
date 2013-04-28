@@ -8,48 +8,27 @@
 alias ls='ls --color=auto'
 PS1='[\u@ \W]\$ '
 
+alias hello='echo "hello youtube"'
 
-alias hello='echo "hello tubers"'
 
-
-#reload bashrc
+# reload bashrc file
 alias brc='source ~/.bashrc'
 
+alias editbrc='leafpad ~/.bashrc &'
 
-alias ff='feh -B white -g 1000x900'
+alias ff="feh -B white -g 800x600"
+
 
 # functions
 
-function ff2 { feh -B white -g 1000x900 ;}
-
-ff3() { feh -B white -g 1000x900 ;}
-
-ff4() {
- feh -B white -g 1000x900
-feh -B white -g 1000x900
-feh -B white -g 1000x900
-feh -B white -g 1000x900
-feh -B white -g 1000x900
-feh -B white -g 1000x900
+pix() { feh -B white -g 800x600 $1 ;}
 
 
-}
-
-
-
-convert2video() { ffmpeg -i "$1" -codec dfdsf -o "$2" ;}
-convert2images() { convert $@ ;}
-
-
-
-alias name='  code here '
-alias name=" code here "
-
-function name {  code here ;}
-name() { code here ;}
+function name { code ;}
+name() { code ;}
 name() {
 
-code here
+	block of code
 
 }
 
@@ -68,6 +47,7 @@ alias ......="cd ../../../../.."
 
 
 
+youtube-listen() { youtube-viewer -n $@ ;}	# no video, music/audio only
 
 py-help27() { python2.7 -c "help('$1')" ;}
 
@@ -98,6 +78,21 @@ m-ip() {
         echo Current IP $(curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+")
         echo "---------------------------------------------------"
 }
+
+say() { 
+
+	mplayer -user-agent Mozilla \
+	"http://translate.google.com/translate_tts?ie=UTF-8&tl="$1"&q=$(echo "$@" \
+	| cut -d ' ' -f2- | sed 's/ /\+/g')" > /dev/null 2>&1 ;}
+
+say-translation() { 
+
+	lang=$1
+	trans=$(translate {=$lang} "$(echo "$@" | cut -d ' ' -f2- | sed 's/ /\+/g')" )	
+	echo $trans
+	mplayer -user-agent Mozilla \
+	"http://translate.google.com/translate_tts?ie=UTF-8&tl=$lang&q=$trans" > /dev/null 2>&1 ;}
+#}}}
 
 
 
