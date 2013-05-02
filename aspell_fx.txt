@@ -1,0 +1,4 @@
+check-word() { echo "$1" | aspell -a ;}
+check-list() { cat "$1" | aspell list ;}
+check-file() { aspell check "$1" ;}
+
