@@ -1,36 +1,38 @@
-# social network; chatting
-bind-key M-c new-window -n chat -c $HOME 'finch; $SHELL -i' \; \
-	split-window -v -p 50 -t 1 'weechat-curses; $SHELL -i' \; \
-	split-window -h -p 70 -t 1 'turses; $SHELL -i' \; \
+## for ~/.tmux.conf
+# -v = split horizontal
+# -h = split veritical
+
+# chatting
+bind-key M-c new-window -n chat -c $HOME \; \
+	send-keys 'centerim5' 'Enter' \; \
+	split-window -v -p 50 -t 1  \; \
+	send-keys 'weechat-curses' 'Enter' \; \
 	select-pane -t 2
 
 # local music and streaming
-bind-key M-m new-window -n music -c $HOME 'figlet Radio ; $SHELL -i' \; \
-	split-window -v -p 50 -t 1 'cmus; $SHELL -i' \; \
-	split-window -h -p 70 -t 1 'figlet Search Music ;$SHELL -i' \; \
+bind-key M-m new-window -n music -c $HOME \; \
+	send-keys 'clear && figlet Radio' 'Enter' \; \
+	split-window -v -p 50 -t 1 \; \
+	send-keys 'cmus' 'Enter' \; \
+	split-window -h -p 70 -t 1 \; \
+	send-keys 'clear && figlet Search Music' 'Enter' \; \
 	select-pane -t 2
 
 # download and search torrent
-bind-key M-t new-window -n torrent -c ~/Videos 'figlet Torrent - Flexget; $SHELL -i' \; \
-	split-window -v -p 50 -t 1 'transmission-remote-cli; $SHELL -i' \; \
+bind-key M-t new-window -n torrent -c ~/Videos \; \
+	send-keys 'trz' 'Enter' \; \
+	split-window -v -p 50 -t 1 \; \
+	send-keys 'transmission-remote-cli' 'Enter' \; \
 	select-pane -t 1
 
-# launch with surfraw and look at computer stats
-bind-key M-l new-window -n launch -c $HOME 'htop; $SHELL -i' \; \
-	split-window -v -p 50 -t 1 'figlet KeepassC; $SHELL -i' \; \
-	split-window -v -p 1 -t 2 '$SHELL -i' \; \
-	select-pane -t 3
-
-# rss news and websites
-bind-key M-n new-window -n news -c $HOME '$SHELL -i' \; \
-	split-window -v -p 50 -t 1 'newsbeuter; $SHELL -i' \; \
-	split-window -h -p 70 -t 1 'cortex; $SHELL -i' \; \
-	select-pane -t 2
-
 # work
-bind-key M-w new-window -n work -c $HOME 'figlet Workhorse; $SHELL -i' \; \
-	split-window -v -p 30 -t 1 'ranger ~/Documents; $SHELL -i' \; \
-	split-window -h -p 35 -t 1 'tty-clock -t; $SHELL -i' \; \
-	split-window -v -p 50 -t 3 'cmatrix; $SHELL -i' \; \
+bind-key M-w new-window -n work -c $HOME \; \
+	send-keys 'clear && figlet Workhorse' 'Enter' \; \
+	split-window -v -p 30 -t 1 \; \
+	send-keys 'ranger ~/Documents' 'Enter' \; \
+	split-window -h -p 35 -t 1 \; \
+	send-keys 'tty-clock -t' 'Enter' \; \
+	split-window -v -p 50 -t 3 \; \
+	send-keys 'cmatrix' 'Enter' \; \
 	select-pane -t 2
 
