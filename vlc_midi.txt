@@ -1,0 +1,21 @@
+%% install synthesizer and soundfonts sample
+%% https://wiki.archlinux.org/index.php/Timidity#Soundfonts
+yaourt fluidsynth fluidr3
+apt-get install fluidsynth vlc-plugin-fluidsynth fluid-soundfont-gm
+
+%% add in the soundfont location to vlc
+%% https://wiki.archlinux.org/index.php/MIDI#VLC
+%% gui way
+open VLC > Tools > Preferences
+	Checkmark "All" on settings > Input/Codecs > Audio Codec > FluidSynth
+
+%% cli way
+pacman -Qql fluidr3
+vim ~/.config/vlc/vlcrc
+	soundfont=/usr/share/soundfonts/fluidr3/FluidR3GM.SF2
+
+%% debian base
+dpkg -L fluid-soundfont-gm
+vim ~/.config/vlc/vlcrc
+	soundfont=/usr/share/sounds/sf2/FluidR3_GM.sf2
+
