@@ -1,0 +1,9 @@
+# cli pastebin client
+alias pastebinit='pastebinit -a "gotbletu" -b "http://paste2.org" -t "git biz z livin, gotbletu was here"'
+
+# copy/paste for linux machines (Mac style)
+alias pbcopy='xclip -selection clipboard'	# copy to clipboard, ctrl+c, ctrl+shift+c
+alias pbpaste='xclip -selection clipboard -o'	# paste from clipboard, ctrl+v, ctrl+shitt+v
+alias pbselect='xclip -selection primary -o'	# paste from highlight, middle click, shift+insert
+alias pbdump='pbpaste | pastebinit | pbcopy'	# dump text to pastebin server
+
