@@ -1,6 +1,6 @@
 # your screenshot folder location
 # u can use /tmp if you want it to get delete on shutdown
-export PATH_SCREENSHOT=~/Pictures/Screenshots
+export PATH_SCREENSHOT=~/Pictures
 
 # take screenshot fullscreen, single window or draw a box
 pix() { scrot -d 2 "$PATH_SCREENSHOT/fullscr_`date +'%F_%Hh%M'`.png" ;}
