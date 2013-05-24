@@ -1,3 +1,5 @@
+# this is notes for video: http://www.youtube.com/watch?v=Wd7EeliSev4
+
 urls-source "googlereader"
 googlereader-login "username"
 googlereader-password "yourpass"

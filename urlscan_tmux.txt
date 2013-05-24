@@ -1,3 +1,6 @@
+# this is notes for video: http://www.youtube.com/watch?v=c-3IdFufY5Q
+
+
 # for ~/.tmux.conf
 # urlscan as context and url view
 bind-key U capture-pane \; save-buffer /tmp/tmux-buffer \; \

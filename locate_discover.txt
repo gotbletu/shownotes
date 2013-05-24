@@ -1,3 +1,5 @@
+# this is notes for video: http://www.youtube.com/watch?v=5kpETDZQAyk
+
 discover () {
         keyword=$(echo "$@" |  sed 's/ /.*/g' | sed 's:|:\\|:g' | sed 's:(:\\(:g' | sed 's:):\\):g') 
         locate -ir $keyword

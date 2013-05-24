@@ -1,4 +1,6 @@
 #!/bin/bash
+# video demo at: http://www.youtube.com/watch?v=90xoathBYfk
+
 # written by "mhwombat": https://bbs.archlinux.org/viewtopic.php?id=71938&p=2
 # Based on "snippy" by "sessy" 
 # (https://bbs.archlinux.org/viewtopic.php?id=71938)

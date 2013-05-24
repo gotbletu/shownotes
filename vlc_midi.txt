@@ -1,3 +1,6 @@
+# this is notes for video: http://www.youtube.com/watch?v=OP5xkU6x84M
+
+
 %% install synthesizer and soundfonts sample
 %% https://wiki.archlinux.org/index.php/Timidity#Soundfonts
 yaourt fluidsynth fluidr3

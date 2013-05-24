@@ -1,4 +1,5 @@
 #!/bin/bash
+# video demo at: http://www.youtube.com/watch?v=aK4mAAScnAo
 #             _   _     _      _         
 #  __ _  ___ | |_| |__ | | ___| |_ _   _ 
 # / _` |/ _ \| __| '_ \| |/ _ \ __| | | |

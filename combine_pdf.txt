@@ -1,1 +1,3 @@
+# this is notes for video: http://www.youtube.com/watch?v=eQoOk5Xbt3M
+
 combine-pdf() { gs -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=combinedpdf_`date +'%F_%Hh%M'`.pdf -f "$@" ;}

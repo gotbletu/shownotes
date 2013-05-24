@@ -1,3 +1,5 @@
+# this is notes for video: http://www.youtube.com/watch?v=UEwz5eeaZzc
+
 check-word() { echo "$1" | aspell -a ;}
 check-list() { cat "$1" | aspell list ;}
 check-file() { aspell check "$1" ;}

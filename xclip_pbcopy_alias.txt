@@ -1,3 +1,7 @@
+# this is notes for video: http://www.youtube.com/watch?v=fKP0FLp3uW0
+
+
+
 # copy/paste for linux machines (Mac style)
 alias pbcopy='xclip -selection clipboard'	# copy to clipboard, ctrl+c, ctrl+shift+c
 alias pbpaste='xclip -selection clipboard -o'	# paste from clipboard, ctrl+v, ctrl+shitt+v

@@ -1,3 +1,5 @@
+# this is notes for video: http://www.youtube.com/watch?v=XvlTlyEasD8
+
 # old compiz grid 0.8 edge binding commands, change tile with mouse click on each hotcorner
 
 xte 'keydown Control_L' 'keydown Alt_L' 'key KP_1' 'keyup Control_L' 'keyup Alt_L'

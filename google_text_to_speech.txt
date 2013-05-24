@@ -1,3 +1,5 @@
+# this is notes for video: http://www.youtube.com/watch?v=UhVKuAozSMc
+
 say() { 
         # limit to 100 character or less
         # language code: http://developers.google.com/translate/v2/using_rest#language-params

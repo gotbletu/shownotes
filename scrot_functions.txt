@@ -1,3 +1,6 @@
+# this is notes for video: http://www.youtube.com/watch?v=Hh8G1aBp8gc
+
+
 # your screenshot folder location
 # u can use /tmp if you want it to get delete on shutdown
 export PATH_SCREENSHOT=~/Pictures

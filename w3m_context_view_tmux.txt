@@ -1,3 +1,6 @@
+# this is notes for video: http://www.youtube.com/watch?v=C7YPjbrTeCs
+
+
 # for ~/.tmux.conf
 # w3m as a url context viewer and launcher
 # http://www.mail-archive.com/mutt-users@mutt.org/msg09657.html

@@ -1,5 +1,6 @@
-# maximize / unmaximize panes 
+# this is notes for video: http://www.youtube.com/watch?v=6_PVJQvhBeI
 
+# maximize / unmaximize panes 
 
 # NEW CODE, requires 1 hotkey only to switch back and fort
 # credit youtuber: Gnomeye

@@ -1,3 +1,5 @@
+# this is notes for video: http://www.youtube.com/watch?v=9BFaLAa428k
+
 #-------- Color Manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'             # begin blinking
 export LESS_TERMCAP_md=$'\E[01;31m'             # begin bold

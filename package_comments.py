@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# video demo at: http://www.youtube.com/watch?v=m6wfVxMTedY
+#
 # -*- coding: utf-8 -*-
 #
 #	   Package Comments 0.1

@@ -1,3 +1,6 @@
+# this is notes for video: 
+
+
 # cli pastebin client
 alias pastebinit='pastebinit -a "gotbletu" -b "http://paste2.org" -t "git biz z livin, gotbletu was here"'
 
