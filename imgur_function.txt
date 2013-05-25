@@ -1,0 +1,16 @@
+# this is notes for video: http://www.youtube.com/watch?v=7-9uYSGyvU0
+
+
+# upload to image hosting server
+# http://www.commandlinefu.com/commands/view/9341
+upl-imgur() { 
+	curl -# -F image=@"$1" -F "key=1913b4ac473c692372d108209958fd15" \
+	http://api.imgur.com/2/upload.xml | grep -Eo "<original>(.)*</original>" \
+	| grep -Eo "http://i.imgur.com/[^<]*"
+}
+
+# http://www.commandlinefu.com/commands/view/4004
+upl-ompldr() { 
+	curl -# -F file1=@"$1" http://ompldr.org/upload|awk '/File:/' | cut -d\> -f5- | cut -d\/ -f1-4
+}
+
