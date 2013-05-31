@@ -1,0 +1,23 @@
+This is notes for video: http://www.youtube.com/watch?v=FeoVsC4U_0A
+
+
+
+
+#-------- Calibre CLI {{{
+#------------------------------------------------------
+# cross platform ebook manager supports many formats and devices
+# demo video: http://www.youtube.com/watch?v=FeoVsC4U_0A
+# http://manual.calibre-ebook.com/cli/calibredb.html
+# usage:	cmx-comic ; list by default
+# 		cmx-comic add <file>
+# 		cmx-comic remove <id>
+# 		cmx-comic remove <range> ; 23,30,50-55; last number not included
+# 		cmx-comic list -s <keyword>
+# 		cmx-comic list -s "<multiple keywords>"
+cmx-comic() { calibredb ${@:-list} --library-path ~/.calibre/Comic ;}
+cmx-dojinshi() { calibredb ${@:-list} --library-path ~/.calibre/Dojinshi ;}
+cmx-eurotica() { calibredb ${@:-list} --library-path ~/.calibre/Eurotica ;}
+cmx-hanime() { calibredb ${@:-list} --library-path ~/.calibre/Hanime ;}
+cmx-normal() { calibredb ${@:-list} --library-path ~/.calibre/Normal ;}
+cmx-textbook() { calibredb ${@:-list} --library-path ~/.calibre/Textbook ;}
+#}}}
