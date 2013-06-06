@@ -10,10 +10,20 @@ crontab -e
 env EDITOR=xdg-open crontab -e
 
 
-to test if crontab is working to outputting a log file
+to test if crontab is working try to outputting a log file
 exmaple: 
 * * * * * ~/Scripts/timebomb.sh > /tmp/timebomb_error.log 2>&1
 
+note: one of the most common reasons crontab doesnt work
+is because it wants you to put the absolute path to an app/location
+
+Ex:
+transmission-gtk
+vs
+/usr/bin/transmission-gtk
+
+# use the which command to figure it out the path
+which transmission-gtk
 
 
 
@@ -22,7 +32,7 @@ exmaple:
 ## for crontab
 
 # to run flexget without generating log files
-@hourly flexget --cron
+@hourly /usr/bin/flexget --cron
 
 # start transmission-gtk version minimized if it is not already running
 */30 * * * * export DISPLAY=:0 && if pidof -x /usr/bin/transmission-gtk; then exit; else /usr/bin/transmission-gtk -m; fi &
