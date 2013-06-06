@@ -1,0 +1,32 @@
+This is notes for video: https://www.youtube.com/watch?v=N3NyZzMN_Uw
+
+
+
+
+# to open crontab with commandline editor
+crontab -e
+
+# to open crontab with gui editor
+env EDITOR=xdg-open crontab -e
+
+
+to test if crontab is working to outputting a log file
+exmaple: 
+* * * * * ~/Scripts/timebomb.sh > /tmp/timebomb_error.log 2>&1
+
+
+
+
+
+----------------
+## for crontab
+
+# to run flexget without generating log files
+@hourly flexget --cron
+
+# start transmission-gtk version minimized if it is not already running
+*/30 * * * * export DISPLAY=:0 && if pidof -x /usr/bin/transmission-gtk; then exit; else /usr/bin/transmission-gtk -m; fi &
+
+# this is for transmission-cli/daemon version
+@hourly if pidof -x /usr/bin/transmission-daemon; then exit; else /usr/bin/transmission-daemon; fi &
+
