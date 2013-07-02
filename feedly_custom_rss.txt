@@ -1,0 +1,11 @@
+## For Chrome/Chromium Browsers
+1. Install RSS Subscription Extension (by Google)
+
+https://chrome.google.com/webstore/detail/rss-subscription-extensio/nlbjncdgjeocebhnmkbbbdekmmmcbfjd?hl=en-US
+
+2. Add Feedly option to your RSS Extension
+http://cloud.feedly.com/#subscription/feed/%s
+
+if that one does not work try
+http://www.feedly.com/home#subscription/feed/%s
+
