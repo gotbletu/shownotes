@@ -1,3 +1,6 @@
+This is notes for video: https://www.youtube.com/watch?v=bHTZr15vUHo
+
+
 ## For Chrome/Chromium Browsers
 1. Install RSS Subscription Extension (by Google)
 
