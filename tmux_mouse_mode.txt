@@ -1,0 +1,34 @@
+Notes for video: http://www.youtube.com/watch?v=f1jrm8gFpO0
+
+
+
+add to ~/.tmux.conf
+
+#-------- Mouse {{{
+#------------------------------------------------------
+# mouse to highlight and copy; to paste use prefix + ]
+# http://awhan.wordpress.com/2012/04/18/tmux-copy-paste-with-mouse/
+
+# temporarily allow regular terminal copy mode while mouse mode is enable
+# visual line:  shift+mouse
+# visual block: ctrl+shift+mouse <-- only works on some terminals
+# visual block: ctrl+mouse <-- (while mouse mode is disable) only works on some terminals
+
+# toggle mouse on/off
+# http://tangledhelix.com/blog/2012/07/16/tmux-and-mouse-mode/
+bind-key m \
+  set-option -g mode-mouse on \;\
+  set-option -g mouse-resize-pane on \;\
+  set-option -g mouse-select-pane on \;\
+  set-option -g mouse-select-window on \;\
+  display-message 'Mouse: ON'
+bind-key M \
+  set-option -g mode-mouse off \;\
+  set-option -g mouse-resize-pane off \;\
+  set-option -g mouse-select-pane off \;\
+  set-option -g mouse-select-window off \;\
+  display-message 'Mouse: OFF'
+
+
+# }}}
+
