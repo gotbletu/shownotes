@@ -1,0 +1,17 @@
+Notes for video:
+
+
+# python http server
+# connect browser to:	http://ip:port
+# ex:			http://192.168.1.102:8000
+
+# how to figure out your ip address
+# ifconfig
+# or
+# ip addr
+
+# how figure out the python version
+# python -V
+
+alias myserver="python3 -m http.server"
+alias myserver2="python2 -m SimpleHTTPServer"

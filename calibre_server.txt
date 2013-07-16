@@ -1,0 +1,14 @@
+Note for video: 
+
+
+# content server
+# http://manual.calibre-ebook.com/cli/calibre-server.html
+# http://192.168.1.xxx:8500
+cmx-server() { 	calibre-server -p 8500 --daemonize --with-library ~/.calibre/Comic
+		calibre-server -p 8501 --daemonize --with-library ~/.calibre/Dojinshi
+		calibre-server -p 8502 --daemonize --with-library ~/.calibre/Eurotica
+		calibre-server -p 8503 --daemonize --with-library ~/.calibre/Hanime
+		calibre-server -p 8504 --daemonize --with-library ~/.calibre/Normal
+		calibre-server -p 8505 --daemonize --with-library ~/.calibre/Textbook
+}
+
