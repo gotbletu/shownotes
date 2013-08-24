@@ -1,4 +1,4 @@
-Notes for video:
+Notes for video: http://www.youtube.com/watch?v=FFIjMYzkHhc
 
 
 # python http server
