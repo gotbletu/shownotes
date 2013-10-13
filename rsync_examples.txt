@@ -1,0 +1,24 @@
+Notes for video:  http://www.youtube.com/watch?v=a2Kvj9ff8Qk
+
+
+rsync -avr ~/Public/sample /tmp/junko
+
+-a = archive
+-v = verbose
+-r = recursive
+
+# dont create parent folder (trailing slash)
+rsync -avr ~/Public/sample/ /tmp/junko
+
+# delete files from destination folder that
+# does not exist anymore in source folder
+rsync -avr --delete ~/Public/sample/ /tmp/junko
+
+
+-------------
+# My MP3 sync sh/t for ipod/rockbox
+# backup directory structure that has mp3s only, skips any other files
+
+rsync -avrm --delete-excluded --include '*/' --include '*.mp3' --exclude '*' ~/Public/sample/ /tmp/junko
+
+-m = delete empty folder
