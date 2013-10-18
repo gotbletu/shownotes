@@ -19,6 +19,15 @@ rsync -avr --delete ~/Public/sample/ /tmp/junko
 # My MP3 sync sh/t for ipod/rockbox
 # backup directory structure that has mp3s only, skips any other files
 
-rsync -avrm --delete-excluded --include '*/' --include '*.mp3' --exclude '*' ~/Public/sample/ /tmp/junko
+rsync -avrm --delete-excluded --include '*/' --include '*.mp3' --exclude '*' /SOURCE/ /DESTINATION
 
 -m = delete empty folder
+
+
+# For FAT32/NTFS filesystem with rsync
+# basically this prevents rsync from copying again and again every fucking time on fat32/ntfs and maybe other filesystems other than linux
+# since my ipod uses fat32; the timestamp is crap; so to fix this
+
+rsync -avrm --delete-excluded --modify-window=2 --include '*/' --include '*.mp3' --exclude '*' /SOURCE/ /DESTINATION
+
+--modify-window=NUM   -->  compare mod-times with reduced accuracy
