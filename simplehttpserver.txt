@@ -1,0 +1,28 @@
+Notes for video: http://www.youtube.com/watch?v=au8DlTAHx5o
+
+
+download location:
+https://github.com/tualatrix/tools/blob/master/SimpleHTTPServerWithUpload.py
+
+or 
+
+https://code.google.com/p/autosetup1/downloads/detail?name=SimpleHTTPServerWithUpload.py
+
+
+
+commands used:
+
+# give execute permissions to script
+chmod +x SimpleHTTPServerWithUpload.py
+
+# run script manually
+python2.7 SimpleHTTPServerWithUpload.py
+
+# edit bashrc with nano
+nano ~/.bashrc
+
+	Ctrl+o, Enter, Ctrl+x --> save file and exit
+
+# functions for ~/.bashrc
+httpserver() { python2.7 ~/tmp/SimpleHTTPServerWithUpload.py ${1:-8000} ;}
+
