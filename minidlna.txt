@@ -1,0 +1,52 @@
+Notes for Video:  http://www.youtube.com/watch?v=IceJYz5bM8w
+
+
+1)
+# install minidlna on debian/ubuntu base systems
+sudo apt-get install minidlna
+
+
+2)
+# edit configs; only 3 shits u need to worry about
+sudo nano /etc/minidlna.conf
+
+	## add in your folders
+	## note: use symlinks to add additional folders if theres an error
+	## note2: it will auto scan new files added to the folder, so you dont have to rebuild your database everytime
+	media_dir=A,/home/heoyea-cb/Music
+	media_dir=P,/home/heoyea-cb/Pictures
+	media_dir=V,/home/heoyea-cb/Videos
+
+	# Path to the directory that should hold the database and album art cache.
+	db_dir=/var/lib/minidlna
+
+	# Name that the DLNA server presents to clients.
+	friendly_name=Gotbletu_Server
+
+Save and exit; Ctrl+o, Enter, Ctrl+x
+
+
+3)
+# rebuild database; wait like 5 or 10mins if you got a ton of porn and music =)
+# there is no progress bar to show you when is done; if you have logs enable then u can check it in there
+sudo service minidlna force-reload
+
+
+4)
+# if you ever need to restart or stop the minidlna daemon
+sudo service minidlna stop
+sudo service minidlna restart
+
+5)
+# You need a upnp/dlna client for your system/mobile device
+Android Client:
+
+	Yaacc (F-droid): GPL3
+	https://f-droid.org/repository/browse/?fdfilter=dlna&fdid=de.yaacc
+
+	BubbleUPnP (Play Store): Adware
+	https://play.google.com/store/apps/details?id=com.bubblesoft.android.bubbleupnp&hl=en
+
+Other OS:
+	Just look for a upnp or dlna client and install that shit
+	
