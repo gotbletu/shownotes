@@ -1,4 +1,8 @@
-Notes for video: 
+Notes for video:  http://www.youtube.com/watch?v=N8CZhlIssdk
+
+# add this to your ~/.bashrc or ~/.zshrc and reload your shell
+
+#------------------------------------------
 
 
 # find alternative apps if it is installed on your system
