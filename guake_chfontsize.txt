@@ -1,0 +1,17 @@
+Notes for video: http://www.youtube.com/watch?v=i9aKFgxOjwQ
+
+
+
+------------------------
+
+# Guake - Change Font Size
+chfontsize() { gconftool-2 --set '/apps/guake/style/font/style' --type string "Monospace ${1:-12}" ;}
+
+
+
+examples:
+	# default to size 12
+	chfontsize
+	
+	# change font size
+	chfontsize 32
