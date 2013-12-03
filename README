@@ -5,17 +5,22 @@
 # \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
 # |___/                                  
 #       http://www.youtube.com/user/gotbletu
-#       https://twitter.com/gotbletu | https://www.facebook.com/gotbletu
+#       https://twitter.com/gotbletu
+#       https://www.facebook.com/gotbletu
+#       https://plus.google.com/+gotbletu
 
 This b the shownotes for my vidz on Youtube ( http://www.youtube.com/user/gotbletu )
 Mainly becuz pastebin deletes my sh/ts often.
 
-That is all. If you got any corrections hit me up on youtube, facebook, or twitter
+That is all. If you got any corrections hit me up on github, youtube, facebook, google plus, twitter, or email
 
 	-goT bLet U
 
 ======================================
 My videos has been feature on:
+
+	archwiki - xbacklight / xcalib - backlight utilities
+		https://wiki.archlinux.org/index.php/backlight
 
 	compiz grid with mouse binding ( old compiz 0.8 )
 	http://www.webupd8.org/2011/01/set-up-hot-corners-for-compiz-grid.html
@@ -31,6 +36,9 @@ My videos has been feature on:
 
 	package converter - frontend to Alien
 		https://code.google.com/p/foxoman/wiki/PackageConverter
+
+	pacmixer - an alsamixer alike for pulseaudio
+		https://github.com/KenjiTakahashi/pacmixer
 
 	sunflower-fm - lightweight file manager
 		https://code.google.com/p/sunflower-fm/
