@@ -44,7 +44,12 @@ bindsym $mod+c kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
+
+# j4-dmenu-desktop -- A faster replacement for i3-dmenu-desktop
+# https://github.com/enkore/j4-dmenu-desktop
+# https://aur.archlinux.org/packages/j4-dmenu-desktop-git/
+# bindsym $mod+space exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Sans-10' -l 20"
 
 # change focus
 # bindsym $mod+j focus left
