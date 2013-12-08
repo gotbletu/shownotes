@@ -19,11 +19,8 @@ That is all. If you got any corrections hit me up on github, youtube, facebook, 
 ======================================
 My videos has been feature on:
 
-	archwiki - xbacklight / xcalib - backlight utilities
-		https://wiki.archlinux.org/index.php/backlight
-
-	compiz grid with mouse binding ( old compiz 0.8 )
-	http://www.webupd8.org/2011/01/set-up-hot-corners-for-compiz-grid.html
+	Official App page
+	--------------------------------------------------
 
 	couturier - merge pdf and images
 		https://sites.google.com/site/couturierapp/
@@ -48,5 +45,27 @@ My videos has been feature on:
 	
 	veromix - mixer for pulseaudio
 	http://kde-look.org/content/show.php?content=116676
-	http://www.omgubuntu.co.uk/2012/02/how-to-increase-volume-over-100-in-kde/
+
+
+	Blogs/Wikis:
+	------------------------------------------------------
+	Archwiki
+		xbacklight / xcalib - backlight utilities
+		https://wiki.archlinux.org/index.php/backlight
+
+	Linuxaria
+		poor mans sportify
+		http://linuxaria.com/pills/linux-terminal-poor-mans-spotify?lang=en
+
+	OMGUbuntu
+		veromix - mixer for pulseaudio
+		http://www.omgubuntu.co.uk/2012/02/how-to-increase-volume-over-100-in-kde/
+
+	UbuntuBuzz
+		doc2pdf - convert microsoft doc or docx files to pdf
+		http://www.ubuntubuzz.com/2012/12/cli-convert-microsoft-word-document-to.html
+
+	WebUpd8
+		compiz grid with mouse binding ( old compiz 0.8 )
+		http://www.webupd8.org/2011/01/set-up-hot-corners-for-compiz-grid.html
 

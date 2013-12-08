@@ -1,0 +1,20 @@
+Notes for video: http://www.youtube.com/watch?v=zhdO46oqeRw
+
+
+1. symlink dotfiles
+cd /media/Genjutsu/Public/dotfiles
+stow -v -t ~/Remote common downloader private themes
+
+2. delete symlink
+stow -v -D -t ~/Remote common
+
+3. redo symlink
+stow -v -R -t ~/Remote common
+
+4. using ignores
+stow -v -t ~/Remote Genjutsu --ignore='.Trash' --ignore='.Trash-1000' --ignore='lost\+found'
+
+	# ignore "dot" and "plus" signs folders using perl regex
+	# credit: Zoffix from #perl irc
+	stow -v -t ~/Remote Genjutsu --ignore='(?:\..*|[^+]*\+[^+]*)'
+
