@@ -1,0 +1,33 @@
+Notes for video: http://www.youtube.com/watch?v=3Mokyx5J2c4
+
+
+1. searching pypi python packages ( https://pypi.python.org/pypi )
+	pip search <keyword>
+	
+
+2. installing as root ( may conflict with existing apps/weak security)
+	sudo pip install packagename
+	sudo pip2 install packagename
+	sudo pip3 install packagename
+
+3a. installing as local user ( will goto ~/.local/bin )
+	pip install --user packagename
+	pip2 install --user packagename
+	pip3 install --user packagename
+
+3b. add to bashrc/zshrc 
+	# set shell to use local PATH ( avoid making alias for each apps)
+	if [ -d "$HOME/.local/bin" ] ; then
+		PATH="$HOME/.local/bin:$PATH"
+	fi
+4. upgrade a package from root/local
+	sudo pip install packagename --upgrade
+	pip install --user packagename --upgrade
+
+5. list python apps
+	sudo pip list
+	sudo pip2 list
+	pip list
+	pip2 list
+
+
