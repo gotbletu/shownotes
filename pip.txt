@@ -30,4 +30,7 @@ Notes for video: http://www.youtube.com/watch?v=3Mokyx5J2c4
 	pip list
 	pip2 list
 
+6. uninstalling
+	sudo pip uninstall packagename
+	pip uninstall --user packagename
 
