@@ -1,0 +1,21 @@
+notes for video: http://www.youtube.com/watch?v=6jC7qgdlf4E
+
+
+1. figure out which drive/partition you want to auto mount
+sudo fdisk -l
+
+2. find the uuid/type
+sudo blkid
+
+3. edit fstab
+sudo nano /etc/fstab
+
+	example:
+	
+	UUID=8A11-521D /media/MYUSBSTICK vfat defaults 0 0
+	UUID=E8D6B339D6B3073A /media/NTFShare ntfs defaults 0 0
+	UUID=d17b3219-a43d-4c38-b9cd-0ad892fa9d6e /media/Bankai ext4 defaults 0 0
+
+hit Ctrl+o, Enter, Ctrl+x to save and quit
+
+4. Done!! reboot and test if it works =)
