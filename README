@@ -42,6 +42,9 @@ pacmixer - an alsamixer alike for pulseaudio
 sunflower-fm - lightweight file manager
 	https://code.google.com/p/sunflower-fm/
 
+torrent-search - search for torrents
+	http://torrent-search.sourceforge.net
+
 turses - console twitter client
 	https://github.com/alejandrogomez/turses
 
@@ -72,3 +75,5 @@ WebUpd8
 	compiz grid with mouse binding ( old compiz 0.8 )
 	http://www.webupd8.org/2011/01/set-up-hot-corners-for-compiz-grid.html
 
+	ofris - deep freeze for linux
+	http://www.webupd8.org/2010/08/ofris-deep-freeze-like-application-for.html
