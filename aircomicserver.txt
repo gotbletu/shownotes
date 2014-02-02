@@ -1,0 +1,35 @@
+Notes for video: http://www.youtube.com/watch?v=YceW_VcGA4A
+
+
+1. download air comic server .jar and config files
+%% http://gnomewarrior32.blogspot.kr/2013/03/air-comic-server-english.html
+
+2. install java
+	jre7-openjdk jre7-openjdk-headless
+
+3. run the server
+
+	%% GUI
+	java -jar AirComicServer.jar
+
+	%% CLI
+	java -jar AirComicServer.jar -n
+
+	%% Lower the Java Memory
+	java -XX:+UseSerialGC -Xms32M -Xminf=5 -Xmaxf=10 -jar AirComicServer.jar 
+
+	%% Help page
+	java -jar AirComicServer.jar --help
+
+4. access from Android
+	Air Comic Viewer
+	%% AD; https://play.google.com/store/apps/details?id=pe.gnomewarrior64.aircomicviewerad
+	%% Paid; https://play.google.com/store/apps/details?id=pe.gnomewarrior64.aircomicviewer
+
+5. if u want to use my alias/functions for bashrc / zshrc
+
+cfg-aircomic() { $EDITOR ~/Downloads/AirComic/AirComicServer.xml ;}
+aircomicserver() { nohup java -XX:+UseSerialGC -Xms32M -Xminf=5 -Xmaxf=10 -jar ~/Downloads/AirComic/AirComicServer.jar -c ~/Downloads/AirComic/AirComicServer.xml -n >/dev/null 2>&1& }
+aircomicserver-gui() { nohup java -XX:+UseSerialGC -Xms32M -Xminf=5 -Xmaxf=10 -jar ~/Downloads/AirComic/AirComicServer.jar -c ~/Downloads/AirComic/AirComicServer.xml >/dev/null 2>&1& }
+aircomicserver-kill() { kill $(ps -ef | grep '[A]irComicServer.jar' | awk '{print $2}') ;}
+
