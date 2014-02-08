@@ -1,0 +1,58 @@
+Notes for video: http://www.youtube.com/watch?v=Dm7cFjhzgHo
+
+
+#-------- Sopcast CLI {{{
+#------------------------------------------------------
+# http://forum.wiziwig.eu/forums/14-Sopcast
+# http://sopcast.ucoz.com/
+# google keyword: sop://broker.sopcast
+
+# install sopcast commandline version
+# 	Archlinux: sopcast ( x64 https://www.archlinux.org/packages/multilib/x86_64/sopcast/)
+# 	Archlinux: sopcast ( x32 https://www.archlinux.org/packages/community/i686/sopcast/)
+# 	Ubuntu/Debian: sp-auth (https://launchpad.net/~jason-scheunemann/+archive/ppa)
+
+# choose a players (cvlc is default)
+SP_VIDPLAYER=cvlc
+# SP_VIDPLAYER=vlc
+# SP_VIDPLAYER=(vlc --control=lirc)
+# SP_VIDPLAYER=mplayer
+# SP_VIDPLAYER=(mplayer -cache 1000)
+
+# wait X seconds to stablize channel (make it longer if u got slower connection)
+SP_SLEEP=15
+
+# sopcast port and player port
+SP_LOCAL_PORT=55050
+SP_PLAYER_PORT=55051
+
+# manually kill sopcast (sometimes it doesnt exit properly and still uses bandwidth in the background)
+sppc-kill() { killall sp-sc ;}
+
+# kills existing connection, starts a new connection, sleep X sec to stablize the stream, waits to player to exit and kill itself
+sppc() {
+	killall sp-sc &>/dev/null
+	(sp-sc "$1" $SP_LOCAL_PORT $SP_PLAYER_PORT &>/dev/null &)
+	sleep $SP_SLEEP
+	($SP_VIDPLAYER http://localhost:$SP_PLAYER_PORT) 
+	wait
+	killall sp-sc
+}
+
+
+#### eng = english, ro = romanian, esp = espanol/spanish
+# added on February 06, 2014
+spp-doc-explorer.eng,ro() { sppc "sop://broker.sopcast.com:3912/149269" ;}
+spp-doc-history.eng,ro() { sppc "sop://broker.sopcast.com:3912/148253" ;}
+spp-doc-history2.eng,ro() { sppc "sop://broker.sopcast.com:3912/149268" ;}
+spp-doc-natgeo.eng,ro() { sppc "sop://broker.sopcast.com:3912/148248" ;}
+spp-doc-natgeowild.eng,ro() { sppc "sop://broker.sopcast.com:3912/148259" ;}
+spp-doc-nature.eng,ro() { sppc "sop://broker.sopcast.com:3912/149267" ;}
+spp-movie-hbo.eng,ro() { sppc "sop://broker.sopcast.com:3912/148883" ;}
+spp-movie-hbo2.eng,ro() { sppc "sop://broker.sopcast.com:3912/120702" ;}
+spp-tv-universal.eng,ro() { sppc "sop://broker.sopcast.com:3912/148255" ;}
+spp-tv-axn.eng,ro() { sppc "sop://broker.sopcast.com:3912/148257" ;}
+spp-tv-axncrime.eng,ro() { sppc "sop://broker.sopcast.com:3912/149261" ;}
+
+#}}}
+
