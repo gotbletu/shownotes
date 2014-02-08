@@ -1,6 +1,9 @@
 Notes for video: http://www.youtube.com/watch?v=Dm7cFjhzgHo
 
 
+add to ~/.bashrc or ~/.zshrc and reload your shell
+
+
 #-------- Sopcast CLI {{{
 #------------------------------------------------------
 # http://forum.wiziwig.eu/forums/14-Sopcast
@@ -19,7 +22,7 @@ SP_VIDPLAYER=cvlc
 # SP_VIDPLAYER=mplayer
 # SP_VIDPLAYER=(mplayer -cache 1000)
 
-# wait X seconds to stablize channel (make it longer if u got slower connection)
+# wait X seconds to stabilize channel (make it longer if u got slower connection)
 SP_SLEEP=15
 
 # sopcast port and player port
@@ -29,7 +32,7 @@ SP_PLAYER_PORT=55051
 # manually kill sopcast (sometimes it doesnt exit properly and still uses bandwidth in the background)
 sppc-kill() { killall sp-sc ;}
 
-# kills existing connection, starts a new connection, sleep X sec to stablize the stream, waits to player to exit and kill itself
+# kills existing connection, starts a new connection, sleep X sec to stabilize the stream, waits to player to exit and kill itself
 sppc() {
 	killall sp-sc &>/dev/null
 	(sp-sc "$1" $SP_LOCAL_PORT $SP_PLAYER_PORT &>/dev/null &)
