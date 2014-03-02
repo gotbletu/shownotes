@@ -1,0 +1,15 @@
+Notes for video: http://www.youtube.com/watch?v=C6xqO4Z1nIo
+
+
+
+1. manually save a file with sudo permission
+:w !sudo tee %
+
+
+2. save to ~/.vimrc
+" leader key = backslash ( \ )
+" useage: \sudo
+
+" write file if you forgot to give it sudo permission
+map <leader>sudo :w !sudo tee % <CR><CR>
+
