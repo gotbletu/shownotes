@@ -1,0 +1,45 @@
+Notes for Video: http://www.youtube.com/watch?v=AGL4ZMTIfHY
+
+
+
+== On Server ==
+	a. install xauth openssh-server openssh
+	
+	b. enable X11 forwarding [Client]
+		sudo nano /etc/ssh/ssh_config
+			%% uncomment and change to yes
+			#ForwardX11 no  -->  ForwardX11 yes
+			#ForwardX11Trusted yes  -->  ForwardX11Trusted yes
+			
+	c. enable X11 forwarding [Daemon]
+		sudo nano /etc/ssh/sshd_config
+			X11Forwarding yes
+			X11DisplayOffset 10
+			
+	d. restart ssh daemon
+		%% debian
+		sudo service ssh restart
+
+		%% archlinux
+		sudo systemctl restart sshd.service
+	
+	e. check if the display is correct
+		echo $DISPLAY --> localhost:10.0
+		%% if it doesnt say localhost then is wrong
+
+== On Local Machine ==
+	%% http://blog.samat.org/2006/05/08/best-ssh-options-for-x11-forwarding
+	a. useage
+		ssh -Y heoyea-core@192.168.1.100	# using X11 Trusted
+		ssh -X heoyea-core@192.168.1.100
+
+		# faster x11 forwarding
+		ssh -X -C -c blowfish-cbc,arcfour heoyea-core@192.168.1.100
+
+			-C = compress all data
+			-c = Set ciphers. Blowfish is a fast block cipher;
+				it appears very secure and is much faster than 3des
+
+		%% after u connect u can use command line like usual or gui if you want
+	
+
