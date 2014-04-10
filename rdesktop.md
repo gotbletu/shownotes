@@ -1,5 +1,8 @@
 # rDesktop: Remote Desktop into Windows Operating system
 
+- Notes for video: https://www.youtube.com/watch?v=460l2ZN_WQY
+
+
 ## On Windows XP Machine
 
 ### 1. Enable Windows Remote Desktop ( Windows XP )
