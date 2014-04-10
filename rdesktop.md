@@ -44,6 +44,6 @@
 	+ take 40px off the height to fit the taskbar
 - $ rdesktop -u heoyea -g 100% 192.168.1.105:3389
 - $ rdesktop -u heoyea -g 100% 192.168.1.105:3389 -r sound:local
-	+ redirect sound (not working)
+	+ redirect sound to local machine
 - toggle fullscreen: Ctrl+Alt+Enter
 	+ this will give you the taskbar in windows
