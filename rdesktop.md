@@ -11,8 +11,8 @@
 ### 2. Get ip address using command prompt ( Windows XP )
 - Win+R > type cmd > $ ipconfig
 
-	ex: 192.168.1.105
-	default port is: 3389
+- ex: 192.168.1.105
+- default port is: 3389
 
 
 ## On Windows 7 Machine
@@ -23,7 +23,11 @@
 - Select Users > Add > Advanced > Find Now
 - Select a user and hit OK to exit
 
+### 2. Get ip address using command prompt ( Windows 7 )
+- Win key > type cmd > $ ipconfig
 
+- ex: 192.168.1.105
+- default port is: 3389
 
 ## On Linux Machine
 
