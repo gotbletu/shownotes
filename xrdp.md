@@ -70,8 +70,7 @@ use windows remote desktop
 
 ### On Linux Machine
 
-- rdesktop tutorial: https://www.youtube.com/watch?v=460l2ZN_WQY
-
     rdesktop 192.168.1.XXX
     rdesktop -u username -g 90% 192.168.1.XXX
 
+- rdesktop tutorial: https://www.youtube.com/watch?v=460l2ZN_WQY
