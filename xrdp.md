@@ -1,10 +1,10 @@
 # xrdp - remote desktop protocol server
 
-http://askubuntu.com/a/289672
-http://ozkaya84.wordpress.com/2013/03/30/remote-desktop-to-linux-servers/
-http://c-nergy.be/blog/?p=4448
-http://www.linuxplanet.com/linuxplanet/tutorials/7249/1
-http://www.humans-enabled.com/2013/02/how-to-install-xrdp-on-ubuntu-1204.html
+- http://askubuntu.com/a/289672
+- http://ozkaya84.wordpress.com/2013/03/30/remote-desktop-to-linux-servers/
+- http://c-nergy.be/blog/?p=4448
+- http://www.linuxplanet.com/linuxplanet/tutorials/7249/1
+- http://www.humans-enabled.com/2013/02/how-to-install-xrdp-on-ubuntu-1204.html
 
 ## 1. install require packages
 
@@ -70,6 +70,8 @@ use windows remote desktop
 
 ### On Linux Machine
 
-rdesktop 192.168.1.XXX
-rdesktop -u username -g 90% 192.168.1.XXX
+- rdesktop tutorial: https://www.youtube.com/watch?v=460l2ZN_WQY
+
+    rdesktop 192.168.1.XXX
+    rdesktop -u username -g 90% 192.168.1.XXX
 
