@@ -9,7 +9,12 @@ https://github.com/saironiq/shellscripts
     git clone https://github.com/saironiq/shellscripts.git
 
 
-## 2. alias
+## 2. edit the script
+
+   program='/usr/bin/peerflix -p 55055'
+
+
+## 3. alias
 
     PFLIX_PORT=55055
     pfx() { ~/.binary/peerflix_script/thepiratebay_se/tpb.sh $@ ;}
