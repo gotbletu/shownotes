@@ -1,9 +1,9 @@
 Notes for video: https://www.youtube.com/watch?v=LCr_0zFcbaM
 
 ## 1. requirements
-aria2
-webui-aria2 (download from https://github.com/ziahamza/webui-aria2 )
-python (if you want to use the simplehttpserver)
+- aria2
+- webui-aria2 (download from https://github.com/ziahamza/webui-aria2 )
+- python (if you want to use the simplehttpserver)
 
 
 ## 2. add these shits to ~/.bashrc or ~/.zshrc
