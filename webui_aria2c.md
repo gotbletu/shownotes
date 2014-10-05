@@ -47,4 +47,10 @@ Notes for video: https://www.youtube.com/watch?v=LCr_0zFcbaM
 ## 3. Aria2c Integration addon ( Chrome / Chromium)
 https://chrome.google.com/webstore/detail/aria2c-integration/edcakfpjaobkpdfpicldlccdffkhpbfk?hl=en
 
- 
+
+## 4. Related Videos
+- aria2c commandline (https://www.youtube.com/watch?v=ZMiyeNxcBSY)
+- python simplehttpserver (https://www.youtube.com/watch?v=FFIjMYzkHhc)
+- python simplehttpserver with upload (https://www.youtube.com/watch?v=au8DlTAHx5o)
+
+
