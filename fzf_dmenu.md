@@ -1,0 +1,38 @@
+Notes for video: https://www.youtube.com/watch?v=jeImdUnW4R4
+
+
+## 1. requirements (depends on what u using)
+fzf (https://github.com/junegunn/fzf)
+bash
+zsh
+tmux
+
+## 2. for ~/.zshrc
+    fzf-dmenu() { 
+    	# note: xdg-open has a bug with .desktop files, so we cant use that shit
+    	selected="$(ls /usr/share/applications | fzf -e)"
+    	nohup `grep '^Exec' "/usr/share/applications/$selected" | tail -1 | sed 's/^Exec=//' | sed 's/%.//'` >/dev/null 2>&1&
+    }
+
+    # hotkey to fun the function (Ctrl+O)
+    bindkey -s '^O' "fzf-dmenu\n"
+
+## 3. for ~/.bashrc
+    fzf-dmenu() { 
+    	# note: xdg-open has a bug with .desktop files, so we cant use that shit
+    	selected="$(ls /usr/share/applications | fzf -e)"
+    	nohup `grep '^Exec' "/usr/share/applications/$selected" | tail -1 | sed 's/^Exec=//' | sed 's/%.//'` >/dev/null 2>&1&
+    }
+
+    # hotkey to fun the function (Ctrl+O)
+    bind '"\C-O":"fzf-dmenu\n"'
+
+## 4. for ~/.tmux.conf
+    bind-key -n C-Space new-window -n fzf-dmenu -c $HOME \; \
+    	# run commmand then kill tmux window
+    	send-keys 'fzf-dmenu && sleep 1 && tmux kill-window' 'Enter'
+    	# if error then kill tmux window
+    	send-keys 'if [[ $? != 0 ]] ; then tmux kill-window; fi' 'Enter'
+
+## 5. related video
+https://www.youtube.com/watch?v=hO8vd1y0h6g
