@@ -1,4 +1,4 @@
-Notes for video: https://www.youtube.com/watch?v=jeImdUnW4R4
+Notes for video: https://www.youtube.com/watch?v=9qkK3RmPSS4
 
 
 ## 1. requirements (depends on what u using)
@@ -14,7 +14,7 @@ tmux
     	nohup `grep '^Exec' "/usr/share/applications/$selected" | tail -1 | sed 's/^Exec=//' | sed 's/%.//'` >/dev/null 2>&1&
     }
 
-    # hotkey to fun the function (Ctrl+O)
+    # hotkey to run the function (Ctrl+O)
     bindkey -s '^O' "fzf-dmenu\n"
 
 ## 3. for ~/.bashrc
@@ -24,15 +24,12 @@ tmux
     	nohup `grep '^Exec' "/usr/share/applications/$selected" | tail -1 | sed 's/^Exec=//' | sed 's/%.//'` >/dev/null 2>&1&
     }
 
-    # hotkey to fun the function (Ctrl+O)
+    # hotkey to run the function (Ctrl+O)
     bind '"\C-O":"fzf-dmenu\n"'
 
 ## 4. for ~/.tmux.conf
     bind-key -n C-Space new-window -n fzf-dmenu -c $HOME \; \
-    	# run commmand then kill tmux window
     	send-keys 'fzf-dmenu && sleep 1 && tmux kill-window' 'Enter'
-    	# if error then kill tmux window
-    	send-keys 'if [[ $? != 0 ]] ; then tmux kill-window; fi' 'Enter'
 
 ## 5. related video
 https://www.youtube.com/watch?v=hO8vd1y0h6g
