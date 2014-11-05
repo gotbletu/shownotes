@@ -15,7 +15,14 @@ Notes for video: https://www.youtube.com/watch?v=Dmbh4r2mmDs
     bind-key -n 'C-\' new-window -n bookmarks -c $HOME \; \
         send-keys 'fzf-surfraw && tmux kill-window' 'Enter'
 
-## 4. related video
+## 4. add bookmarks
+    nano ~/.config/surfraw/bookmarks
+    
+    example:
+    linuxgotbletu	https://www.youtube.com/user/gotbletu/videos	#linux channel opensource
+
+
+## 5. related video
 * surfraw playlist
 * https://www.youtube.com/playlist?list=PLqv94xWU9zZ2e-lDbmBpdASA6A6JF4Nyz
 * fuzzy finder playlist
