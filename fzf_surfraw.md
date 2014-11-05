@@ -13,7 +13,7 @@ Notes for video: https://www.youtube.com/watch?v=Dmbh4r2mmDs
 
 ## 3. for ~/.tmux.conf
     bind-key -n 'C-\' new-window -n bookmarks -c $HOME \; \
-	send-keys 'fzf-surfraw && tmux kill-window' 'Enter'
+        send-keys 'fzf-surfraw && tmux kill-window' 'Enter'
 
 ## 4. related video
 * surfraw playlist
