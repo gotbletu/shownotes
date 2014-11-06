@@ -9,7 +9,7 @@ Notes for video: https://www.youtube.com/watch?v=Dmbh4r2mmDs
 * surfraw
 
 ## 2. for ~/.zshrc or ~/.bashrc
-    fzf-surfraw() { surfraw "$(cat ~/.config/surfraw/bookmarks | sed '/^$/d' | sort -n | fzf -e)" }
+    fzf-surfraw() { surfraw "$(cat ~/.config/surfraw/bookmarks | sed '/^$/d' | sort -n | fzf -e)" ;}
 
 ## 3. for ~/.tmux.conf
     bind-key -n 'C-\' new-window -n bookmarks -c $HOME \; \
