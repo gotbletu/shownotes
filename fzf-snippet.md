@@ -73,8 +73,14 @@ Notes for video: https://www.youtube.com/watch?v=Zew0mgJwAh8
     #       https://plus.google.com/+gotbletu
     #       https://github.com/gotbletu
     
+## 6. nano ~/.tmux.conf
+### (optional keybinding for tmux users)
+#### i use  single and double qoute hotkey
+    bind-key "'" new-window -n snippet \; send-keys "fzf-snippet && tmux kill-window\n"
+    bind-key '"' new-window -n multisnippet \; send-keys "fzf-multisnippet && tmux kill-window\n"
 
-## 6. related video
+
+## 7. related video
 * fuzzy finder playlist
 * https://www.youtube.com/playlist?list=PLqv94xWU9zZ2fMsMMDF4PjtNHCeBFbggD
 
