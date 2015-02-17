@@ -1,0 +1,160 @@
+| URL Sniffing user instructions |
+----------------------------------
+source: http://www.myp2pforum.eu & http://www.wiziwig.tv/
+
+
+--------------------------------------------
+1. How to use rtmpdump with rtmpsrv in Linux 
+--------------------------------------------
+rtmpsrv allows you to get all parameters that are required by rtmpdump. You don't need packet sniffers or complex analysis to use rtmpdump when using rtmpsrv. The only problem you may have is when a video 
+consists of several segments (chapters). In such cases just skip to the next chapter.
+
+How to use rtmpsrv in Ubuntu Linux
+...................................
+
+- Configure your firewall to redirect RTMP traffic through a local port: "sudo iptables -t nat -A OUTPUT -p tcp --dport 1935 -j REDIRECT"
+- Then just start rtmpsrv in terminal : "rtmpsrv"
+
+rtmpsrv will be analyzing data from your local port. It will output a rtmpdump command that can be used to watch live streams or to download videos.
+When you get the rtmpdump command, press CTRL+C to stop rtmpsrv.
+
+- Delete the firewall redirect created above: "sudo iptables -t nat -D OUTPUT -p tcp --dport 1935 -j REDIRECT"
+
+Example : 
+rtmpdump -r "rtmp://61.194.12.178:1935/2e2cd" -a "2e2cd" -f "LNX 10,1,102,65" -W "http://www3.nhk.or.jp/nhkworld/r/movie/fivecool_player.0.3.6.2.swf" -p "http://www3.nhk.or.jp/nhkworld/r/movie/index.html" -y "nhkworldhd.sdp" -o nhkworldhd.flv
+
+Live stream command : 
+rtmpdump -v -r "rtmp://61.194.12.178:1935/2e2cd/nhkworldhd.sdp" -W "http://www3.nhk.or.jp/nhkworld/r/movie/fivecool_player.0.3.6.2.swf" | vlc -
+
+--------------------------------------------
+2. How to sniff in Windows : Freewares used
+--------------------------------------------
+- Streamtransport : the most powerful sniffer  
+- URL Snooper : good but can't sniff every platform
+- rtmpexplorer : useful for complete sniffing results with URL Snooper
+
+----------------------------------------------
+3 .Instructions for live flash streams in VLC
+----------------------------------------------
+Command : rtmpdump -v -r "rtmp://..." -W "http://...swf" -q | vlc -
+
+--live|-v............. [Save a live stream, no --resume (seeking) of live streams possible]
+--rtmp|-r url......... [URL (e.g. rtmp//hotname[:port]/path)]
+--swfVfy|-W url........[URL to player swf file, compute hash/size automatically]
+--quiet|-q.............[Supresses all command output]
+--pageUrl|-p url.......[Web URL of played programme]
+
+
+786cast.com
+------------
+rtmpdump -v -r "rtmp://77.247.178.19/live/funmaza" -W "http://www.786cast.com/jplayr.swf" -p "http://www.786cast.com/channel.php?u=funmaza" | vlc -
+
+
+Canalhd.tv : with Streamtransport
+---------------------------------
+rtmpdump -v -r "rtmp://live001.sna1.flash.streamingmediahosting.com/globalhdtv-live/key=fe1ff99f/futbolhub5" -W "http://live.canalhd.tv/canalhd.tv.swf" -p "http://canalhd.tv/video.php?n=futbolhub5" | vlc -
+
+
+Castamp.com
+------------
+rtmpdump -v -r "rtmp://68.68.29.171/live/fvbrgbgrbr" -W "http://live.castamp.com/player.swf" -p "http://www.castamp.com/channel/fvbrgbgrbr" | vlc -
+
+
+Flowplayer (Mypremium.tv)
+-------------------------
+rtmpdump -v -r "rtmp://46.19.141.218/live/11.sdp" -W "http://mypremium.tv/em/flowplayer-3.2.5.swf" | vlc -
+
+
+Freedocast.com : with Streamtransport
+--------------------------------------
+rtmpdump -v -r "rtmp://wcdn0.kitd.cz:80/live/false" -W "http://cdn.freedocast.com/hdflvplayer/hdplayer.swf" -p "http://www.freedocast.com/sportsmax" | vlc -
+
+
+Jimey.tv : not working
+-----------------------
+rtmpdump -v -r "rtmpe://173.192.187.181/edge/dvfdvfdvfdfd" -W "http://jimey.tv/player/fresh.swf" -p "http://jimey.tv/subscriber.php?channel=dvfdvfdvfdfd&user=bvcbvnvbncxvbf" | vlc -
+
+
+Longtailvideo
+-------------
+rtmpdump -v -r "rtmp://video.pivol.com/live/sporttv" -W "http://player.longtailvideo.com/player4.6.swf" | vlc -
+
+
+Meevos.tv
+---------
+rtmpdump -v -r "rtmp://68.68.28.187/live/mtvasia4" -W "http://player.meevos.tv/player.swf" -p "http://embed.meevos.tv/embed.php?id=mtvasia4&w=650&h=450" | vlc -
+
+
+Megalive.com : with Streamtransport
+------------------------------------
+rtmpdump -v -r "rtmp://live3.megalive.com/videochat/stream_N2VMNDQ5ZDGZOWY1NTZMMGQZYJM4MDVJOTE3MTY1ZMUX" -W "http://www.megalive.com/ml_player.swf" -p "http://www.megalive.com/?v=N397EADK" | vlc -
+
+
+Mips.tv 
+--------
+rtmpdump -v -r "rtmp://85.17.29.110/live/cfgff" -W "http://www.mips.tv/player/eplayer.swf" -p "http://www.mips.tv/player/embedplayer.php?id=41776&e=1&width=600&height=450" | vlc -
+
+Or open it in VLC (in linux only) : rtmp://mipscdn.tv:1935/live/_definst_/cfgff
+
+
+Seeon.tv
+--------
+rtmpdump -v -r "rtmp://live0.seeon.tv/edge/cwhispjaxw2ta7x" -W "http://www.seeon.tv/jwplayer/player.swf" -p "http://www.seeon.tv/view/8847" | vlc -
+
+
+Streami.tv : with Streamtransport
+---------------------------------
+rtmpdump -v -r "rtmp://173.193.219.184:1936/videowhisper/stream0002" -W "http://streami.tv/jwplayer/player.swf" | vlc -
+
+
+TVope.com
+----------
+rtmpdump -v -r "rtmp://streamer.istreamlive.net/aliez/tvope/teletubbiess" -W "http://builds.flowplayer.netdna-cdn.com/73166/40398/flowplayer.commercial-3.2.6-1.swf" -p "http://tvope.com/emb/player.php?c=teletubbiess" | vlc -
+
+
+Ustream.tv : with Streamtransport
+---------------------------------
+rtmpdump -v -r "rtmp://cp39920.live.edgefcs.net/live/ustream-sj@23675" -W "http://cdn1.ustream.tv/swf/4/viewer.323.swf" -p "http://www.ustream.tv/channel/nhk-world-tv" | vlc -
+rtmpdump -v -r "rtmp://cp39920.live.edgefcs.net/live/ustream-sj@23675" -W "http://cdn1.ustream.tv/swf/4/viewer.323.swf" | vlc -
+
+
+Veemi.com
+----------
+rtmpdump -v -r "rtmp://68.68.30.164/live/ArAfSUNZRxgMlPt" -W "http://www.veemi.com/player/player-licensed.swf" -p "http://www.veemi.com/embed.php?v=ArAfSUNZRxgMlPt&vw=640&vh=360&domain=mypremium.tv" | vlc -
+
+Or open it in VLC : rtsp://live.veemi.com:1935/live/_defins ... UNZRxgMlPt
+
+
+Webcaston.com
+--------------
+rtmpdump -v -r "rtmp://c51.webcaston.com/live/40xo6iAhsvVEhsO" -W "http://www.webcaston.com/player/player-licensed.swf" -p "http://webcaston.com/40xo6iAhsvVEhsO" | vlc -
+
+Or open it in VLC : rtsp://live.webcaston.com:1935/live/_de ... iAhsvVEhsO
+
+
+Wii-cast.tv : with Streamtransport
+----------------------------------
+rtmpdump -v -r "rtmpe://212.7.212.17:1935/pub/leestream43" -W "http://www.wii-cast.tv/player/player12.swf" -p "http://www.wii-cast.tv/embedjw.php?fileid=leestream43&vw=750&vh=400" | vlc -
+
+
+Yycast.com
+----------
+rtmpdump -v -r "rtmp://25-17.ddns.net/live/fsports80" -W "http://img.yycast.com:805/player-licensed.swf" -p "http://www.yycast.com/embed.php?fileid=fsports80&vw=600&vh=400" | vlc -
+
+
+Zonein.tv : with Streamtransport
+--------------------------------
+rtmpdump -v -r "rtmp://173.193.138.130:1935/268853?doPlay=a/zonein" -W "http://zonein1.com/5458/zamorai.swf" -p "http://zonein.tv/268853" | vlc -
+
+
+-------------------------------
+4. How to download RTMP videos
+-------------------------------
+Command : rtmpdump -r "rtmp://...mp4" -W "http://...swf" -o "d:\videos\Filename.mp4"
+
+--rtmp|-r url......... [URL (e.g. rtmp//hotname[:port]/path)]
+--playpath|-y..........[Overrides the playpath parsed from rtmp url]
+--swfVfy|-W url........[URL to player swf file, compute hash/size automatically]
+--pageUrl|-p url.......[Web URL of played programme]
+--flv|-o string........[FLV output file name, if the file name is - print stream to stdout]
+
