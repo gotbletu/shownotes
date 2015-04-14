@@ -3,7 +3,7 @@ Notes for video: https://www.youtube.com/watch?v=g31cCEervTw
 
 ## 1. requirements (depends on what u using)
 * python2-pip (needed to install using pip)
-* flexget (sudo pip2 install flexget=1.1.128)
+* flexget (sudo pip2 install flexget==1.2.128)
 * any torrent client you want to use
 
 ## 2. commands used
