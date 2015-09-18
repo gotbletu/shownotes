@@ -13,7 +13,7 @@ common names: audio compressor, automatic gain control, volume normalization
     swh-plugins   # might also be called ladspa-swh-plugins
 
 ### autostart
-    sudo vim /etc/pulse/default.pa
+    sudo nano /etc/pulse/default.pa
     
     .ifexists module-ladspa-sink.so
     .nofail
@@ -21,7 +21,10 @@ common names: audio compressor, automatic gain control, volume normalization
     .fail
     .endif
 
-    sudo reboot
+
+- reboot
+- then play some music/video
+- open pavucontrol and change the stream to the LADSPA compressor
 
 ### references
 - http://askubuntu.com/a/44012
