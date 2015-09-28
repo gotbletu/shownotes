@@ -4,6 +4,6 @@
 
 # copy/paste for linux machines (Mac style)
 alias pbcopy='xclip -selection clipboard'	# copy to clipboard, ctrl+c, ctrl+shift+c
-alias pbpaste='xclip -selection clipboard -o'	# paste from clipboard, ctrl+v, ctrl+shitt+v
+alias pbpaste='xclip -selection clipboard -o'	# paste from clipboard, ctrl+v, ctrl+shift+v
 alias pbselect='xclip -selection primary -o'	# paste from highlight, middle click, shift+insert
 
