@@ -19,7 +19,7 @@ If you find my videos feature on other site let me know also, I always need an E
 
 http://www.youtube.com/user/gotbletu
 
-## My Videos as Been Feature On:
+## My Videos has Been Feature On:
 
 #### Official Software Site
 
@@ -64,11 +64,15 @@ WebUpd8: compiz grid with mouse binding [Link](http://www.webupd8.org/2011/01/se
 
 WebUpd8: ofris - deep freeze for linux [Link](http://www.webupd8.org/2010/08/ofris-deep-freeze-like-application-for.html)
 
+Transmission Remote CLI torrent client (Xpressrazor) [Link](https://xpressrazor.wordpress.com/2014/04/30/using-transmission-remote-as-your-default-bittorrent-client/)
+
 #### Spanish Translation
-Hipertextual: turn any terminal into a dropdown terminal [Link](http://hipertextual.com/2015/02/terminal-dropdown)
+Hipertextual: turn any terminal into a dropdown terminal (Ander Raso) [Link](http://hipertextual.com/2015/02/terminal-dropdown)
 
-transmission cli torrent client [Link](https://comandormrf.wordpress.com/2015/03/14/transmission-daemon-torrents-desde-la-terminal-y-webui/) | [CLI](https://www.youtube.com/watch?v=ee4XzWuapsE) | [TUI/Ncurses](https://www.youtube.com/watch?v=hLz7ditUwY8)
+transmission cli torrent client (comandormrf) [Link](https://comandormrf.wordpress.com/2015/03/14/transmission-daemon-torrents-desde-la-terminal-y-webui/) | [CLI](https://www.youtube.com/watch?v=ee4XzWuapsE) | [TUI/Ncurses](https://www.youtube.com/watch?v=hLz7ditUwY8)
 
+#### German Translation
+Mutt Terminal Email client (tomzai) [Link](http://tomzai.ch/mutt-mail-client-step-by-step/)
 
 #### Shout Outs (Thanks everyone = )
 [InfinitelyGalactic](https://www.youtube.com/user/InfinitelyGalactic) - Linux, Android, Tech Reviewer [Link](https://www.youtube.com/watch?v=2Dg7eQK_pn0#t=5m5s)
