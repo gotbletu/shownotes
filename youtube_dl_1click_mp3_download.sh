@@ -15,7 +15,7 @@
 # a script to copy link and convert youtube videos to mp3
 # just create a shortcut launcher on the panel and click on it while on the youtube page you want to download the mp3 from
 
-# requires: wmctrl xclip xdotool youtube-dl
+# requires: ffmpeg wmctrl xclip xdotool youtube-dl
 
 # browser to focus; show list using wmctrl -l
 BROWSER_FOCUS=Chromium
