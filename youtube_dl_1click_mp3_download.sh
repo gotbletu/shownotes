@@ -39,8 +39,8 @@ cd "$DOWNLOAD_DIR_MP3"
 
 notify-send -i "$IMAGE_LOGO" 'Downloading to MP3' 'Starting ...' -t 5000
 
-# download (prevents downloading all playlist)
-youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" "$(xclip -selection clipboard -o | cut -d\& -f1)"
+# download audio only saves bandwidth (prevents downloading all playlist)
+youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" -f 171 "$(xclip -selection clipboard -o | cut -d\& -f1)"
 
 notify-send -i "$IMAGE_LOGO" 'Downloading to MP3' 'Completed !!!' -t 5000
 
