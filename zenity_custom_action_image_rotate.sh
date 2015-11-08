@@ -21,7 +21,7 @@
 # note: %N is the selected filenames (without paths)
 # conditions: image files
 
-DEGREE=$(zenity --list --radiolist --height "180" --text "<b>Please</b> make a selection:" --hide-header --column "Pick" --column "Item" TRUE "90" FALSE "180" FALSE "270" FALSE "360")
+DEGREE=$(zenity --list --radiolist --height "180" --text "<b>Please</b> make a selection:" --hide-header --column "Pick" --column "Item" TRUE "90" FALSE "180" FALSE "270")
 
 myArray=( "$@" )
 for arg in "${myArray[@]}"; do
