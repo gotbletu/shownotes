@@ -19,6 +19,18 @@ Mutt  is a small but very powerful text based program for reading and sending el
 
 GMAIL
 
+> Make sure to enable "IMAP" and "Allow less secure apps" so mutt can work with gmail
+
+> https://mail.google.com/mail/u/0/#settings/fwdandpop
+
+> Enable IMAP
+
+> https://myaccount.google.com/security#activity
+
+> Allow less secure apps: ON
+
+> Some non-Google apps and devices use less secure sign-in technology, which could leave your account vulnerable. You can turn off access for these apps (which we recommend) or choose to use them despite the risks.
+
     vim ~/.mutt/account.com.gmail.gotbletu
 
 
@@ -34,6 +46,9 @@ GMAIL
     set header_cache = ~/.mutt/com.gmail.gotbletu/cache/headers            
     set message_cachedir = ~/.mutt/com.gmail.gotbletu/cache/bodies         
     set certificate_file = ~/.mutt/com.gmail.gotbletu/certificates  
+    set ssl_starttls = yes
+    set ssl_force_tls = yes
+
 
 YAHOO
 
@@ -152,6 +167,8 @@ set your folder hooks, macros hotkey, default account and text editor
     
     #-------- Basic Config {{{
     #------------------------------------------------------
+    set ssl_starttls = yes
+    set ssl_force_tls = yes
     set imap_check_subscribed
     # set hostname = gmail.com
     set mail_check = 120
