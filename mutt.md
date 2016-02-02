@@ -244,7 +244,6 @@ set your folder hooks, macros hotkey, default account and text editor
 
 - http://www.youtube.com/user/gotbletu
 - https://twitter.com/gotbletu
-- https://www.facebook.com/gotbletu
 - https://plus.google.com/+gotbletu
 - https://github.com/gotbletu
 - gotbletu@gmail.com

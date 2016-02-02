@@ -27,6 +27,8 @@ http://www.youtube.com/user/gotbletu
 
 [curseofwar](https://github.com/a-nikolaev/curseofwar/wiki) - fast action terminal RTS game with vim hotkeys
 
+[fzf](https://github.com/junegunn/fzf/wiki) - fuzzy finder for your shell
+
 [inxi](https://code.google.com/p/inxi/) - a full featured system information script
 
 [package converter](https://code.google.com/p/foxoman/wiki/PackageConverter) - frontend to Alien

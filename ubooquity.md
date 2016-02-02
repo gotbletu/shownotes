@@ -53,15 +53,11 @@ Can be installed on any OS supporting Java (Windows, Linux, Mac OS...) and on a 
 
 - run the ubooquity command then open browser to: http://localhost:2202/admin
 
-
-
-
 ***
 ### start services
     crontab -e
     
-    PATH_UBOOQUITY=~/.binary/ubooquity
-    @reboot sleep 180 && cd $PATH_UBOOQUITY && nohup java -jar $PATH_UBOOQUITY/Ubooquity.jar -webadmin -headless
+    @reboot sleep 180 && cd ~/.binary/ubooquity && java -jar Ubooquity.jar -webadmin -headless
 
 ### references
 

@@ -23,7 +23,7 @@ Alt+1, Alt+2 ...etc
     bind '"\e3": "!:0-2 \n"'
     bind '"\e4": "!:0-3 \n"'
     bind '"\e5": "!:0-4 \n"'
-    bind '"\e`": "!:-1 \n"'     # all but the last word
+    bind '"\e`": "!:0- \n"'     # all but the last word
 
     
 ### zsh 
@@ -38,7 +38,7 @@ Alt+1, Alt+2 ...etc
     bindkey -s '\e3' "!:0-2 \t"
     bindkey -s '\e4' "!:0-3 \t"
     bindkey -s '\e5' "!:0-4 \t"
-    bindkey -s '\e`' "!:-1 \t"     # all but the last word
+    bindkey -s '\e`' "!:0- \t"     # all but the last word
     
 ### contact
 
