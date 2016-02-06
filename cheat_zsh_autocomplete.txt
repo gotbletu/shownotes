@@ -1,0 +1,9 @@
+notes for video: https://www.youtube.com/watch?v=RDsUapd8jVw
+
+# site: https://github.com/chrisallenlane/cheat
+# cheat zsh autocomplete; add to ~/.zshrc
+_cmpl_cheat() {
+	reply=($(cheat -l | cut -d' ' -f1))
+}
+compctl -K _cmpl_cheat cheat
+
