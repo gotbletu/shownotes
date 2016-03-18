@@ -11,13 +11,15 @@ Nap is a console napster client written by Kevin Sullivan. It runs on Linux, Ope
     
     servers=share-it.loginto.me:3456;108.19.45.179:7777;95.248.174.8:8888;108.19.45.179:8888;spica.sytes.net:8888;84.24.69.59:6436;98.202.75.0:8877;79.103.115.248:5995;82.53.30.153:3456;80.181.212.54:8888
 
-http://gotnap.com/index.php/list
+- http://gotnap.com/index.php/list
+
+
 
 ### connect to a server
     nap -r -s ipaddress:port
     nap -r -s 79.103.107.173:5995 -s 98.202.75.0:8877
     
- ### commands
+### commands
     /help
     /search [keyword]
     /results          # open results window
