@@ -3,13 +3,13 @@ A couple of functions i created to format my drives. It will delete existing par
 
 I could of used just mkfs to format but from my experience linux likes to have at least one partition so that is why we used fdisk to create a partition before we format with mkfs.
 
-* tutorial video: [Link](https://www.youtube.com/watch?v=ypKjq5KIxSk)
+* tutorial video: [Link](https://www.youtube.com/watch?v=7txO1cdNJsQ)
 * offical website: [Link](https://www.youtube.com/user/gotbletu)
 
 ### install requirements
     mkfs fdisk
 
-### configuration
+### code
 add to ~/.bashrc or ~/.zshrc
     
     #-------- Color Code {{{
@@ -35,6 +35,172 @@ add to ~/.bashrc or ~/.zshrc
     # Format USB Stick/Hard Drive
     # It will create a single partition that fills the whole drive space
     
+    
+    format2usb-ext2() {
+      if [ $# -lt 2 ]; then
+        echo -e "format and create a partition that fills up the whole device"
+        echo -e "\nUsage: $0 <label> <device>"
+        echo -e "Example: $0 MY_USB sdx"
+        return 1
+      fi
+    
+      # check if the device is mounted
+      mount_status=$(mount | grep /dev/"$2" | wc -l)
+      if [ "$mount_status" -ne 0 ]
+      then
+        lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$2"
+        echo -e "${Red}/dev/$2 is mounted. You have to unmount /dev/$2 ${Color_Off}"
+        return 1
+      fi
+    
+      # list out all drives
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
+      
+      echo -n -e "${Red}WARNING: You are about to FORMAT a drive. Do you want to continue? [y/n] ${Color_Off}"
+      read REPLY
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        echo "... You chose to continue"
+      else
+        return 1
+      fi
+    
+      # delete existing partition then create new linux partition
+      echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nw" | sudo fdisk /dev/"$2"
+    
+      # delete partiton x8 using d\n\n
+      # d    delete a partition
+      #      default, partition
+    
+      # o    create a new empty DOS partition table
+      # n    add a new partition
+      # p    print the partition table
+      # 1    partition number 1
+      #      default, start immediately after preceding partition
+      #      default, extend partition to end of disk
+      # w    write table to disk and exit
+    
+      # format device
+      echo -e "y\n" | sudo mkfs.ext2 -L "$1" /dev/"$2"1
+    
+      # set permission
+      mkdir -p /tmp/testmount
+      sudo mount /dev/"$2"1 /tmp/testmount
+      sudo chmod -R 777 /tmp/testmount
+      sudo umount /tmp/testmount
+      rmdir /tmp/testmount
+    }
+    
+    format2usb-ext3() {
+      if [ $# -lt 2 ]; then
+        echo -e "format and create a partition that fills up the whole device"
+        echo -e "\nUsage: $0 <label> <device>"
+        echo -e "Example: $0 MY_USB sdx"
+        return 1
+      fi
+    
+      # check if the device is mounted
+      mount_status=$(mount | grep /dev/"$2" | wc -l)
+      if [ "$mount_status" -ne 0 ]
+      then
+        lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$2"
+        echo -e "${Red}/dev/$2 is mounted. You have to unmount /dev/$2 ${Color_Off}"
+        return 1
+      fi
+    
+      # list out all drives
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
+    
+      echo -n -e "${Red}WARNING: You are about to FORMAT a drive. Do you want to continue? [y/n] ${Color_Off}"
+      read REPLY
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        echo "... You chose to continue"
+      else
+        return 1
+      fi
+    
+      # delete existing partition then create new linux partition
+      echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nw" | sudo fdisk /dev/"$2"
+    
+      # delete partiton x8 using d\n\n
+      # d    delete a partition
+      #      default, partition
+    
+      # o    create a new empty DOS partition table
+      # n    add a new partition
+      # p    print the partition table
+      # 1    partition number 1
+      #      default, start immediately after preceding partition
+      #      default, extend partition to end of disk
+      # w    write table to disk and exit
+    
+      # format device
+      echo -e "y\n" | sudo mkfs.ext3 -L "$1" /dev/"$2"1
+    
+      # set permission
+      mkdir -p /tmp/testmount
+      sudo mount /dev/"$2"1 /tmp/testmount
+      sudo chmod -R 777 /tmp/testmount
+      sudo umount /tmp/testmount
+      rmdir /tmp/testmount
+    }
+    
+    format2usb-ext4() {
+      if [ $# -lt 2 ]; then
+        echo -e "format and create a partition that fills up the whole device"
+        echo -e "\nUsage: $0 <label> <device>"
+        echo -e "Example: $0 MY_USB sdx"
+        return 1
+      fi
+    
+      # check if the device is mounted
+      mount_status=$(mount | grep /dev/"$2" | wc -l)
+      if [ "$mount_status" -ne 0 ]
+      then
+        lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$2"
+        echo -e "${Red}/dev/$2 is mounted. You have to unmount /dev/$2 ${Color_Off}"
+        return 1
+      fi
+    
+      # list out all drives
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
+    
+      echo -n -e "${Red}WARNING: You are about to FORMAT a drive. Do you want to continue? [y/n] ${Color_Off}"
+      read REPLY
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        echo "... You chose to continue"
+      else
+        return 1
+      fi
+    
+      # delete existing partition then create new linux partition
+      echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nw" | sudo fdisk /dev/"$2"
+    
+      # delete partiton x8 using d\n\n
+      # d    delete a partition
+      #      default, partition
+    
+      # o    create a new empty DOS partition table
+      # n    add a new partition
+      # p    print the partition table
+      # 1    partition number 1
+      #      default, start immediately after preceding partition
+      #      default, extend partition to end of disk
+      # w    write table to disk and exit
+    
+      # format device
+      echo -e "y\n" | sudo mkfs.ext4 -L "$1" /dev/"$2"1
+    
+      # set permission
+      mkdir -p /tmp/testmount
+      sudo mount /dev/"$2"1 /tmp/testmount
+      sudo chmod -R 777 /tmp/testmount
+      sudo umount /tmp/testmount
+      rmdir /tmp/testmount
+    }
+    
     format2usb-fat32() {
       if [ $# -lt 2 ]; then
         echo -e "format and create a partition that fills up the whole device"
@@ -52,13 +218,17 @@ add to ~/.bashrc or ~/.zshrc
         return 1
       fi
     
-      # show the device info that is going to be formatted
-      sudo fdisk -l /dev/"$2"
+      # list out all drives
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
     
-      # warning message countdown
-      echo -e "${Red}WARNING YOU ARE ABOUT TO FORMAT A DRIVE! ${Color_Off}"
-      echo -e "${Red}You Have 15sec to hit CTRL+C To Cancle ${Color_Off}"
-      for i in {15..1..1};do echo -n "$i." && sleep 1; done
+      echo -n -e "${Red}WARNING: You are about to FORMAT a drive. Do you want to continue? [y/n] ${Color_Off}"
+      read REPLY
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        echo "... You chose to continue"
+      else
+        return 1
+      fi
     
       # delete existing partition then create new linux partition
       echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nt\nb\nw" | sudo fdisk /dev/"$2"
@@ -82,6 +252,13 @@ add to ~/.bashrc or ~/.zshrc
     
       # format device
       sudo mkfs.fat -F 32 -n "$label_name" -I /dev/"$2"1
+    
+      # set permission
+      mkdir -p /tmp/testmount
+      sudo mount /dev/"$2"1 /tmp/testmount
+      sudo chmod -R 777 /tmp/testmount
+      sudo umount /tmp/testmount
+      rmdir /tmp/testmount
     }
     
     format2usb-ntfs() {
@@ -101,13 +278,17 @@ add to ~/.bashrc or ~/.zshrc
         return 1
       fi
     
-      # show the device info that is going to be formatted
-      sudo fdisk -l /dev/"$2"
+      # list out all drives
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
     
-      # warning message countdown
-      echo -e "${Red}WARNING YOU ARE ABOUT TO FORMAT A DRIVE! ${Color_Off}"
-      echo -e "${Red}You Have 15sec to hit CTRL+C To Cancle ${Color_Off}"
-      for i in {15..1..1};do echo -n "$i." && sleep 1; done
+      echo -n -e "${Red}WARNING: You are about to FORMAT a drive. Do you want to continue? [y/n] ${Color_Off}"
+      read REPLY
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        echo "... You chose to continue"
+      else
+        return 1
+      fi
     
       # delete existing partition then create new linux partition
       echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nt\n7\nw" | sudo fdisk /dev/"$2"
@@ -128,157 +309,11 @@ add to ~/.bashrc or ~/.zshrc
     
       # format device
       sudo mkfs.ntfs -f -L "$1" /dev/"$2"1
-    }
     
-    format2usb-ext2() {
-      if [ $# -lt 2 ]; then
-        echo -e "format and create a partition that fills up the whole device"
-        echo -e "\nUsage: $0 <label> <device>"
-        echo -e "Example: $0 MY_USB sdx"
-        return 1
-      fi
-    
-      # check if the device is mounted
-      mount_status=$(mount | grep /dev/"$2" | wc -l)
-      if [ "$mount_status" -ne 0 ]
-      then
-        lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$2"
-        echo -e "${Red}/dev/$2 is mounted. You have to unmount /dev/$2 ${Color_Off}"
-        return 1
-      fi
-    
-      # show the device info that is going to be formatted
-      sudo fdisk -l /dev/"$2"
-    
-      # warning message countdown
-      echo -e "${Red}WARNING YOU ARE ABOUT TO FORMAT A DRIVE! ${Color_Off}"
-      echo -e "${Red}You Have 15sec to hit CTRL+C To Cancle ${Color_Off}"
-      for i in {15..1..1};do echo -n "$i." && sleep 1; done
-    
-      # delete existing partition then create new linux partition
-      echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nw" | sudo fdisk /dev/"$2"
-    
-      # delete partiton x8 using d\n\n
-      # d    delete a partition
-      #      default, partition
-    
-      # o    create a new empty DOS partition table
-      # n    add a new partition
-      # p    print the partition table
-      # 1    partition number 1
-      #      default, start immediately after preceding partition
-      #      default, extend partition to end of disk
-      # w    write table to disk and exit
-    
-      # format device
-      echo -e "y\n" | sudo mkfs.ext2 -L "$1" /dev/"$2"1
-    
-      # set read/write permission
+      # set permission
       mkdir -p /tmp/testmount
       sudo mount /dev/"$2"1 /tmp/testmount
-      sudo chmod 777 /tmp/testmount
-      sudo umount /tmp/testmount
-      rmdir /tmp/testmount
-    }
-    
-    format2usb-ext3() {
-      if [ $# -lt 2 ]; then
-        echo -e "format and create a partition that fills up the whole device"
-        echo -e "\nUsage: $0 <label> <device>"
-        echo -e "Example: $0 MY_USB sdx"
-        return 1
-      fi
-    
-      # check if the device is mounted
-      mount_status=$(mount | grep /dev/"$2" | wc -l)
-      if [ "$mount_status" -ne 0 ]
-      then
-        lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$2"
-        echo -e "${Red}/dev/$2 is mounted. You have to unmount /dev/$2 ${Color_Off}"
-        return 1
-      fi
-    
-      # show the device info that is going to be formatted
-      sudo fdisk -l /dev/"$2"
-    
-      # warning message countdown
-      echo -e "${Red}WARNING YOU ARE ABOUT TO FORMAT A DRIVE! ${Color_Off}"
-      echo -e "${Red}You Have 15sec to hit CTRL+C To Cancle ${Color_Off}"
-      for i in {15..1..1};do echo -n "$i." && sleep 1; done
-    
-      # delete existing partition then create new linux partition
-      echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nw" | sudo fdisk /dev/"$2"
-    
-      # delete partiton x8 using d\n\n
-      # d    delete a partition
-      #      default, partition
-    
-      # o    create a new empty DOS partition table
-      # n    add a new partition
-      # p    print the partition table
-      # 1    partition number 1
-      #      default, start immediately after preceding partition
-      #      default, extend partition to end of disk
-      # w    write table to disk and exit
-    
-      # format device
-      echo -e "y\n" | sudo mkfs.ext3 -L "$1" /dev/"$2"1
-    
-      # set read/write permission
-      mkdir -p /tmp/testmount
-      sudo mount /dev/"$2"1 /tmp/testmount
-      sudo chmod 777 /tmp/testmount
-      sudo umount /tmp/testmount
-      rmdir /tmp/testmount
-    }
-    
-    format2usb-ext4() {
-      if [ $# -lt 2 ]; then
-        echo -e "format and create a partition that fills up the whole device"
-        echo -e "\nUsage: $0 <label> <device>"
-        echo -e "Example: $0 MY_USB sdx"
-        return 1
-      fi
-    
-      # check if the device is mounted
-      mount_status=$(mount | grep /dev/"$2" | wc -l)
-      if [ "$mount_status" -ne 0 ]
-      then
-        lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$2"
-        echo -e "${Red}/dev/$2 is mounted. You have to unmount /dev/$2 ${Color_Off}"
-        return 1
-      fi
-    
-      # show the device info that is going to be formatted
-      sudo fdisk -l /dev/"$2"
-    
-      # warning message countdown
-      echo -e "${Red}WARNING YOU ARE ABOUT TO FORMAT A DRIVE! ${Color_Off}"
-      echo -e "${Red}You Have 15sec to hit CTRL+C To Cancle ${Color_Off}"
-      for i in {15..1..1};do echo -n "$i." && sleep 1; done
-    
-      # delete existing partition then create new linux partition
-      echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nw" | sudo fdisk /dev/"$2"
-    
-      # delete partiton x8 using d\n\n
-      # d    delete a partition
-      #      default, partition
-    
-      # o    create a new empty DOS partition table
-      # n    add a new partition
-      # p    print the partition table
-      # 1    partition number 1
-      #      default, start immediately after preceding partition
-      #      default, extend partition to end of disk
-      # w    write table to disk and exit
-    
-      # format device
-      echo -e "y\n" | sudo mkfs.ext4 -L "$1" /dev/"$2"1
-    
-      # set read/write permission
-      mkdir -p /tmp/testmount
-      sudo mount /dev/"$2"1 /tmp/testmount
-      sudo chmod 777 /tmp/testmount
+      sudo chmod -R 777 /tmp/testmount
       sudo umount /tmp/testmount
       rmdir /tmp/testmount
     }
