@@ -17,6 +17,7 @@ Using the FreeTuxTV Database of Working WebTV channels and playing it with VLC
     #       How to use nvlc: https://www.youtube.com/watch?v=7y_58wpHuFE
     
     alias nvlc='nvlc --no-color'				# vlc black/white color
+    freetuxtv-nolang() { nvlc "http://database.freetuxtv.net/WebStreamExport/index?format=m3u&type=1&status=2&lng=none&isp=all" ;}
     freetuxtv-french() { nvlc "http://database.freetuxtv.net/WebStreamExport/index?format=m3u&type=1&status=2&lng=fr&isp=all" ;}
     freetuxtv-english() { nvlc "http://database.freetuxtv.net/WebStreamExport/index?format=m3u&type=1&status=2&lng=en&isp=all" ;}
     freetuxtv-turkish() { nvlc "http://database.freetuxtv.net/WebStreamExport/index?format=m3u&type=1&status=2&lng=tr&isp=all" ;}
