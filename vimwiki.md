@@ -30,7 +30,7 @@ Taking notes with the best text editor! =)
     vim index.md
     
     # hotkeys
-    Enter - create a new note (cusor must be on a word)
+    Enter - create a new note (cursor must be on a word)
     Enter - enter into the note
     Backspace - Go back
     <leader>md - Open Markdown preview on web browser
