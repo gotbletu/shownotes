@@ -43,9 +43,11 @@ couple of macros i use with my terminal rss reader, we dont need to reinvent the
     # xclip: https://www.youtube.com/watch?v=fKP0FLp3uW0
     macro y set browser "echo -n %u | xclip -selection clipboard"; open-in-browser ; set browser "$BROWSER %u"
     
+
     # read saved files
     # ranger: https://www.youtube.com/watch?v=qooLR8NmYKs
     # w3m context url: https://www.youtube.com/watch?v=C7YPjbrTeCs
+    save-path ~/.newsbeuter/saved_articles
     macro s set browser "tmux split-window && tmux send-keys 'ranger ~/.newsbeuter/saved_articles && tmux kill-pane\n'" ; open-in-browser ; set browser "$BROWSER %u"
     
     # }}}
