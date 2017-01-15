@@ -1,5 +1,5 @@
 # Newsbeuter Macro
-couple of macros i use with my terminal rss reader, we dont need to reinvent the wheel, we are just going to use exiting tools and chain them together.
+couple of macros i use with my terminal rss reader, we dont need to reinvent the wheel, we are just going to use existing tools and chain them together.
 * tutorial video: [Link](https://www.youtube.com/watch?v=mRnMg2V9n-E)
 * offical website: [Link](http://newsbeuter.org/)
 
