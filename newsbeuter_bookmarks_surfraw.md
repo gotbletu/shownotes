@@ -12,7 +12,6 @@
     bookmark-cmd "~/.scripts/newsbeuter_bookmarks_surfraw.sh"
     
 ### script
-
 - You can wget the script here: [newsbeuter_bookmarks_surfraw.sh](newsbeuter_bookmarks_surfraw.sh)
 - or manually save below
 
@@ -45,6 +44,7 @@
     title="$2"          # tags
     description="$3"    # nickname (single word only, no spaces)
     echo -e "${description}\t${url}\t;; newsbeuter ${title}" >> ~/.config/surfraw/bookmarks
+
 
 ### launch bookmarks (fzf + surfraw)
 Note: This was not cover in the video since it was already explained in this old video below
