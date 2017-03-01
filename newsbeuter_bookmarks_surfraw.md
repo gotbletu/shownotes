@@ -16,6 +16,8 @@
 - or manually save below
 
 
+
+
     #!/bin/sh
     #             _   _     _      _         
     #  __ _  ___ | |_| |__ | | ___| |_ _   _ 
@@ -38,7 +40,6 @@
     # hotkey:
     #   Ctrl+B to bookmark an article url
     #   Ctrl+G to cancel
-    
     
     url="$1"            # url
     title="$2"          # tags
