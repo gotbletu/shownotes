@@ -8,9 +8,9 @@
 # |___/                                  
 #       http://gotbletu.blogspot.com/ | http://www.youtube.com/user/gotbletu
 
-# A lazy script to download wallpaper and delete old wallpaper at the sametime
-#  just add it to your cron for automatic and pure lazyness
-#   all you need is a wallpaper changer for your desktop environment and is a done deal son loL
+# A lazy script to download wallpaper and delete old wallpaper at the same time
+#  just add it to your cron for automatic and pure laziness
+#   all you need is a wallpaper changer for your desktop environment and is a done deal, son LOL
 
 # Variable (you can change any of these to your liking)
 real_wall_dir=~/Pictures/Wallpapers
@@ -30,14 +30,15 @@ wget -U "Mozilla/5.0" $(lynx --dump $url_wall_link | awk '/7yz4ma1/ && /jpg/ && 
 # delete any file under 50k in size (to avoid shitty thumnbails or crap quality)
 find . -type f -iname "*.jp*g" -size -50k -exec rm {} \;
 
-# change the downloaded wallpaper metadata (modified date to todays date)
-#  this makes it easy to see which files are older to delete later on
+# change the downloaded wallpaper metadata (modified date to today's date)
+#  this makes it easy to see which files are older & to delete later on
 find . -type f -iname "*.jp*g" -exec touch -m {} \;
 
-# now that everything is cleaned and filter
-#  send the downloaded images to the wallpaper folder 
+# now that everything is cleaned and filtered
+#  send the downloaded images to the wallpaper folder and remove temp folder
 find . -type f -iname "*.jp*g" -exec mv {} $real_wall_dir \;
-
-#  delete wallpaper image older then X days and remove temp folder
 rm -rf $temp_wall_dir
+
+#  delete wallpaper image older then X days
+cd $real_wall_dir
 find $real_wall_dir -mtime +$expire_wall_date -exec rm {} \;
