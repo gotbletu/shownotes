@@ -1,0 +1,285 @@
+#             _   _     _      _         
+#  __ _  ___ | |_| |__ | | ___| |_ _   _ 
+# / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
+#| (_| | (_) | |_| |_) | |  __/ |_| |_| |
+# \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
+# |___/                                  
+#       https://www.youtube.com/user/gotbletu
+#       https://twitter.com/gotbletu
+#       https://plus.google.com/+gotbletu
+#       https://github.com/gotbletu
+#       gotbleu@gmail.com
+
+# demo: https://www.youtube.com/watch?v=8cLRsYKoEdw
+
+# Legends:
+# Mod4 = Super
+# Mod3 = Capslock = Hyper_L (custom rebind) (demo: https://www.youtube.com/watch?v=W9_H_M-H-a4)
+
+#-------- Xbindkeys default readme {{{
+#------------------------------------------------------
+
+# For the benefit of emacs users: -*- shell-script -*-
+###########################
+# xbindkeys configuration #
+###########################
+#
+# Version: 1.8.6
+#
+# If you edit this file, do not forget to uncomment any lines
+# that you change.
+# The pound(#) symbol may be used anywhere for comments.
+#
+# To specify a key, you can use 'xbindkeys --key' or
+# 'xbindkeys --multikey' and put one of the two lines in this file.
+#
+# The format of a command line is:
+#    "command to start"
+#       associated key
+#
+#
+# A list of keys is in /usr/include/X11/keysym.h and in
+# /usr/include/X11/keysymdef.h
+# The XK_ is not needed.
+#
+# List of modifier:
+#   Release, Control, Shift, Mod1 (Alt), Mod2 (NumLock),
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll).
+#
+
+# The release modifier is not a standard X modifier, but you can
+# use it if you want to catch release events instead of press events
+
+# By defaults, xbindkeys does not pay attention with the modifiers
+# NumLock, CapsLock and ScrollLock.
+# Uncomment the lines above if you want to pay attention to them.
+
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
+
+# Examples of commands:
+
+# "xbindkeys_show" 
+#   control+shift + q
+
+# set directly keycode (here control + f with my keyboard)
+# "xterm"
+#   c:41 + m:0x4
+
+# specify a mouse button
+# "xterm"
+#   control + b:2
+
+#"xterm -geom 50x20+20+20"
+#   Shift+Mod2+alt + s
+#
+## set directly keycode (here control+alt+mod2 + f with my keyboard)
+#"xterm"
+#  alt + c:0x29 + m:4 + mod2
+#
+## Control+Shift+a  release event starts rxvt
+#"rxvt"
+#  release+control+shift + a
+#
+## Control + mouse button 2 release event starts rxvt
+#"rxvt"
+#  Control + b:2 + Release
+
+##################################
+# End of xbindkeys configuration #
+##################################
+
+#}}}
+#-------- System {{{
+#------------------------------------------------------
+
+# search files
+# demo: https://www.youtube.com/watch?v=C64LKCZFzME
+"xterm -fullscreen -fg white -bg black -fa 'Monospace' -fs 14 -e ranger --cmd=fzf_locate"
+  Mod4+Alt+s
+
+# file manger
+"xdg-open ~"
+  Mod4+Alt+f
+
+# download folder
+"xdg-open ~/Downloads"
+  Mod4+Alt+d
+
+# garbage bin
+"xdg-open trash:///"
+  Mod4+Alt+g
+
+# kill a X window program (right mouse = kill, left mouse = cancle)
+"xkill"
+  Control+Shift+Escape
+
+# system monitor (htop) (kde style)
+# demo: https://www.youtube.com/watch?v=ZnEDfqr4Rm0
+"xterm -fg white -bg black -fa 'Monospace' -fs 14 -e htop"
+  Control+Escape
+
+# system monitor (htop) alternative (windows style)
+"xterm -fg white -bg black -fa 'Monospace' -fs 14 -e htop"
+  Control+Alt+Delete
+
+# lock screen
+"xscreensaver-command -lock"
+  Control+Alt+l
+
+
+#}}}
+#-------- Window Management {{{
+#------------------------------------------------------
+
+# resize window mode (hit Enter to finish, Esc to cancle)
+"sleep 0.2 && xdotool key alt+space r"
+  Mod3+r
+
+# move window mode (draging)
+"sleep 0.2 && xdotool key alt+space m"
+  Mod3+w
+
+# close window
+# "sleep 0.2 && xdotool key alt+space c"
+"wmctrl -c :ACTIVE:"
+  Mod3+c
+
+# fullscreen window (toggle)
+"wmctrl -r :ACTIVE: -b toggle,fullscreen"
+  Mod3+f
+
+# maximize window (toggle)
+# "sleep 0.2 && xdotool key alt+space x"
+"wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz"
+  Mod3+e
+
+# minimize window
+# "sleep 0.2 && xdotool key alt+space n"
+"xdotool windowminimize $(xdotool getactivewindow)"
+  Mod3+d
+
+# minimize all other windows
+"sleep 0.2 && xdotool key alt+space n"
+  Mod3+g
+
+# always on top (toggle)
+"wmctrl -r :ACTIVE: -b toggle,above"
+  Mod3+t
+
+# always visible on workspaces (toggle)
+"wmctrl -r :ACTIVE: -b toggle,sticky"
+  Mod3+v
+
+# show desktop (toggle)
+"~/.scripts/show_desktop_toggle.sh"
+  Mod3+s
+
+# reload xbindkeys
+# "xmodmap ~/.Xmodmap && killall xcape && xcape -e 'Hyper_L=Return' && killall xbindkeys && xbindkeys"
+"killall xbindkeys ; xbindkeys"
+  Control+Shift+u
+
+#}}}
+#-------- Scripts {{{
+#------------------------------------------------------
+
+# start rofi
+# demo: https://www.youtube.com/playlist?list=PLqv94xWU9zZ0LVP1SEFQsLEYjZC_SUB3m
+"~/.scripts/rofi-scripts-collection/rofi-bangs.sh"
+  Control+space
+
+# open highlighted url or last url from clipboard history in incognito mode
+# "~/.scripts/anamnesis_clipboard_chromium_incognito_url.sh"
+"~/.scripts/rofi_clipboard_chromium_incognito_url.sh"
+  Mod3+4
+
+# separate username:password
+"~/.scripts/userpass_separate_clipboard.sh"
+  Mod3+3
+
+# get username only
+# "~/.scripts/anamnesis_clipboard_user.sh"
+"~/.scripts/rofi_clipboard_user.sh"
+  Mod3+1
+
+# get password only
+# "~/.scripts/anamnesis_clipboard_pass.sh"
+"~/.scripts/rofi_clipboard_pass.sh"
+  Mod3+2
+
+# redshift
+# demo: https://www.youtube.com/watch?v=c8v84LRTeUw
+"~/.scripts/redshift_toggle.sh"
+  Control+Shift+r
+
+# textaloud (text to speech)
+"~/.scripts/textaloud.sh"
+  Mod3+Shift+s
+
+# google translate via notification
+"~/.scripts/translate_via_google_notify.sh"
+  Mod3+shift+t
+
+# remove clipboard formatting and paste
+# demo: https://www.youtube.com/watch?v=YY3hRhrUjOQ
+"~/.scripts/clipboard_removeformatting.sh"
+  Control+Shift+z
+
+# change wallpaper (random)
+"~/.scripts/command/set-as-wallpaper-xfce4.12.sh"
+  Mod3+b
+
+# show list of hotkeys
+# "~/.scripts/keyboard_shortcuts_overlay_xfce.sh"
+#   Mod3+b
+
+# turn any terminal into dropdown terminal
+# demo: https://www.youtube.com/watch?v=mVw2gD9iiOg
+# "~/.scripts/any_term_dropdown.sh"
+#   Mod3+a
+
+# # mouse grid (mouseless.py) and mousemove mode (mousemove_mode.sh)
+# demo: https://www.youtube.com/watch?v=6P7gZFtihKM
+# "~/.scripts/mouseless_mousemove_mode.sh"
+#   Mod3+a
+#
+# # mouse grid (mouseless.py) and mousemove mode (mousemove_mode.sh)
+# "~/.scripts/mouseless_mousemove_mode.sh"
+#   Alt+semicolon
+#
+# # mouse grid (mouseless.py) and mousemove mode (mousemove_mode.sh)
+# "~/.scripts/mouseless_mousemove_mode.sh"
+#   Pause
+
+#}}}
+#-------- Screenshot {{{
+#------------------------------------------------------
+
+# screenshot (fullscreen)
+"xfce4-screenshooter -f"
+  Print
+
+# screenshot (window)
+"xfce4-screenshooter -w"
+  Alt+Print
+
+# screenshot (select region using mouse)
+"xfce4-screenshooter -r"
+  Control+Print
+
+#}}}
+
+#-------- Empty {{{
+#------------------------------------------------------
+
+#}}}
+#-------- Empty {{{
+#------------------------------------------------------
+
+#}}}
+
+
+
+
