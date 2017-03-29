@@ -5,8 +5,11 @@ Taking notes with the best text editor! =)
 
 ### install requirements
 - vim
-- vimwiki (https://github.com/vimwiki/vimwiki)
 - vim-instant-markdown (https://github.com/suan/vim-instant-markdown)
+- vimwiki (https://github.com/vimwiki/vimwiki)
+  - **Note: Some people have reported that the newer version does not work**
+  - This is the version i was using in the video, click on downloads button to get the zip
+    - https://github.com/vimwiki/vimwiki/tree/2c03d82a0e4662adf1e347487d73a9bf4bf6fdac
 
 ### configuration
     vim ~/.vimrc
@@ -41,6 +44,7 @@ As far as markdown syntax you can learn that on your own, takes about 5-10mins r
 ### references
 - https://github.com/vimwiki/vimwiki
 - https://github.com/suan/vim-instant-markdown
+- Vimwiki Version from Video Demo: https://github.com/vimwiki/vimwiki/tree/2c03d82a0e4662adf1e347487d73a9bf4bf6fdac
 
 
 ### contact
