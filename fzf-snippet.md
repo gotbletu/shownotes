@@ -12,15 +12,17 @@ Notes for video: https://www.youtube.com/watch?v=Zew0mgJwAh8
     mkdir ~/.multisnippet
     
 ## 3. alias for zshrc/bashrc
-
+    # location of snippets, folder created in step 2 or custom location
+    snippets_dir=~/.multisnippet
+    
     # edit single line snippet
     cfg-snippetrc() { $EDITOR ~/.snippetrc ;}
     
     # edit multiline snippet
-    cfg-multisnippetrc() { $EDITOR ~/.multisnippet/"$(ls ~/.multisnippet | fzf -e -i)" ;}
+    cfg-multisnippetrc() { $EDITOR $snippets_dir/"$(ls $snippets_dir | fzf -e -i)" ;}
     
     #create new multiline snippet
-    multisnippet() { $EDITOR ~/.multisnippet/"$1" ;}
+    multisnippet() { $EDITOR $snippets_dir/"$1" ;}
     
     fzf-snippet() { 
     	selected="$(cat ~/.snippetrc | sed '/^$/d' | sort -n | fzf -e -i )"
@@ -29,11 +31,8 @@ Notes for video: https://www.youtube.com/watch?v=Zew0mgJwAh8
     }
     
     fzf-multisnippet() { 
-    	# location of snippets
-    	dir=~/.multisnippet
-    
     	# merge filename and tags into single line
-    	results=$(for FILE in $dir/*
+    	results=$(for FILE in $snippets_dir/*
     	do
     		getname=$(basename $FILE)
     		gettags=$(head -n 1 $FILE)
@@ -44,7 +43,7 @@ Notes for video: https://www.youtube.com/watch?v=Zew0mgJwAh8
     
     	# copy content into clipboard without tags
     	filename=$(echo "$(echo $results | fzf -e -i )" | cut -d' ' -f 1)
-    	sed 1d $dir/$filename | xclip -selection clipboard
+    	sed 1d $snippets_dir/$filename | xclip -selection clipboard
     }
 
 
