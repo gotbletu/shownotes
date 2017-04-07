@@ -85,6 +85,19 @@
     # refresh database
     sudo updatedb
 
+### extra info
+
+    From the Ranger man page :
+    
+    map key command
+    Assign the key combination to the given command. Whenever you type
+    the key/keys, the command will be executed. Additionally, if you use
+    a quantifier when typing the key, like 5j, it will be passed to the
+    command as the attribute "self.quantifier".
+    
+    In our case the quantifier is any key before pressing the fzf_select keybinding
+
+
 ### references
 - https://www.youtube.com/watch?v=C64LKCZFzME
 - http://ranger.nongnu.org/
