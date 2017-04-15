@@ -8,7 +8,7 @@ creating a meta feed so we can see all the rss feeds in one feed.
     newsbeuter
 
 ### configuration
-    vim ~/.newsbeuter/config
+    vim ~/.newsbeuter/urls
     
 
     # Make sure to put query feeds at the top of the config
