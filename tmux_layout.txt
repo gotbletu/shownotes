@@ -6,6 +6,28 @@
 # -v = split horizontal
 # -h = split veritical
 
+################### tmux 2.4
+# Note: seems like in 2.4 you have to use -t WINDOWNAME for it to work
+
+bind-key M-a new-window -n gbu -c $HOME \; \
+  new-window -n bt -c $HOME \; \
+  send-keys -t bt 'transmission-remote-cli' 'Enter' \; \
+  split-window -t bt \; \
+  send-keys -t bt 'ranger ~/DL_Torrent' 'Enter' \; \
+  new-window -n mus -c $HOME \; \
+  send-keys -t mus 'cmus' 'Enter' \; \
+  new-window -n chat -c $HOME \; \
+  send-keys -t chat 'weechat-curses' 'Enter' \; \
+  split-window -h -p 20 -t chat \; \
+  send-keys -t chat 'sleep 10 && tmux rename-window -t 4 chat && finch' 'Enter' \; \
+  new-window -n mail -c $HOME \; \
+  send-keys -t mail 'mutt' 'Enter' \; \
+  new-window -n rss -c $HOME \; \
+  send-keys -t rss 'newsbeuter' 'Enter'
+
+
+################### tmux 2.3
+
 # chatting
 bind-key M-c new-window -n chat -c $HOME \; \
 	send-keys 'centerim5' 'Enter' \; \
