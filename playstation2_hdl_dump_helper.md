@@ -1,5 +1,9 @@
 # Transfer Games to Playstation 2 Hard Drive on Linux
-Add and delete games from our FAT PS2 IDE Hard Drive using HDL Dump Helper GUI
+Add and delete games from our FAT PS2 IDE Hard Drive using HDL Dump Helper GUI.
+This is a java frontend for the commandline program called hdl_dump.
+It has Linux and Windows build, and some says it works on MacOS also.
+This program cannot format your hard drive, so you would still need to either use **winhiip** on Windows or 
+I believe you can format your hard drive directly from the PS2 as well using **HDLoader** from FreeMcBoot.
 
 * tutorial video: [Link](https://www.youtube.com/watch?v=LpBYuCI0d8E)
 
@@ -12,8 +16,8 @@ Add and delete games from our FAT PS2 IDE Hard Drive using HDL Dump Helper GUI
 ### Software Requirements:
 - java (search in the package manager for **jre** and install one of those e.g: **jre8-openjdk**)
 - hdl_dump_helper
-  - http://www.ps2-home.com/forum/viewtopic.php?t=2738)
-  - http://www.theisozone.com/downloads/playstation/ps2-homebrew/hdl-dump-helper-gui-for-linux-windows/)
+  - http://www.ps2-home.com/forum/viewtopic.php?t=2738
+  - http://www.theisozone.com/downloads/playstation/ps2-homebrew/hdl-dump-helper-gui-for-linux-windows/
 
 ### HDL Dump Helper
     Extract hdl_dump_helper_gui_v2.3.rar
