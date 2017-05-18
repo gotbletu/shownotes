@@ -226,6 +226,7 @@ Check the clonezilla site for other supported filesystems else it will use the d
 
 ### common error
 - Use **fsck** command to check and repair if you get this type of error
+----
 
 
     # Partclone fail, please check /var/log/partclone.log
