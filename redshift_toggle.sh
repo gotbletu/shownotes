@@ -19,11 +19,11 @@
 STATUS="$(ps -ef | grep -w '[r]edshift' | wc -l)"
 # if off then turn on
 if [[ "${STATUS}" == 0 ]]; then
-  notify-send -t 1 --icon=info "RedShift" "On"
+  notify-send -i /usr/share/icons/hicolor/scalable/apps/redshift-status-on.svg "RedShift" "On"
   redshift >/dev/null 2>&1 & disown
 # else if on then turn off
 elif [[ "${STATUS}" == 1 ]]; then
-  notify-send -t 1 --icon=info "RedShift" "Off"
+  notify-send -i /usr/share/icons/hicolor/scalable/apps/redshift-status-off.svg "RedShift" "Off"
   redshift -x && killall redshift
 fi
 
