@@ -29,7 +29,7 @@ If you find my videos feature on other site let me know also, I always need an E
 - [pacmixer](https://github.com/KenjiTakahashi/pacmixer) - an alsamixer alike for pulseaudio
 - [sunflower-fm](https://code.google.com/p/sunflower-fm/) - lightweight file manager with dual pane
 - [torrent-search](http://torrent-search.sourceforge.net) - search for torrents
-- [turses](https://github.com/alejandrogomez/turses) - console twitter client
+- [turses](https://pypi.python.org/pypi/turses) - console twitter client
 - [veromix](http://kde-look.org/content/show.php?content=116676) - KDE mixer for pulseaudio
 - [youtube-viewer](https://github.com/trizen/youtube-viewer) - a command-line interface to YouTube
 
