@@ -6,23 +6,23 @@ Preview and Render HTML emails, both in commandline or in a GUI web browser
 ### install requirements
     mutt
 
-
 ### muttrc
     vim ~/.muttrc
     
-    # open in gui browser: hit "v" then go down to text/html then hit "m"
+    # open in gui browser: hit "v" then go down to text/html then hit "m" or "Enter"
     bind attach <return> view-mailcap
     auto_view text/html                                      # view html automatically
     alternative_order text/plain text/enriched text/html     # list html for last
 
-
 ### mailcap
     vim ~/.mailcap
 
-    # text/html; chromium %s &; test=test -n "$DISPLAY"; needsterminal;
+    # text/html; chromium %s; test=test -n "$DISPLAY"; needsterminal;
     # text/html; w3m -I %{charset} -T text/html; copiousoutput;
-    text/html; "$BROWSER" %s &; test=test -n "$DISPLAY"; needsterminal;
+    
+    text/html; "$BROWSER" %s; test=test -n "$DISPLAY"; needsterminal;
     text/html; "$BROWSERCLI" -I %{charset} -T text/html; copiousoutput;
+    text/plain; cat %s; copiousoutput
     
 ### references
 - http://jasonwryan.com/blog/2012/05/12/mutt/
