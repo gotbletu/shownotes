@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    BleachBit
+    Copyright (C) 2008-2017 Andrew Ziem
+    https://www.bleachbit.org
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<cleaner id="unique_id">
+  <!-- The label is the application name such as Bash or GIMP.
+         Use the same capitialization as the application uses to
+         refer to itself. By default, this is the only string
+         that is not translated.  To translate it, set
+         the attribute translate="true". -->
+  <label>Application name</label>
+  <!-- Include a brief description of the application such as
+         'web browser' or 'game.'  Where possible, use the same
+         description as another cleaner to avoid unnecessary
+         translations.  If the description is unavailable, omit
+         the whole element. -->
+  <description>Description of the application</description>
+  <!-- A cleaner has one or more options.  If the actions
+         change significantly, you may change the option ID to
+         avoid causing the user to deleting files unintentionally. -->
+  <option id="unique_id">
+    <!-- The option label must be specific and should quickly give
+           the user the jist of what the action does.  Where possible,
+           use the same description as another cleaner to avoid
+           unnecessary translations.  Good option labels include
+           "logs," "cache," and "cookies." -->
+    <label>Cleaning action</label>
+    <!-- The description precises describes what will happen.  It
+           should begin with a verb such as "delete." -->
+    <description>Delete the web cache, which reduces time to display revisited pages</description>
+    <!-- Each option may have one warning shown to the user when
+         selected interactively (in the GUI) to alert him of a
+         special consideration or potential risk. -->
+    <warning>Deleting the cache will slow down application usage</warning>
+    <!-- An option has one or more actions.
+
+           Actions generally have two parts: a search method (how to
+           find a file) and a command (what to do with the file once
+           it is found). You should make the pattern as specific as
+           possible to avoid deleting files unintentionally.
+
+           search="file" finds a single file.
+           command="delete" deletes it.  -->
+    <action search="file" command="delete" path="/tmp/secret.log"/>
+    <!-- On POSIX systems for system logs that may be in use, it's better
+         to truncate than to delete. -->
+    <action search="file" command="truncate" path="/var/log/messages"/>
+    <!-- search="walk.all" deletes all files and directories under the directory (but
+           not the parent). It walks each subdirectory too.  -->
+    <action search="walk.all" command="delete" path="/var/tmp/"/>
+    <!-- search="walk.files" deletes all files (but not any directories), walking
+         in to each subdirectory. -->
+    <action search="walk.files" command="delete" path="/var/tmp/"/>
+    <!-- search="glob" deletes all pathnames matching the shell glob
+           pattern described in the Python documentation.
+           http://www.python.org/doc/2.5.2/lib/module-glob.html -->
+    <action search="glob" command="delete" path="/tmp/*.bak"/>
+    <action search="glob" command="delete" path="/var/log/*.[0-9].gz"/>
+    <action search="glob" command="delete" path="/tmp/?.bak"/>
+    <!-- With search=file, glob, walk.all, and walk.files, BleachBit expands
+         ~ to the user's personal home directory and any existing environment
+         variables such as $HOME and $USERPROFILE -->
+    <action command="delete" search="file" path="~/.xsession-errors"/>
+    <action command="delete" search="file" path="$USERPROFILE\_viminfo"/>
+    <!-- While the search="..." generates a list of files, you can filter
+         the list using any combination of: regex, nregex, and type.
+
+         regex and nregex are both case sensitive and both match just the
+         filename (i.e., not the whole path).
+
+         The following action truncates any file that ends with log.
+         -->
+    <action command="truncate" search="walk.files" path="/var/log" regex="log$" type="d"/>
+    <!-- command=sqlite.vacuum defragments an SQLite 3 database -->
+    <action command="sqlite.vacuum" search="glob" path="/var/cache/yum/*/*.sqlite"/>
+    <!-- command="winreg" without the attribute 'name' deletes
+           Windows registry keys -->
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"/>
+    <!-- command="winreg" with the attribute 'name' deletes a
+           named value under a Windows registry key -->
+    <action command="winreg" name="CurrentVersion" path="HKCU\Software\BleachBit"/>
+  </option>
+</cleaner>
