@@ -1,6 +1,6 @@
-# XTerm Xresources - Pimp The Xterm Terminal
+# XTerm Xresources - Pimp The XTerm Terminal
 xterm looks like sh/t so time to style and profile it lols. Turn it into a dropdown terminal also
-* tutorial video: [Link](https://www.youtube.com/watch?v=sytpQxPqV_g)
+* tutorial video: [Link](https://www.youtube.com/watch?v=mAUQsNUnk9I)
 * offical website: [Link](https://invisible-island.net/xterm/)
 
 ### install requirements
@@ -918,6 +918,9 @@ exit xterm and reopen xterm
 ### enable dropdown terminal
 - https://www.youtube.com/watch?v=mVw2gD9iiOg
 
+### using w3m as a url view launcher
+- https://www.youtube.com/watch?v=C7YPjbrTeCs
+
 ### test blinking colors
 
     echo '\e[0;31;5m gotbletu screencast'
@@ -930,7 +933,7 @@ exit xterm and reopen xterm
     set colorscheme solarized
 
 ### references
-- https://www.youtube.com/watch?v=sytpQxPqV_g
+- https://www.youtube.com/watch?v=mAUQsNUnk9I
 - dropdown terminal script https://www.youtube.com/watch?v=mVw2gD9iiOg
 - https://wiki.archlinux.org/index.php/Xterm
 - https://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
