@@ -74,15 +74,19 @@ xterm looks like sh/t so time to style and profile it lols. Turn it into a dropd
     
     
     !! Keybinding ========================================================
-    ! copy/paste hotkey (ctrl+shift+c = copy ; ctrl+shift+v = paste)
-    ! change fontsize on the fly (ctrl+plus = increase ; ctrl+minus = decrease)
     ! http://blog.rot13.org/2010/03/change-font-size-in-xterm-using-keyboard.html
+    ! - change fontsize on the fly (ctrl+plus = increase ; ctrl+minus = decrease, ctrl+0 = default)
+    ! - copy/paste hotkey (ctrl+shift+c = copy ; ctrl+shift+v = paste)
+    ! - open url (clickable links)
+    !   1) double click to highlight the full url
+    !   2) Shift + click it to open it
     XTerm.vt100.translations: #override \n\
       Ctrl <Key> minus: smaller-vt-font() \n\
       Ctrl <Key> plus: larger-vt-font() \n\
       Ctrl <Key> 0: set-vt-font(d) \n\
       Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
       Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
+      Shift <Btn1Up>: exec-formatted("xdg-open '%t'", PRIMARY) \n\
       <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
       <Btn2Up>: insert-selection(PRIMARY)
     
@@ -105,13 +109,6 @@ xterm looks like sh/t so time to style and profile it lols. Turn it into a dropd
     !
     ! XTerm*on3Clicks: regex [[:alpha:]]+://([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
     XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
-    
-    ! Open URL (Clickable Links)
-    ! 1) hover above a link
-    ! 2) triple click it to select it
-    ! 3) Alt + click it to open it
-    *VT100*translations: #override Shift <Btn1Up>: exec-formatted("xdg-open '%t'", PRIMARY)
-    
     
     ! <BtnUp>:select-end(SELECT, CUT_BUFFER0) \n\
     ! Ctrl <Btn4Down>:scroll-back(1,halfpage,m) \n\
