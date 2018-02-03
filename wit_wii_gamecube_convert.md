@@ -55,7 +55,7 @@ convert wii iso to wbfs with auto split at 4GB. convert gamecube iso to ciso (co
         GAMEID=$(wit lll -H "$arg" | awk '{print $1}')
         TITLE=$(wit lll -H "$arg" | awk '{ print substr($0, index($0,$5)) }' | awk '{$1=$1};1' )
         DIR_FILENAME="$FILENAME [$GAMEID]"
-        DIR_TITLENAME="$TITLE [$GAMEID]"
+        DIR_TITLENAME="$TITLE ($REGION) [$GAMEID]"
     
         ## no conversion; only generate folder base on title inside the rom, move iso to folder
         # mkdir -pv "$DIR_TITLENAME"
@@ -102,7 +102,7 @@ convert wii iso to wbfs with auto split at 4GB. convert gamecube iso to ciso (co
         GAMEID=$(wit lll -H "$arg" | awk '{print $1}')
         TITLE=$(wit lll -H "$arg" | awk '{ print substr($0, index($0,$5)) }' | awk '{$1=$1};1' )
         DIR_FILENAME="$FILENAME [$GAMEID]"
-        DIR_TITLENAME="$TITLE [$GAMEID]"
+        DIR_TITLENAME="$TITLE ($REGION) [$GAMEID]"
     
         ## create proper folder structure base on title inside the rom, scrub image & convert to wbfs, auto split at 4GB a piece
         # mkdir -pv "$DIR_TITLENAME"
