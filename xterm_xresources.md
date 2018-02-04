@@ -920,7 +920,7 @@ exit xterm and reopen xterm
 
 ### test blinking colors
 
-    echo '\e[0;31;5m gotbletu screencast'
+    echo -e '\e[0;31;5m gotbletu screencast \e[0m'
 
 ### extra stuff: enable solarized themes in vim and ranger
     vim ~/.vimrc
