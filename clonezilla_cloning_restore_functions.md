@@ -106,20 +106,20 @@ Check the clonezilla site for other supported filesystems else it will use the d
       fi
       OUTPUT_FILE="$1_clonezilla_disk_`date +'%Y_%m_%d'`"
       DEVICE_NAME="$2"
-      echo "${Yellow}>>>Checking if device is mounted ${Color_Off}"
+      echo -e "${Yellow}>>>Checking if device is mounted ${Color_Off}"
         MOUNT_STATUS=$(mount | grep /dev/"$DEVICE_NAME" | wc -l)
         if [ "$MOUNT_STATUS" -ne 0 ]
         then
           lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$DEVICE_NAME"
-          echo "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount the device and all of its partitions then try again ${Color_Off}"
+          echo -e "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount the device and all of its partitions then try again ${Color_Off}"
           return 1
         fi
-      echo "${Blue}>>>Set current output path to $PWD ${Color_Off}"
+      echo -e "${Blue}>>>Set current output path to $PWD ${Color_Off}"
         sudo sed -i 's:ocsroot=.*:ocsroot='\""$PWD"\"':g' /etc/drbl/drbl.conf
-      echo "${Green}>>>Start full disk cloning process ${Color_Off}"
-      echo "${Green}>>>$OUTPUT_FILE image will be saved to $PWD ${Color_Off}"
+      echo -e "${Green}>>>Start full disk cloning process ${Color_Off}"
+      echo -e "${Green}>>>$OUTPUT_FILE image will be saved to $PWD ${Color_Off}"
         sudo ocs-sr -q2 -c -j2 -z1p -i 5000000 -sc -p true savedisk "$OUTPUT_FILE" "$DEVICE_NAME"
-      echo "${Red}>>>Changing permission of $OUTPUT_FILE image ${Color_Off}"
+      echo -e "${Red}>>>Changing permission of $OUTPUT_FILE image ${Color_Off}"
         sudo chmod -R 777 "$OUTPUT_FILE"
     }
     
@@ -132,15 +132,15 @@ Check the clonezilla site for other supported filesystems else it will use the d
       fi
       INPUT_FILE="$1"
       DEVICE_NAME="$2"
-      echo "${Yellow}>>>Checking if device is mounted ${Color_Off}"
+      echo -e "${Yellow}>>>Checking if device is mounted ${Color_Off}"
         MOUNT_STATUS=$(mount | grep /dev/"$DEVICE_NAME" | wc -l)
         if [ "$MOUNT_STATUS" -ne 0 ]
         then
           lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$DEVICE_NAME"
-          echo "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount the device and all of its partitions then try again ${Color_Off}"
+          echo -e "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount the device and all of its partitions then try again ${Color_Off}"
           return 1
         fi
-      echo "${Green}>>>Start full disk restore process ${Color_Off}"
+      echo -e "${Green}>>>Start full disk restore process ${Color_Off}"
         sudo /usr/sbin/ocs-sr -g auto -e1 auto -e2 -c -r -j2 -p true restoredisk "$INPUT_FILE" "$DEVICE_NAME"
     }
     
@@ -156,20 +156,20 @@ Check the clonezilla site for other supported filesystems else it will use the d
       OUTPUT_FILE="$1_clonezilla_part${PART_NUM}_`date +'%Y_%m_%d'`"
       DEVICE_NAME="$2"
       PART_NUM=$(echo "$2" | sed 's/[^0-9]*//g')
-      echo "${Yellow}>>>Checking if device is mounted ${Color_Off}"
+      echo -e "${Yellow}>>>Checking if device is mounted ${Color_Off}"
         MOUNT_STATUS=$(mount | grep /dev/"$DEVICE_NAME" | wc -l)
         if [ "$MOUNT_STATUS" -ne 0 ]
         then
           lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$DEVICE_NAME"
-          echo "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount then try again ${Color_Off}"
+          echo -e "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount then try again ${Color_Off}"
           return 1
         fi
-      echo "${Blue}>>>Set current output path to $PWD ${Color_Off}"
+      echo -e "${Blue}>>>Set current output path to $PWD ${Color_Off}"
         sudo sed -i 's:ocsroot=.*:ocsroot='\""$PWD"\"':g' /etc/drbl/drbl.conf
-      echo "${Green}>>>Start partition cloning process ${Color_Off}"
-      echo "${Green}>>>$OUTPUT_FILE image will be saved to $PWD ${Color_Off}"
+      echo -e "${Green}>>>Start partition cloning process ${Color_Off}"
+      echo -e "${Green}>>>$OUTPUT_FILE image will be saved to $PWD ${Color_Off}"
         sudo /usr/sbin/ocs-sr -q2 -c -j2 -z1p -i 5000000 -sc -p true saveparts "$OUTPUT_FILE" "$DEVICE_NAME"
-      echo "${Red}>>>Changing permission of $OUTPUT_FILE image ${Color_Off}"
+      echo -e "${Red}>>>Changing permission of $OUTPUT_FILE image ${Color_Off}"
         sudo chmod -R 777 "$OUTPUT_FILE"
     }
     
@@ -183,19 +183,20 @@ Check the clonezilla site for other supported filesystems else it will use the d
       fi
       INPUT_FILE="$1"
       DEVICE_NAME="$2"
-      echo "${Yellow}>>>Checking if device is mounted ${Color_Off}"
+      echo -e "${Yellow}>>>Checking if device is mounted ${Color_Off}"
         MOUNT_STATUS=$(mount | grep /dev/"$DEVICE_NAME" | wc -l)
         if [ "$MOUNT_STATUS" -ne 0 ]
         then
           lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$DEVICE_NAME"
-          echo "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount then try again ${Color_Off}"
+          echo -e "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount then try again ${Color_Off}"
           return 1
         fi
-      echo "${Green}>>>Start partition restore process ${Color_Off}"
+      echo -e "${Green}>>>Start partition restore process ${Color_Off}"
         sudo /usr/sbin/ocs-sr -g auto -e1 auto -e2 -c -r -j2 -k -p true restoreparts "$INPUT_FILE" "$DEVICE_NAME"
     }
     
     # }}}
+
 
 ### other commands
 
