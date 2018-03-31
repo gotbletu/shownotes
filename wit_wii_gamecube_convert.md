@@ -32,7 +32,7 @@ convert wii iso to wbfs with auto split at 4GB. convert gamecube iso to ciso (co
     
     convert-to-game-nintendont() {
       if [ $# -lt 1 ]; then
-        echo -e "convert gamecube iso games to ciso (compress iso, ignore usused blocks)."
+        echo -e "convert gamecube iso games to ciso (compress iso, ignore unused blocks)."
         echo -e "works with nintendont v4.428+ and usbloadergx on a modded wii console."
         echo -e "Note: after conversion the ciso will be renamed to iso to make it work under usbloadergx"
         echo -e "\nUsage: $0 <filename>"

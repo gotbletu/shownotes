@@ -24,9 +24,11 @@ If you find my videos feature on other site let me know also, I always need an E
 - [couturier](https://sites.google.com/site/couturierapp/) - merge pdf and images
 - [curseofwar](https://github.com/a-nikolaev/curseofwar/wiki) - fast action terminal RTS game with vim hotkeys
 - [fzf](https://github.com/junegunn/fzf/wiki) - fuzzy finder for your shell
+- [greenclip](https://github.com/erebe/greenclip) - simple clipboard manager to be integrated with rofi
 - [inxi](https://code.google.com/p/inxi/) - a full featured system information script
 - [package converter](https://code.google.com/p/foxoman/wiki/PackageConverter) - frontend to Alien
 - [pacmixer](https://github.com/KenjiTakahashi/pacmixer) - an alsamixer alike for pulseaudio
+- [pkm](https://github.com/silvernode/pkm) - a shell script wrapper for package managers originally by gotbletu
 - [sunflower-fm](https://code.google.com/p/sunflower-fm/) - lightweight file manager with dual pane
 - [torrent-search](http://torrent-search.sourceforge.net) - search for torrents
 - [turses](https://pypi.python.org/pypi/turses) - console twitter client
@@ -34,11 +36,12 @@ If you find my videos feature on other site let me know also, I always need an E
 - [youtube-viewer](https://github.com/trizen/youtube-viewer) - a command-line interface to YouTube
 
 
-#### Blogs/Wikis:
+#### Blogs/Wikis/SocialMedia:
 
 - Archwiki: xbacklight / xcalib - backlight utilities [Link](https://wiki.archlinux.org/index.php/backlight)
 - FZF Fuzzy Finder - A command-line fuzzy finder written in Go [Link](http://junegunn.kr/2015/02/fzf-in-go/)
 - Linuxaria: poor mans sportify [Link](http://linuxaria.com/pills/linux-terminal-poor-mans-spotify?lang=en)
+- nixCraft: vim as a manpager [Link](https://twitter.com/nixcraft/status/973221210589925385)
 - OMGUbuntu: veromix - mixer for pulseaudio [Link](http://www.omgubuntu.co.uk/2012/02/how-to-increase-volume-over-100-in-kde/)
 - Phoenixts: 9 YouTube Channels to Learn Linux Online [Link](http://phoenixts.com/blog/9-youtube-channels-to-learn-linux-online/)
 - Softpedia: Video Clip of the Week: Workspaces & How We Use Them [Link](http://news.softpedia.com/news/Softpedia-Linux-Weekly-Issue-95-141165.shtml)
@@ -50,7 +53,6 @@ If you find my videos feature on other site let me know also, I always need an E
 
 #### Spanish Translation
 - Hipertextual: turn any terminal into a dropdown terminal (Ander Raso) [Link](http://hipertextual.com/2015/02/terminal-dropdown)
-- transmission cli torrent client (comandormrf) [Link](https://comandormrf.wordpress.com/2015/03/14/transmission-daemon-torrents-desde-la-terminal-y-webui/) | [CLI](https://www.youtube.com/watch?v=ee4XzWuapsE) | [TUI/Ncurses](https://www.youtube.com/watch?v=hLz7ditUwY8)
 
 #### German Translation
 - Mutt Terminal Email client (tomzai) [Link](http://tomzai.ch/mutt-mail-client-step-by-step/)
