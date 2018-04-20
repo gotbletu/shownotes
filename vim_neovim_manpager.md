@@ -16,6 +16,13 @@ vim religion invades the manpages
     nvim ~/.bashrc or ~/.zshrc
     export MANPAGER="nvim +set\ filetype=man -"
     
+    if the above doesn't work try the following:
+    export MANPAGER="nvim -c 'set ft=man' -"
+
+    nvim ~/.config/fish/config.fish
+    set MANPAGER "nvim -c 'set ft=man' -"
+
+    The following code snippet does seem to disable the default keybinding gO to toggle the TOC: 
     nvim ~/.config/nvim/init.vim
     filetype plugin on
     syntax on
