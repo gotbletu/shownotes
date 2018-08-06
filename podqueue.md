@@ -2,7 +2,7 @@
 repurposing podboat as a TUI download manager instead of only handling podcast
 
 * tutorial video: [Link](https://www.youtube.com/watch?v=1ylYBDfqyPY)
-* offical website: [Link](https://www.youtube.com/user/gotbletu)
+* offical website: [Link](https://newsboat.org/)
 
 tags: linux, terminal, newsboat, podboat, newsbeuter, podbeuter, download manager, TUI, Text User Interface, Ncurses, commandline, CLI, rss feed reader, podcast catcher, downloader
 
@@ -41,7 +41,7 @@ tags: linux, terminal, newsboat, podboat, newsbeuter, podbeuter, download manage
 
 ### standalone script
 
-    wget https://github.com/gotbletu/shownotes/blob/master/podqueue.sh
+    wget https://raw.githubusercontent.com/gotbletu/shownotes/master/podqueue.sh
     chmod +x podqueue.sh
 
 ### using with w3m web browser
@@ -57,6 +57,7 @@ How to use custom scripts with w3m: https://www.youtube.com/watch?v=YzgCgarUa_M
 - https://www.youtube.com/watch?v=1ylYBDfqyPY
 - [How to use custom scripts with w3m](https://www.youtube.com/watch?v=YzgCgarUa_M)
 - [podbeuter - podcast downloader](https://www.youtube.com/watch?v=5wyefy3GuDg)
+- https://newsboat.org/
 
 ### contact
 
