@@ -38,38 +38,10 @@ since the ps3 still uses fat32, we have to split files at 4gb chunks so we can t
                  /SSF4/SSF4.iso.3
                  /SSF4/SSF4.iso.4
                  "
-        echo -e "\nHow To Install PS3 Game/Rap Files:
-        - Requirements: Download & Install To PS3 > reActPSN http://store.brewology.com/ahomebrew.php?brewid=126
-          - Note: reActPSN is for Installing Rap Files
-        - Requirements: Download & Install To PS3 > MultiMan (Base) https://store.brewology.com/ahomebrew.php?brewid=24
-          - Note: MultiMan is for Installing iso PS3 Game files
-    
-        - PC > Split the iso Games if is too large to fit on USB device
-        - PC > copy exdata/UP1004-NPUB31154_00-GTAVDIGITALDOWNL.rap to USB:/exdata/UP1004-NPUB31154_00-GTAVDIGITALDOWNL.rap
-        - PC > copy packages/Grand Theft Auto V/ to USB:/packages/Grand Theft Auto V/
-        ----
-            USB:/exdata/UP1004-NPUB31154_00-GTAVDIGITALDOWNL.rap
-            USB:/packages/Grand Theft Auto V/Grand Theft Auto V.iso.0
-            USB:/packages/Grand Theft Auto V/Grand Theft Auto V.iso.1
-            USB:/packages/Grand Theft Auto V/Grand Theft Auto V.iso.2
-            USB:/packages/Grand Theft Auto V/Grand Theft Auto V.iso.3
-            USB:/packages/Grand Theft Auto V/Grand Theft Auto V.iso.4
-        ----
-        - IMPORTANT: Plug In Your USB Drive To The USB Port Closes To The PS3 BluRay Drive
-    
-        # Installing RAP Files
-        - PS3 > User > Create New User > Enter a user name [aa]
-        - Switch user/Login as aa: PS3 > User > aa > it will autorename itself to [reActPSN 2.0] profile
-        - PS3 > Game > reActPSN > this will install any rap files in your USB:/exdata/
-    
-        # Installing iso Game Files
-        - PS3 > Game > Multiman > Press Start+Select (switch to File Manager aka mmOS)
-        - File Manager (mmOS) > PS3 Root > **dev_usb000** > packages > highlight Grand Theft Auto V folder > Press O > **Copy** > Press X
-        - File Manager (mmOS) > PS3 Root > **dev_hdd0** > Press O > **Paste** > Yes
-          - Note: when it transfer to the ps3 hdd, it will auto merge all the Grand Theft Auto V.iso.* files
-          - Note2: the merged files on the PS3 internal HDD will be auto deleted once it is installed
-        - File Manager (mmOS) > PS3 Root > **dev_hdd0** > Grand Theft Auto V > highlight Grand Theft Auto V.iso > Press X (twice) > Yes (exit Multiman)
-        - PS3 > Game > Package Manager > Install Package Files > **Standard** > Grand Theft Auto V.iso > Press X (Installing) > Wait a long time
+        echo -e "\nHow To Install PS3 ISO Files:
+          For Game.ISO.0..1...2 etc. Move the files to a folder named **PS3ISO** at the root of the USB drive.
+          This way, the games can be played/viewed/copied from the Multiman XMB Game column with cover art before copying.
+          Multimans file browser (mmOS) doesnt join Game.ISO.0 files when copied. Only in the Multiman XMB.
         "
         return 1
       fi
