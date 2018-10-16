@@ -61,6 +61,7 @@ IMAGEGUI="feh -. -x -B black -g 900x600-15+60"
 # IMAGECLI="w3m /usr/lib/w3m/cgi-bin/treat_as_url.cgi -o display_image=1 -o imgdisplay=/usr/lib/w3m/w3mimgdisplay"
 IMAGECLI="w3m -o display_image=1 -o imgdisplay=w3mimgdisplay"
 # IMAGECLI="fbi"
+TORRENTCLI="transmission-remote --add"
 # LIVEFEED='streamlink -p "mpv --cache 2048 --ontop --no-border --force-window --autofit=500x280 --geometry=-15-60"'
 LIVEFEED="tsp streamlink"
 DDL_PATH=~/Downloads/plowshare
@@ -191,7 +192,7 @@ case "$url" in
         tmux split-window -fv -p 20 && tmux send-keys "mpv '$url' && exit" 'Enter'
         ;;
     magnet:*|*.torrent)
-        transmission-remote --add "$url"
+        $TORRENTCLI "$url"
         ;;
     *.jpg|*.jpeg|*.png|*:large)
         tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
