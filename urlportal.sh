@@ -182,8 +182,8 @@ case "$url" in
         ;;
     *imgur.com/*)
         # tmux split-window && tmux send-keys "lynx -source "$url" | grep post-image-container | grep -oP '<div id=\"\K[^\"]+' | while read line; do echo https://i.imgur.com/"\$line".png; done | urlview && tmux kill-pane" 'Enter'
-        multiurlextract="(lynx -source "$url" | grep post-image-container | grep -oP '<div id=\"\K[^\"]+' | while read line; do echo https://i.imgur.com/"\$line".png; done | urlview)"
-        tmux split-window && tmux send-keys "$multiurlextract && tmux kill-pane" 'Enter'
+        url="(lynx -source "$url" | grep post-image-container | grep -oP '<div id=\"\K[^\"]+' | while read line; do echo https://i.imgur.com/"\$line".png; done | urlview)"
+        tmux split-window && tmux send-keys "$url && tmux kill-pane" 'Enter'
         ;;
     mailto:*)
         tmux split-window -fv && tmux send-keys "mutt -- '$url' && tmux kill-pane" 'Enter'
