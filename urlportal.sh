@@ -99,79 +99,79 @@ case "$url" in
         tmux new-window -n browse && tmux send-keys "$BROWSERCLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *22pixx.xyz/ia-i/*)
-        cleanurl="$(printf $url | sed 's/ia-i/i/g' | sed 's/\.html//g')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's/ia-i/i/g' | sed 's/\.html//g')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *freebunker.com/*)
-        cleanurl="$(printf $url | sed 's@img\/@tn\/i@')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's@img\/@tn\/i@')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imagerar.com/t/*)
-        cleanurl="$(printf $url | sed 's@/t@/u@')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's@/t@/u@')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imagerar.com/imgy-u/*)
-        cleanurl="$(printf $url | sed 's/imgy-u/u/g' | sed 's/.html//g')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's/imgy-u/u/g' | sed 's/.html//g')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imageshtorm.com/upload/small/*|*hotimage.uk/upload/small/*|*hdmoza.com//upload/small/*|*nikapic.ru/upload/small/*|*imagedecode.com/upload/small/*|*trans.firm.in//upload/small/*)
         # nohup $IMAGEGUI "$(printf $url | sed 's/small/big/')" > /dev/null 2>&1 &
-        cleanurl="$(printf $url | sed 's/small/big/')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's/small/big/')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imageshtorm.com/img*)
         # nohup $IMAGEGUI "$(printf $url | sed 's/small/big/')" > /dev/null 2>&1 &
-        cleanurl="$(curl -s "$url" | grep onclick | grep -oP '<a href=\047\K[^\047]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl -s "$url" | grep onclick | grep -oP '<a href=\047\K[^\047]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *freescreens.ru/allimage/*|*imgclick.ru/allimage/*|*money-pic.ru/allimage/*)
-        cleanurl="$(printf $url | sed 's/-thumb//')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's/-thumb//')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *freescreens.ru/*)
-        cleanurl="$(printf "$url/1/" | sed 's/freescreens.ru/picpic.online/')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf "$url/1/" | sed 's/freescreens.ru/picpic.online/')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *pixcloud.ru/view*)
-        cleanurl="$(curl -s "$url" | grep -oP '<img id="photo" src="\K[^"]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl -s "$url" | grep -oP '<img id="photo" src="\K[^"]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *money-pic.ru/*)
-        cleanurl="$(curl -s "$url/1/" | grep allimage | grep -oP '<img src="\K[^"]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl -s "$url/1/" | grep allimage | grep -oP '<img src="\K[^"]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imagecurl.com/viewer.php?file=*)
-        cleanurl="$(printf $url | sed 's@https://@https://cdn.@' | sed 's@/viewer.php?file=@/images/@')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(printf $url | sed 's@https://@https://cdn.@' | sed 's@/viewer.php?file=@/images/@')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *img2share.com/*|*imgpeak.com/*|*damimage.com/img*|*imagedecode.com/img*|*picfuture.com/*|*imageteam.org/*|*imgsalem.com/*|*dimtus.com/img*|*imgstudio.org/img*|*imagehub.pro/img*|*trans.firm.in//img*|*pic.hotimg.site/img*)
-        # cleanurl="$(curl -s "$url" | grep -oP '<img class=\047centred\047 src=\047\K[^\047]+')"
-        cleanurl="$(curl -s "$url" | grep centred | grep -oP 'src=\047\K[^\047]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        # url="$(curl -s "$url" | grep -oP '<img class=\047centred\047 src=\047\K[^\047]+')"
+        url="$(curl -s "$url" | grep centred | grep -oP 'src=\047\K[^\047]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imgadult.com/img*|*imgdrive.net/*)
-        cleanurl="$(curl -s "$url" | grep -oP '<meta property="og:image" content="\K[^"]+' | sed 's/small/big/')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl -s "$url" | grep -oP '<meta property="og:image" content="\K[^"]+' | sed 's/small/big/')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *xxximagetpb.org/*|*img-central.com/*|*imgdone.com/image/*|*i.nmfiles.com/image/*|*i.imghost.top/image/*|*mstimg.com/image/*|*imagebam.com/image/*|*imgflip.com/i/*)
-        cleanurl="$(lynx -source "$url" | grep -oP '<meta property="og:image" content="\K[^"]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(lynx -source "$url" | grep -oP '<meta property="og:image" content="\K[^"]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *wallpaperspic.pw/*|*pornweb.xyz/*)
-        cleanurl="$(curl -s "$url" | grep imagebam | grep -oP '<p><img src="\K[^"]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl -s "$url" | grep imagebam | grep -oP '<p><img src="\K[^"]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     */imagetwist.com/*)
-        cleanurl="$(curl -s "$url" | grep -oP '<p style="display: block; text-align:center;"><img src="\K[^"]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl -s "$url" | grep -oP '<p style="display: block; text-align:center;"><img src="\K[^"]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *imgtornado.com/img*|*placeimg.net/img*|*http://imgjazz.com/img*|*picmoza.com//img*|*xxxwebdlxxx.org/img*)
-        cleanurl="$(curl --data "imgContinue=Continue to image ..." --location "$url" | grep centred | grep -oP 'src=\047\K[^\047]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl --data "imgContinue=Continue to image ..." --location "$url" | grep centred | grep -oP 'src=\047\K[^\047]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *hotimage.uk/img*)
-        cleanurl="$(curl --data "imgContinue=Continue to image ..." --location "$(printf $url | sed 's@http://@https://www.@')" | grep centred | grep -oP 'src=\047\K[^\047]+')"
-        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$cleanurl' && tmux kill-pane" 'Enter'
+        url="$(curl --data "imgContinue=Continue to image ..." --location "$(printf $url | sed 's@http://@https://www.@')" | grep centred | grep -oP 'src=\047\K[^\047]+')"
+        tmux new-window -n pixcli && tmux send-keys "$IMAGECLI '$url' && tmux kill-pane" 'Enter'
         ;;
     *i.imgur.com/*.gifv|*i.imgur.com/*.mp4|*i.imgur.com/*.webm|*i.imgur.com/*.gif)
         nohup $VIDEO_CLIP "$url" > /dev/null 2>&1 &
