@@ -24,10 +24,8 @@ custom keybindings for the terminal web browser w3m
         
         # open gui browser
         keymap  xw      EXTERN_LINK   '$BROWSER'
-        %% keymap  xw      EXTERN_LINK   'chromium'
         keymap  XW      EXTERN        '$BROWSER'
         keymap  xn      EXTERN_LINK   '$BROWSER_PRIVATE'
-        %% keymap  xn      EXTERN_LINK   'chromium --incognito'
         keymap  XN      EXTERN        '$BROWSER_PRIVATE'
         
         # queue download file (task-spooler)
@@ -68,7 +66,6 @@ custom keybindings for the terminal web browser w3m
 
 - http://www.youtube.com/user/gotbletu
 - https://twitter.com/gotbletu
-- https://plus.google.com/+gotbletu
 - https://github.com/gotbletu
 - gotbletu@gmail.com
 
