@@ -49,7 +49,7 @@ tags: android find apk file version system requirements minimum sdk aapt dump
     
         # Chart https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels
     
-        echo "${Red}$arg${Color_Off} \n-- $packagename \n-- $packageinfo"
+        echo -e "${Red}$arg${Color_Off} \n-- $packagename \n-- $packageinfo"
     
         if [ "$sdkVersion" = "sdkVersion:'28'" ] ; then echo "-- sdkVersion:'28' = Android 9 (P)" ; fi
         if [ "$sdkVersion" = "sdkVersion:'27'" ] ; then echo "-- sdkVersion:'27' = Android 8.1 (O_MR1)" ; fi
