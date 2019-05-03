@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+###             _   _     _      _
+###  __ _  ___ | |_| |__ | | ___| |_ _   _
+### / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
+###| (_| | (_) | |_| |_) | |  __/ |_| |_| |
+### \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
+### |___/
+###       https://www.youtube.com/user/gotbletu
+###       https://twitter.com/gotbletu
+###       https://github.com/gotbletu
+###       gotbleu@gmail.com
+###
+### Name            : 404urlcleaner
+### Version         : 0.2
+### Date            : 20190502
+### Description     : Remove all dead urls with HTTP status code 404 (mainly use with newsboat/newsbeuter)
+### Depends On      : bash  curl  coreutils  grep  moreutils
+### Video Demo      : https://youtu.be/dTpEuQZRRDM
+
+# Reset
+Color_Off='\e[0m'       # Text Reset
+# Regular Colors
+Black='\e[0;30m'        # Black
+Red='\e[0;31m'          # Red
+Green='\e[0;32m'        # Green
+Yellow='\e[0;33m'       # Yellow
+Blue='\e[0;34m'         # Blue
+Purple='\e[0;35m'       # Purple
+Cyan='\e[0;36m'         # Cyan
+White='\e[0;37m'        # White
+
+display_usage() {
+  echo "Remove all dead urls with HTTP status code 404 (mainly use with newsboat/newsbeuter)"
+  echo -e "\n  Usage:\n  $0 [file]"
+  echo -e "\n  Example:\n  $0 ~/.newsboat/urls"
+}
+  # if less than one argument supplied, display usage
+  if [  $# -lt 1 ]
+  then
+    display_usage
+    exit 1
+  fi
+  # check whether user had supplied -h or --help . If yes display usage
+  if [[ ( $@ == "--help") ||  $@ == "-h" ]]
+  then
+    display_usage
+    exit 0
+  fi
+
+# all url status code
+TMPFILE1=/tmp/urlstatus.txt
+# only 404 status code
+TMPFILE2=/tmp/urlstatus2nd.txt
+
+# remove temp files
+# rm "$TMPFILE1"
+# rm "$TMPFILE2"
+
+# create backup file
+echo -e "${Green}>>>Creating Backup File${Color_Off}"
+cp -aiv "$1" "$1_`date +'%F_%Hh%Ms%S'`"
+
+# check all links and print http code
+echo -e "${Green}>>>Checking HTTP Status Code${Color_Off}"
+grep '^http' -i "$1" | awk '{print $1}' | while read url
+do
+    urlstatus=$(curl -o /dev/null --silent --head --write-out '%{http_code}' "$url")
+    echo "$url  C0DE-$urlstatus" | tee -a "$TMPFILE1"
+done
+
+# double check 404 links again (sometime the first check is not acurrate)
+echo -e "${Blue}>>>Double Checking HTTP Status Code${Color_Off}"
+grep 'C0DE-404' -i "$TMPFILE1" | awk '{print $1}' | while read url
+do
+    urlstatus=$(curl -o /dev/null --silent --head --write-out '%{http_code}' "$url")
+    echo "$url  C0DE-$urlstatus" | tee -a "$TMPFILE2"
+done
+
+# remove all 404
+grep 'C0DE-404' -i "$TMPFILE2" | awk '{print $1}' | while read url
+do
+    grep -F -v "$url" "$1" | sponge "$1"
+    echo -e "${Red}>>>REMOVING $url ${Color_Off}"
+done
+
+# remove temp files
+rm "$TMPFILE1"
+rm "$TMPFILE2"
+
+
