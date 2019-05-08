@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # info: script to grab media links from w3m page and open with nvlc that will spawn a new tmux window
 

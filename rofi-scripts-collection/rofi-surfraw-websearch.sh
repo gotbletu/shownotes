@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # info: rofi-surfraw-websearch is a script to do internet searches from different websites, all from the rofi launcher
 # requirements: rofi surfraw

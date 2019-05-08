@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # Useful when copying from websites
 # This will paste in plain text without formatting.

@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # info: rofi-locate is a script to search local files and folders on your computer using the locate command and the updatedb database
 # requirements: rofi mlocate

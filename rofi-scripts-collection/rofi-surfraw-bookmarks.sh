@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # info: rofi-surfraw-bookmarks is a script to open your saved surfraw bookmarks with the rofi launcher
 # requirements: rofi surfraw

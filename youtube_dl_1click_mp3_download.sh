@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # tutorial video: https://www.youtube.com/watch?v=nGSGlc9bTAg
 # mirror video: https://archive.org/details/youtube_UCkf4VIqu3Acnfzuk3kRIFwA

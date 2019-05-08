@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # demo video: https://www.youtube.com/watch?v=cDtVEXjiKTw
 # A script to download random wallpaper and delete old wallpaper at the sametime (wallhaven.cc)

@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # Tutorial video: https://www.youtube.com/watch?v=4LouA5E76FM
 # Custom Actions that can be used on any File Manager with Custom Actions Support

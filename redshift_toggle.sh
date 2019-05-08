@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # DESC: Toggle redshift on and off
 # DEMO: https://www.youtube.com/watch?v=c8v84LRTeUw

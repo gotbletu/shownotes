@@ -8,7 +8,7 @@
 #       https://www.youtube.com/user/gotbletu
 #       https://twitter.com/gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 #                   _                  _        _
 #        _   _ _ __| |_ __   ___  _ __| |_ __ _| |

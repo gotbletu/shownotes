@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 if [ $# -lt 1 ]; then
   echo -e "Add Links To Podboat, Use Podboat As A TUI Download Manager"

@@ -9,7 +9,7 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#       gotbleu@gmail.com
+#       gotbletu@gmail.com
 
 # info: newsbeuter script to save bookmarks directly to surfraw
 # demo video: https://www.youtube.com/watch?v=rHVfgGTTtNQ
