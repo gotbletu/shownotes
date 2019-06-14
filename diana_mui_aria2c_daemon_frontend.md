@@ -8,8 +8,8 @@ a poorman's frontend to diana (which is a commandline frontend to aria2 daemon)
     bash  aria2  coreutils  fzf  gawk  procps-ng  xdg-utils diana (https://github.com/baskerville/diana)
 
 ### download required scripts
-    $ wget https://github.com/gotbletu/shownotes/blob/master/diana-mui
-    $ wget https://github.com/gotbletu/shownotes/blob/master/diana-progress
+    $ wget https://raw.githubusercontent.com/gotbletu/shownotes/master/diana-mui
+    $ wget https://raw.githubusercontent.com/gotbletu/shownotes/master/diana-progress
 
 ### configuration
     # open scripts and edit paths to fit your setup
