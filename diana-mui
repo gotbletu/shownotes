@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+###             _   _     _      _         
+###  __ _  ___ | |_| |__ | | ___| |_ _   _ 
+### / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
+###| (_| | (_) | |_| |_) | |  __/ |_| |_| |
+### \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
+### |___/                                  
+###       https://www.youtube.com/user/gotbletu
+###       https://twitter.com/gotbletu
+###       https://github.com/gotbletu
+###       gotbletu@gmail.com
+###
+### Author          : gotbletu
+### Name            : diana-mui
+### Version         : 0.2
+### Date            : 20190607
+### Description     : diana-mui is a Menu User Interface to the diana program. Diana is a commandline interface to aria2 daemon
+### Depends On      : bash  aria2  coreutils  fzf  gawk  procps-ng  xdg-utils  diana (https://github.com/baskerville/diana)
+### Video Demo      : https://www.youtube.com/watch?v=y59JwlYsrAE
+### References      : https://github.com/baskerville/diana/blob/87c5b1b57425585b4c0f543edcf7e9038cf793c5/diana#L427-L429
+
+# download path
+DIANA_DOWNLOAD_DIR=~/Downloads/Aria
+# cli frontend to aria2 daemon
+DIANA_BIN=/usr/bin/diana
+# diana's custom way to start aria2 daemon
+DAD_BIN=/usr/bin/dad
+# list all active,paused,completed,errors
+DIANAMUI_PROGRESS_BIN=~/.scripts/diana-progress
+
+main_program () {
+while true; do
+  clear
+  printf '%s\n\n' '======== Diana MUI ========'
+  printf '%s\n' '  o|l)   Open File <==> List All Downloads'
+  printf '%s\n' '  a|A)   Add <==> Add Paused'
+  printf '%s\n' '  i|f)   File Info <==> Show Filename'
+  printf '%s\n' '  r|R)   Remove * <==> Force Remove *'
+  printf '%s\n' '  p|P)   Pause * <==> Pause All Active'
+  printf '%s\n' '  c|C)   Resume * <==> Resume All Paused'
+  printf '%s\n' '  T)     Stop Seeding Completed Torrents'
+  printf '%s\n' '  E)     Clear Completed Downloads & Errors'
+  printf '%s\n' '  s|S)   Start Aria2c Daemon <==> STOP Daemon'
+  printf '%s\n' '  h|q)   Help <==> Quit'
+  printf '%s\n'
+  printf '%s\n' '         * Use TAB key to select multiple'
+  printf '%s\n'
+  printf '  Enter Your Choice: '
+  read INPUT
+
+  case "$INPUT" in
+  
+    l)    # List all
+          watch -t "$DIANAMUI_PROGRESS_BIN"
+          ;;
+    i)    # Show File Info
+          GID=`("$DIANA_BIN" list && "$DIANA_BIN" paused && "$DIANA_BIN" stopped && "$DIANA_BIN" errors) | fzf | awk '{print $1}'`
+          "$DIANA_BIN" info "$GID"
+          read -rsp $'Press any key to return to main menu\n' -n1 key
+          ;;
+    f)    # Show Filename
+          GID=`("$DIANA_BIN" list && "$DIANA_BIN" paused && "$DIANA_BIN" stopped && "$DIANA_BIN" errors) | fzf | awk '{print $1}'`
+          "$DIANA_BIN" files "$GID"
+          read -rsp $'Press any key to return to main menu\n' -n1 key
+          ;;
+    o)    # Open File
+          GID=`("$DIANA_BIN" list && "$DIANA_BIN" paused && "$DIANA_BIN" stopped && "$DIANA_BIN" errors) | fzf | awk '{print $1}'`
+          nohup xdg-open "$("$DIANA_BIN" files "$GID" | cut -d'%' -f2- | awk '{$1=$1};1')" >/dev/null 2>&1 &
+          # read -rsp $'Press any key to return to main menu\n' -n1 key
+          ;;
+    a)    # Add
+          printf '%s\n' ">>> Add [<URI>|<MAGNET>|<TORRENT_FILE>|<METALINK_FILE] To Active Downloads"
+          read -e -p ">>> " URI
+          "$DIANA_BIN" add "$URI"
+          ;;
+    A)    # Add Paused
+          printf '%s\n' ">>> Add [<URI>|<MAGNET>|<TORRENT_FILE>|<METALINK_FILE] To Paused Downloads"
+          read -e -p ">>> " URI
+          "$DIANA_BIN" --pause add "$URI"
+          ;;
+    r)    # Removing Download
+          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" remove "$GID"; done
+          ;;
+    R)    # Force Removing Download
+          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" forcerm "$GID"; done
+          ;;
+    p)    # Pausing Download
+          "$DIANA_BIN" list | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" pause "$GID"; done
+          ;;
+    P)    # Pause All The Active Downloads (aka Sleep)
+          "$DIANA_BIN" sleep
+          ;;
+    c)    # Resuming Download
+          "$DIANA_BIN" paused | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" resume "$GID"; done
+          ;;
+    C)    # Resume All The Paused Downloads (aka Wake)
+          "$DIANA_BIN" wake
+          ;;
+    E)    # Clear The List Of Stopped Downloads And Errors (aka Purge)
+          "$DIANA_BIN" purge
+          ;;
+    T)    # Stop Seeding Completed Downloads (aka Clean)
+          "$DIANA_BIN" clean
+          ;;
+    s)    printf '%s\n' "Starting Aria2c Daemon..."
+          printf '%s\n' "Download To: $DIANA_DOWNLOAD_DIR"
+          mkdir -p "$DIANA_DOWNLOAD_DIR"
+          "$DAD_BIN" -d "$DIANA_DOWNLOAD_DIR" start
+          sleep 3
+          ;;
+    S)    printf '%s\n' "Stopping Aria2c Daemon..."
+          "$DAD_BIN" stop
+          sleep 3
+          ;;
+    h|H)  # Help page
+          clear
+          printf '%s\n' 'Diana-MUI is a Menu User Interface to the diana program.'
+          printf '%s\n' 'Diana is a commandline interface to aria2 daemon.'
+          printf '%s\n' 'Aria2 is a download utility that supports HTTP(S), FTP, BitTorrent, and Metalink.'
+          printf '%s\n'
+          printf '%s\n' 'Requirements: bash  aria2  coreutils  fzf  gawk  procps-ng  xdg-utils  diana (https://github.com/baskerville/diana)'
+          printf '%s\n'
+          printf '%s\n' 'Optional: aria2c addon (https://chrome.google.com/webstore/detail/aria2c-integration/edcakfpjaobkpdfpicldlccdffkhpbfk)'
+          printf '%s\n'
+          printf '%s\n'
+          printf '%s\n' 'Author:  gotbletu <gotbletu@gmail.com>'
+          printf '%s\n' '         https://www.youtube.com/user/gotbletu'
+          printf '%s\n' '         https://twitter.com/gotbletu'
+          printf '%s\n' '         https://github.com/gotbletu'
+          printf '%s\n'
+          read -rsp $'Press any key to return to main menu\n' -n1 key
+          ;;
+    q|Q)  # Quit/Exit
+          clear && break
+          ;;
+    *)    printf '%s\n' "Invalid Option... Try Again"
+          sleep 2
+          ;;
+  esac
+
+done
+}
+
+# run program
+main_program
+
+
