@@ -12,7 +12,7 @@
 ###
 ### Author          : gotbletu
 ### Name            : diana-mui
-### Version         : 0.2
+### Version         : 0.2.1
 ### Date            : 20190607
 ### Description     : diana-mui is a Menu User Interface to the diana program. Diana is a commandline interface to aria2 daemon
 ### Depends On      : bash  aria2  coreutils  fzf  gawk  procps-ng  xdg-utils  diana (https://github.com/baskerville/diana)
@@ -43,7 +43,8 @@ while true; do
   printf '%s\n' '  s|S)   Start Aria2c Daemon <==> STOP Daemon'
   printf '%s\n' '  h|q)   Help <==> Quit'
   printf '%s\n'
-  printf '%s\n' '         * Use TAB key to select multiple'
+  printf '%s\n' '  * Tab:select-single  Ctrl-A:select-all'
+  printf '%s\n' '    Ctrl-T:toggle-all  Ctrl-D:deselect-all'
   printf '%s\n'
   printf '  Enter Your Choice: '
   read INPUT
@@ -79,19 +80,19 @@ while true; do
           "$DIANA_BIN" --pause add "$URI"
           ;;
     r)    # Removing Download
-          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" remove "$GID"; done
+          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" remove "$GID"; done
           ;;
     R)    # Force Removing Download
-          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" forcerm "$GID"; done
+          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" forcerm "$GID"; done
           ;;
     p)    # Pausing Download
-          "$DIANA_BIN" list | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" pause "$GID"; done
+          "$DIANA_BIN" list | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" pause "$GID"; done
           ;;
     P)    # Pause All The Active Downloads (aka Sleep)
           "$DIANA_BIN" sleep
           ;;
     c)    # Resuming Download
-          "$DIANA_BIN" paused | fzf -m | awk '{print $1}' | while read GID; do "$DIANA_BIN" resume "$GID"; done
+          "$DIANA_BIN" paused | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" resume "$GID"; done
           ;;
     C)    # Resume All The Paused Downloads (aka Wake)
           "$DIANA_BIN" wake
