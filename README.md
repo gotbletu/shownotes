@@ -33,6 +33,7 @@ If you find my videos feature on other site let me know also, I always need an E
 - [torrent-search](http://torrent-search.sourceforge.net) - search for torrents
 - [turses](https://pypi.python.org/pypi/turses) - console twitter client
 - [veromix](http://kde-look.org/content/show.php?content=116676) - KDE mixer for pulseaudio
+- [weechat-vimode](https://github.com/GermainZ/weechat-vimode) - A WeeChat script that adds vi-like modes, commands and keybindings.
 - [youtube-viewer](https://github.com/trizen/youtube-viewer) - a command-line interface to YouTube
 
 
