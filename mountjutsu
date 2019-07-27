@@ -19,7 +19,7 @@
 ###                   gptfdisk  dosfstools  ntfs-3g  hfsprogs  exfat-utils  e2fsprogs
 ###                   cryptsetup  clonezilla  partclone  partimage  vlc  cdw  f3  smartmontools
 ###                   dvdbackup  libdvdread  libdvdcss  cdrdao  cdrtools(or cdrkit)
-### Video Demo      : https://www.youtube.com/watch?v=A4EDFT2d6xA
+### Video Demo      : https://www.youtube.com/watch?v=jipILuNW5Ks
 
 #-------- Bash Color Code {{{
 #------------------------------------------------------
@@ -1370,7 +1370,7 @@ HELP="
 
     AUTHOR: gotbletu (gotbletu@gmail.com)
             https://github.com/gotbletu | https://www.youtube.com/user/gotbletu
-    DEMO:   https://www.youtube.com/watch?v=A4EDFT2d6xA
+    DEMO:   https://www.youtube.com/watch?v=jipILuNW5Ks
 "
 list-all-drive() {
   lsblk -o "tran,name,hotplug,size,fstype,type,label,mountpoint,uuid,model"
