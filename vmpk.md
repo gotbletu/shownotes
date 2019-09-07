@@ -9,13 +9,16 @@ turn your computer keyboard into a piano keyboard
 ### qsynth settings
     1. start the program
     2. setup > audio > audio driver > [pulseaudio]
-    3. setup > soundfonts > open > [/usr/share/soundfonts/FluidR3_GM2-2.sf2]
-    4. might have to restart the qsynth program
+    3. setup > MIDI > MIDI Client Name ID > [qsynth]
+    4. setup > soundfonts > open > [/usr/share/soundfonts/FluidR3_GM2-2.sf2]
+    5. Options > Output peak level meters [Check]
+    6. might have to restart the qsynth program
     
 ### vmpk settings
     1. start the program
-    2. file > import soundfont > input file > [/usr/share/soundfonts/FluidR3_GM2-2.sf2] > OK
-    3. edit > midi connections > output midi connections > [FluidSynth] > OK
+    2. edit > midi connections > output midi connections > 
+       MIDI OUT Driver: > [ALSA]
+       Output MIDI Connection: > [FLUID Synth (qsynth):0] > OK
 
 ### references
 - http://vmpk.sourceforge.net/
