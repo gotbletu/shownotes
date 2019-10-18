@@ -87,8 +87,7 @@ common names: audio compressor, automatic gain control, volume normalization, so
 
 ### references
 - Update v2 https://www.youtube.com/watch?v=typM_AQUzi4
-- [Axel Werner DRC Stereo](https://awerner.myhome-server.de/doku.php?id=it-artikel:how-to-enable-audio-normalization-a.k.a.-audio-compression-a.k.a.-audio-dynamic-range-compression-under-linux)
-- stereo compressor https://plus.google.com/+AxelWerner/posts/Fck1t3HBi19
+- [Axel Werner DRC Stereo](https://awerner.myhome-server.de/doku.php?id=it-artikel:linux:how-to-enable-audio-normalization-a.k.a.-audio-compression-a.k.a.-audio-dynamic-range-compression-under-linux)
 - [Daniele T found the pulseaudio 12 fix](https://www.youtube.com/user/damnischannel)
 - pulseaudio 12 bug https://bugs.freedesktop.org/show_bug.cgi?id=107078
 - http://askubuntu.com/a/44012
