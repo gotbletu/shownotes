@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu <gotbletu@gmail.com>
+# SOCIAL: https://www.youtube.com/user/gotbletu|https://github.com/gotbletu|https://twitter.com/gotbletu
+# DESC:   join/merge multiple tracks psx bin/cue file into a single bin/cue {e.g playstation 1 Redump}
+# DEPEND: binmerge (https://github.com/putnam/binmerge)
+# DEMO:   https://youtu.be/eJOO5tpWZU0
+
+if [[ $# -lt 1 || $1 = "-h" || $1 = "--help" ]]; then
+  printf "%s\n" "info: join/merge multiple tracks psx bin/cue file into a single bin/cue {e.g playstation 1 Redump}"
+  printf "\n"
+  printf "%s\n" "usage: ${0##*/} [cuefile]"
+  printf "\n"
+  printf "%s\n" "  $ ${0##*/} file.cue"
+  printf "%s\n" "  $ ${0##*/} file1.cue file2.cue file3.cue"
+  printf "%s\n" "  $ ${0##*/} *.cue"
+  exit 1
+fi
+
+DIR=BINMERGE_OUT
+mkdir -p "$DIR"
+
+myArray=( "$@" )
+for arg in "${myArray[@]}"; do
+  binmerge -o "$DIR" "$arg" "${arg%.*}"
+done
