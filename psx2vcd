@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu <gotbletu@gmail.com>
+# SOCIAL: https://www.youtube.com/user/gotbletu|https://github.com/gotbletu|https://twitter.com/gotbletu
+# DESC:   convert (non-splitted) bin/cue to psx vcd (playstation video cd) [only for modded playstation 2 console]
+# DEPEND: coreutils gawk sed psmisc
+#         popstationr (https://github.com/pseiler/popstationr)
+#         cue2pops (https://github.com/makefu/cue2pops-linux)
+# DEMO:   https://youtu.be/jqffZaPFFrE
+# REFF:   Open PS2 Loader aka OPL v1641+ (http://www.ps2-home.com/forum/viewtopic.php?f=13&t=3)
+#         Popstarter (https://assemblergames.com/threads/ps2-pops-stuff-popstarter.45347/)
+#         Popstarter #2 (https://www.psx-place.com/resources/popstarter.683/)
+#         GameID/Character Limit http://www.ps2-home.com/forum/viewtopic.php?t=5311
+
+if [[ $# -lt 1 || $1 = "-h" || $1 = "--help" ]]; then
+  printf "%s\n" "info: convert (non-splitted) bin/cue to psx vcd (playstation video cd) [only for modded playstation 2 console]"
+  printf "\n"
+  printf "%s\n" "usage: ${0##*/} [cuefile]"
+  printf "\n"
+  printf "%s\n" "  $ ${0##*/} file.cue"
+  printf "%s\n" "  $ ${0##*/} file1.cue file2.cue file3.cue"
+  printf "%s\n" "  $ ${0##*/} *.cue"
+  printf "\n"
+  printf "%s\n" "Where To Put PSX VCD Games On USB?:"
+  printf "%s\n" "  mass:/POPS/POPSTARTER.ELF"
+  printf "%s\n" "  mass:/POPS/POPS_IOX.PAK"   # md5sum a625d0b3036823cdbf04a3c0e1648901
+  printf "%s\n" "  mass:/POPS/SLUS_008.21.Street Fighter Alpha 3 (USA).VCD"
+  printf "\n"
+  printf "%s\n" "Load Game: PS2 FMCB > Open PS2 Loader (v1641+) > Game List > PSX"
+  exit 1
+fi
+
+# kill popstationr after getting gameid from log file then use cue2pops to convert to VCD (output --> SLUS_003.97.WCW Nitro (USA).VCD]
+myArray=( "$@" )
+for arg in "${myArray[@]}"; do
+  PSX_LOG=/tmp/psx2vcd.log
+  (sleep 2 && killall popstationr) &
+  # (sleep 2 && killall popstationr && rm EBOOT.PBP) &
+  popstationr "${arg%.*}" AUTO 9 "${arg%.*}".[Bb][Ii][Nn] > "$PSX_LOG"
+  GAMEID="$(head -n1 "$PSX_LOG" | awk -F '[][]' '{print $2}' | sed 's/./&_/4' | sed 's/./&./8')"  # e.g SLUS_003.97
+  # title max 32 char limit, not counting file extension or gameid
+  TITLE="$( echo "${arg%.*}" | head -c 32 | awk '{$1=$1};1' )" # trim title to 32 char only
+  cue2pops "$arg" "$GAMEID.$TITLE".VCD
+done
+rm EBOOT.PBP
