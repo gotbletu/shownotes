@@ -36,9 +36,9 @@ https://www.youtube.com/watch?v=ur81Y-mV5Us
         def execute(self):
             import subprocess
             if self.quantifier:
-                command="fasd | fzf -e -i --tac --no-sort | awk '{print $2}'"
+                command="fasd | fzf -e -i --tac --no-sort | awk '{ print substr($0, index($0,$2)) }'"
             else:
-                command="fasd | fzf -e -i --tac --no-sort | awk '{print $2}'"
+                command="fasd | fzf -e -i --tac --no-sort | awk '{ print substr($0, index($0,$2)) }'"
             fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
             stdout, stderr = fzf.communicate()
             if fzf.returncode == 0:
@@ -71,7 +71,7 @@ https://www.youtube.com/watch?v=ur81Y-mV5Us
 - fasd from cli: https://www.youtube.com/watch?v=ur81Y-mV5Us
 - [fzf playlist](https://www.youtube.com/playlist?list=PLqv94xWU9zZ2fMsMMDF4PjtNHCeBFbggD)
 - [ranger playlist](https://www.youtube.com/playlist?list=PLqv94xWU9zZ18QJz2Ev8mSeHlICJbejzK)
-- https://github.com/ranger/ranger/wiki/Commands
+- https://github.com/ranger/ranger/wiki/Custom-Commands
 - https://github.com/clvv/fasd
 - https://github.com/junegunn/fzf
 
