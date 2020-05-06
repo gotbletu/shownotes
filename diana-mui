@@ -12,24 +12,19 @@
 ###
 ### Author          : gotbletu
 ### Name            : diana-mui
-### Version         : 0.2.2
-### Date            : 20190720
+### Version         : 0.2.3
+### Date            : 2020-05-05
 ### Description     : diana-mui is a Menu User Interface to the diana program. Diana is a commandline interface to aria2 daemon
 ### Depends On      : bash  aria2  coreutils  fzf  gawk  procps-ng  xdg-utils  diana (https://github.com/baskerville/diana)
 ### Video Demo      : https://www.youtube.com/watch?v=y59JwlYsrAE
 ### References      : https://github.com/baskerville/diana/blob/87c5b1b57425585b4c0f543edcf7e9038cf793c5/diana#L427-L429
 
-# 20190720 v0.2.2 added tmux clear scrollback
-# 20190607 v0.2.1 added extra hotkeys 
+# 2020-05-05 v0.2.3 added d,D,M hotkeys for changing config, download path, show path. shellcheck passes 99%-ignore expand warning
+# 2019-07-20 v0.2.2 added tmux clear scrollback
+# 2019-06-07 v0.2.1 added extra hotkeys 
 
 # download path
-DIANA_DOWNLOAD_DIR=~/Downloads/Aria
-# cli frontend to aria2 daemon
-DIANA_BIN=/usr/bin/diana
-# diana's custom way to start aria2 daemon
-DAD_BIN=/usr/bin/dad
-# list all active,paused,completed,errors
-DIANAMUI_PROGRESS_BIN=~/.scripts/diana-progress
+DIANA_DOWNLOAD_DIR="/media/EdoTensei/Aria/"
 
 main_program () {
 while true; do
@@ -45,77 +40,102 @@ while true; do
   printf '%s\n' '  c|C)   Resume * <==> Resume All Paused'
   printf '%s\n' '  T)     Stop Seeding Completed Torrents'
   printf '%s\n' '  E)     Clear Completed Downloads & Errors'
+  printf '%s\n' '  M)     Modify Aria2 Configuration'
+  printf '%s\n' '  d|D)   Show Path <==> Change Download Path'
   printf '%s\n' '  s|S)   Start Aria2c Daemon <==> STOP Daemon'
   printf '%s\n' '  h|q)   Help <==> Quit'
-  printf '%s\n'
+  printf '\n'
   printf '%s\n' '  * Tab:select-single  Ctrl-A:select-all'
   printf '%s\n' '    Ctrl-T:toggle-all  Ctrl-D:deselect-all'
-  printf '%s\n'
+  printf '\n'
   printf '  Enter Your Choice: '
-  read INPUT
+  read -r INPUT
 
   case "$INPUT" in
   
-    l)    # List all
-          watch -t "$DIANAMUI_PROGRESS_BIN"
+    l)    # List all (Ctrl+c to exit)
+          watch -t diana-progress
           ;;
     i)    # Show File Info
-          GID=`("$DIANA_BIN" list && "$DIANA_BIN" paused && "$DIANA_BIN" stopped && "$DIANA_BIN" errors) | fzf | awk '{print $1}'`
-          "$DIANA_BIN" info "$GID"
-          read -rsp $'Press any key to return to main menu\n' -n1 key
+          # GID=`(diana list && diana paused && diana stopped && diana errors) | fzf | awk '{print $1}'`
+          GID=$( (diana list && diana paused && diana stopped && diana errors) | fzf | awk '{print $1}')
+          diana info "$GID"
+          read -rsp $'Press any key to return to main menu\n' -n1
           ;;
     f)    # Show Filename
-          GID=`("$DIANA_BIN" list && "$DIANA_BIN" paused && "$DIANA_BIN" stopped && "$DIANA_BIN" errors) | fzf | awk '{print $1}'`
-          "$DIANA_BIN" files "$GID"
-          read -rsp $'Press any key to return to main menu\n' -n1 key
+          # GID=`(diana list && diana paused && diana stopped && diana errors) | fzf | awk '{print $1}'`
+          GID=$( (diana list && diana paused && diana stopped && diana errors) | fzf | awk '{print $1}')
+          diana files "$GID"
+          read -rsp $'Press any key to return to main menu\n' -n1
           ;;
     o)    # Open File
-          GID=`("$DIANA_BIN" list && "$DIANA_BIN" paused && "$DIANA_BIN" stopped && "$DIANA_BIN" errors) | fzf | awk '{print $1}'`
-          nohup xdg-open "$("$DIANA_BIN" files "$GID" | cut -d'%' -f2- | awk '{$1=$1};1')" >/dev/null 2>&1 &
+          # GID=`(diana list && diana paused && diana stopped && diana errors) | fzf | awk '{print $1}'`
+          GID=$( (diana list && diana paused && diana stopped && diana errors) | fzf | awk '{print $1}')
+          nohup xdg-open "$(diana files "$GID" | cut -d'%' -f2- | awk '{$1=$1};1')" >/dev/null 2>&1 &
           # read -rsp $'Press any key to return to main menu\n' -n1 key
           ;;
     a)    # Add
           printf '%s\n' ">>> Add [<URI>|<MAGNET>|<TORRENT_FILE>|<METALINK_FILE] To Active Downloads"
-          read -e -p ">>> " URI
-          "$DIANA_BIN" add "$URI"
+          read -r -e -p ">>> " URI
+          diana add "$URI"
           ;;
     A)    # Add Paused
           printf '%s\n' ">>> Add [<URI>|<MAGNET>|<TORRENT_FILE>|<METALINK_FILE] To Paused Downloads"
-          read -e -p ">>> " URI
-          "$DIANA_BIN" --pause add "$URI"
+          read -r -e -p ">>> " URI
+          diana --pause add "$URI"
           ;;
     r)    # Removing Download
-          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" remove "$GID"; done
+          (diana list && diana paused ) | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read -r GID; do diana remove "$GID"; done
           ;;
     R)    # Force Removing Download
-          ("$DIANA_BIN" list && "$DIANA_BIN" paused ) | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" forcerm "$GID"; done
+          (diana list && diana paused ) | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read -r GID; do diana forcerm "$GID"; done
           ;;
     p)    # Pausing Download
-          "$DIANA_BIN" list | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" pause "$GID"; done
+          diana list | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read -r GID; do diana pause "$GID"; done
           ;;
     P)    # Pause All The Active Downloads (aka Sleep)
-          "$DIANA_BIN" sleep
+          diana sleep
           ;;
     c)    # Resuming Download
-          "$DIANA_BIN" paused | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read GID; do "$DIANA_BIN" resume "$GID"; done
+          diana paused | fzf -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all | awk '{print $1}' | while read -r GID; do diana resume "$GID"; done
           ;;
     C)    # Resume All The Paused Downloads (aka Wake)
-          "$DIANA_BIN" wake
+          diana wake
           ;;
     E)    # Clear The List Of Stopped Downloads And Errors (aka Purge)
-          "$DIANA_BIN" purge
+          diana purge
+          ;;
+    d)    # show current aria2 download location
+          printf '\n'
+          printf "%s\n" "Current Download Path: $DIANA_DOWNLOAD_DIR"
+          printf '\n'
+          read -rsp $'Press any key to return to main menu\n' -n1
+          ;;
+    D)    # change aria2 download location
+          printf '%s\n' ">>> Set Your Default Download Directory"
+          read -r -e -p ">>> " DIR
+          DIR=$(printf '%s' "$DIR" | sed 's/^~/$HOME/g')
+          sed -i 's:^DIANA_DOWNLOAD_DIR=.*:DIANA_DOWNLOAD_DIR='\""$DIR"\"':g' "$0"
+          printf '\n'
+          printf "%s\n" "Restart Daemon And Script To Apply Changes"
+          printf '\n'
+          read -rsp $'Press any key to return to main menu\n' -n1
+          ;;
+    M)    # modify edit aria2 configuration
+          if [ ! -d "$HOME/.config/aria2" ]; then mkdir -p "$HOME/.config/aria2" ; fi
+          $EDITOR "$HOME/.config/aria2/aria2.conf"
           ;;
     T)    # Stop Seeding Completed Downloads (aka Clean)
-          "$DIANA_BIN" clean
+          diana clean
           ;;
     s)    printf '%s\n' "Starting Aria2c Daemon..."
           printf '%s\n' "Download To: $DIANA_DOWNLOAD_DIR"
           mkdir -p "$DIANA_DOWNLOAD_DIR"
-          "$DAD_BIN" -d "$DIANA_DOWNLOAD_DIR" start
+          dad -d "$DIANA_DOWNLOAD_DIR" start
           sleep 3
           ;;
     S)    printf '%s\n' "Stopping Aria2c Daemon..."
-          "$DAD_BIN" stop
+          dad stop
           sleep 3
           ;;
     h|H)  # Help page
@@ -123,18 +143,17 @@ while true; do
           printf '%s\n' 'Diana-MUI is a Menu User Interface to the diana program.'
           printf '%s\n' 'Diana is a commandline interface to aria2 daemon.'
           printf '%s\n' 'Aria2 is a download utility that supports HTTP(S), FTP, BitTorrent, and Metalink.'
-          printf '%s\n'
-          printf '%s\n' 'Requirements: bash  aria2  coreutils  fzf  gawk  procps-ng  xdg-utils  diana (https://github.com/baskerville/diana)'
-          printf '%s\n'
+          printf '\n'
+          printf '%s\n' 'Requirements: bash  aria2  coreutils  sed  fzf  gawk  procps-ng  xdg-utils  diana (https://github.com/baskerville/diana)'
+          printf '\n'
           printf '%s\n' 'Optional: aria2c addon (https://chrome.google.com/webstore/detail/aria2c-integration/edcakfpjaobkpdfpicldlccdffkhpbfk)'
-          printf '%s\n'
-          printf '%s\n'
+          printf '\n'
           printf '%s\n' 'Author:  gotbletu <gotbletu@gmail.com>'
           printf '%s\n' '         https://www.youtube.com/user/gotbletu'
           printf '%s\n' '         https://twitter.com/gotbletu'
           printf '%s\n' '         https://github.com/gotbletu'
-          printf '%s\n'
-          read -rsp $'Press any key to return to main menu\n' -n1 key
+          printf '\n'
+          read -rsp $'Press any key to return to main menu\n' -n1
           ;;
     q|Q)  # Quit/Exit
           clear && break
@@ -149,5 +168,3 @@ done
 
 # run program
 main_program
-
-

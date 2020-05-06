@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 ###             _   _     _      _         
 ###  __ _  ___ | |_| |__ | | ___| |_ _   _ 
 ### / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
@@ -12,21 +12,19 @@
 ###
 ### Author          : gotbletu
 ### Name            : diana-progress
-### Version         : 0.2
-### Date            : 20190607
+### Version         : 0.2.1
+### Date            : 2020-05-05
 ### Description     : outputs basic stats and info about the current aria2c daemon downloads
-### Depends On      : bash  diana (https://github.com/baskerville/diana)
+### Depends On      : diana (https://github.com/baskerville/diana)
 ### Video Demo      : https://www.youtube.com/watch?v=y59JwlYsrAE
 
-DIANA_BIN=/usr/bin/diana
-
 # printf '%s\n' "====BANDWIDTH===="
-"$DIANA_BIN" stats
+diana stats
 printf '%s\n' "=====ACTIVE======"
-"$DIANA_BIN" list
+diana list
 printf '%s\n' "=====PAUSED======"
-"$DIANA_BIN" paused
+diana paused
 printf '%s\n' "====COMPLETED===="
-"$DIANA_BIN" stopped
+diana stopped
 printf '%s\n' "=====ERRORS======"
-"$DIANA_BIN" errors
+diana errors
