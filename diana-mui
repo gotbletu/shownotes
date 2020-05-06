@@ -24,7 +24,7 @@
 # 2019-06-07 v0.2.1 added extra hotkeys 
 
 # download path
-DIANA_DOWNLOAD_DIR="/media/EdoTensei/Aria/"
+DIANA_DOWNLOAD_DIR="$HOME/Downloads"
 
 main_program () {
 while true; do

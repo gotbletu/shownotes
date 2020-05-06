@@ -11,16 +11,12 @@ a poorman's frontend to diana (which is a commandline frontend to aria2 daemon)
     $ wget https://raw.githubusercontent.com/gotbletu/shownotes/master/diana-mui
     $ wget https://raw.githubusercontent.com/gotbletu/shownotes/master/diana-progress
 
-### configuration
-    # open scripts and edit paths to fit your setup
-    DIANA_DOWNLOAD_DIR=~/Downloads/Aria
-    DIANA_BIN=/usr/bin/diana
-    DAD_BIN=/usr/bin/dad
-    DIANAMUI_PROGRESS_BIN=~/.scripts/diana-progress
-    
 ### usage
     $ diana-mui
 
+### configuration
+    run the diana-mui and change the download path (hit D). Restart script and start the daemon (hit s)
+    
 ### optional: w3m keymap
     vim ~/.w3m/keymap
     
