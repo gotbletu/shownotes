@@ -1,11 +1,13 @@
-# W3M Prefix Search Engines Using FZF and Surfraw
+# W3M Prefix Search Engines Searches Using FZF and Surfraw
 improving w3m by having a quick way to search multiple search engines or even custom search engines via the power of surfraw elvi
 
 * tutorial video: [Link](https://youtu.be/p5NZb8f8AHA)
 * offical website: [Link](https://www.youtube.com/user/gotbletu)
 
+tags: linux w3m omnibar address bar quick w3m smart search fzf fuzzy finder surfraw tmux workaround
+
 ### install requirements
-    w3m fzf surfraw
+    w3m fzf surfraw (xsel or tmux)
 
 ### install scripts to root directory
 Download at [root-cgi-bin](w3m_plugins/root-cgi-bin)
@@ -17,6 +19,7 @@ Download at [root-cgi-bin](w3m_plugins/root-cgi-bin)
     /usr/lib/w3m/cgi-bin/goto_clipboard.cgi
     /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi
 ---- 
+    chmod +x <script.cgi>
     
 ### install scripts to local directory
 Download at [cgi-bin](w3m_plugins/cgi-bin)
@@ -27,6 +30,7 @@ Download at [cgi-bin](w3m_plugins/cgi-bin)
     ~/.w3m/cgi-bin/fzf_surfraw.cgi
     ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi
 ---- 
+    chmod +x <script.cgi>
 
 ### configuration
     vim ~/.w3m/keymap
@@ -37,7 +41,7 @@ Download at [cgi-bin](w3m_plugins/cgi-bin)
     # keymap  xs      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
     # keymap  XS      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
     
-    # for tmux users or headless server
+    # for tmux users
     # keymap  xs      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi"
     # keymap  XS      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi"
     

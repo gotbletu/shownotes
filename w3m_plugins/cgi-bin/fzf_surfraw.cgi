@@ -6,6 +6,7 @@
 ### \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
 ### |___/                                  
 ###       https://www.youtube.com/user/gotbletu
+###       https://lbry.tv/@gotbletu
 ###       https://twitter.com/gotbletu
 ###       https://github.com/gotbletu
 ###       gotbletu@gmail.com
@@ -38,5 +39,5 @@ if [ "$PREFIX" = "" ]; then exit; fi
 read -r -e -p "  $PREFIX >> Enter Your Search Keyword: " INPUT
 
 # print proper url and copy to primary clipboard (aka highlighted clipboard) and tmux clipboard
-surfraw -browser=echo "$PREFIX" "$INPUT" | xsel -p
-# pidof tmux >/dev/null && tmux set-buffer "$(surfraw -browser=echo "$PREFIX" "$INPUT")"
+surfraw -p "$PREFIX" "$INPUT" | xsel -p
+# pidof tmux >/dev/null && tmux set-buffer "$(surfraw -p "$PREFIX" "$INPUT")"
