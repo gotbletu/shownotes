@@ -1,0 +1,89 @@
+#!/usr/bin/env sh
+###             _   _     _      _         
+###  __ _  ___ | |_| |__ | | ___| |_ _   _ 
+### / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
+###| (_| | (_) | |_| |_) | |  __/ |_| |_| |
+### \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
+### |___/                                  
+###       https://www.youtube.com/user/gotbletu
+###       https://lbry.tv/@gotbletu
+###       https://twitter.com/gotbletu
+###       https://github.com/gotbletu
+###       gotbletu@gmail.com
+###
+### Author          : gotbletu
+### Name            : timecapsule-handler-account
+### Version         : 0.2
+### Date            : 2020-05-13
+### Description     : toggle mount and unmount apple timecapsule with account setup
+### Depends On      : cifs-utils sudo grep util-linux coreutils
+### Video Demo      : https://youtu.be/CmFrqBrNCNM
+### References      : https://gist.github.com/dgraziotin/4487187
+
+# script requires root access
+[ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
+
+Color_Off='\e[0m'       # Text Reset
+Red='\e[0;31m'          # Red
+Green='\e[0;32m'        # Green
+Yellow='\e[0;33m'       # Yellow
+
+
+# Time Capsule Settings
+# https://i.imgur.com/bTvDdAG.jpg
+# https://i.imgur.com/DbFvkDT.png
+# https://i.imgur.com/LEgaW1M.png
+# https://i.imgur.com/OUJDyCJ.png
+# https://i.imgur.com/21jaA00.png
+# https://i.imgur.com/fNnWQgG.png
+# https://i.imgur.com/h7slYTL.png
+
+# sudo mkdir -p /mnt/timecapsule && sudo mount.cifs //192.168.1.207/Data /mnt/timecapsule -o user=XXXXX,password=XXXXX,sec=ntlm,vers=1.0
+
+# https://i.imgur.com/LEgaW1M.png
+CAPSULE_BASESTATION_NAME="TC2TB"
+
+# https://i.imgur.com/h7slYTL.png
+CAPSULE_PARTITION="Data"
+
+# Time Capsule Account Password (Stick With Basic Letter And Numbers To Make It Easy , Else Use \ To Escape Special Characters)
+# https://i.imgur.com/h7slYTL.png
+ACCOUNT_USER="visitor"
+ACCOUNT_PASS="0123456789"
+
+
+# Where To Mount Time Capsule (Dont Use Spaces In Path, It Will Auto Create Folder)
+MOUNT_POINT_PARTITION="/mnt/${CAPSULE_BASESTATION_NAME}_${CAPSULE_PARTITION}"
+MOUNT_POINT_USER="/mnt/${CAPSULE_BASESTATION_NAME}_${ACCOUNT_USER}"
+
+# toggle mount and unmount of Time Capsule
+IS_MOUNTED=$(mount 2> /dev/null | grep "$MOUNT_POINT_PARTITION" | cut -d' ' -f3)
+if [ "$IS_MOUNTED" ]; then
+  umount "$MOUNT_POINT_PARTITION"
+  rmdir "$MOUNT_POINT_PARTITION"
+  umount "$MOUNT_POINT_USER"
+  rmdir "$MOUNT_POINT_USER"
+else
+  mkdir -p "$MOUNT_POINT_PARTITION"
+  mkdir -p "$MOUNT_POINT_USER"
+  mount.cifs "//$CAPSULE_BASESTATION_NAME/$CAPSULE_PARTITION" "$MOUNT_POINT_PARTITION" -o user="$ACCOUNT_USER",pass="$ACCOUNT_PASS",file_mode=0777,dir_mode=0777,sec=ntlm,vers=1.0
+  mount.cifs "//$CAPSULE_BASESTATION_NAME/$ACCOUNT_USER" "$MOUNT_POINT_USER" -o user="$ACCOUNT_USER",pass="$ACCOUNT_PASS",file_mode=0777,dir_mode=0777,sec=ntlm,vers=1.0
+fi
+
+# check if mounted folders has files inside it (aka is NETWORK MOUNTED CORRECTLY)
+# doesnt work if you have no files in your PARTITION folders
+IS_MOUNTED_PARTITION=$(ls $MOUNT_POINT_PARTITION 2> /dev/null | wc -l)
+if [ "$IS_MOUNTED_PARTITION" -gt 0 ]; then
+  printf "\033c"
+  printf "%b\n" ">>> ${Green}Your Apple Time Capsule Is Mounted at: ${Color_Off}"
+  printf "%b\n" "\t $MOUNT_POINT_PARTITION"
+  printf "%b\n" "\t $MOUNT_POINT_USER"
+  printf "%b\n" ">>> ${Yellow}Run Script Again If You Wish To Unmount${Color_Off}"
+fi
+
+# check if folder exist (aka IS NOT MOUNTED)
+if [ ! -d "$MOUNT_POINT_USER" ]; then
+  printf "\033c"
+  printf "%b\n" ">>> ${Red}Your Apple Time Capsule Is Unmounted${Color_Off}"
+  printf "%b\n" ">>> ${Yellow}Run Script Again If You Wish To Mount${Color_Off}"
+fi
