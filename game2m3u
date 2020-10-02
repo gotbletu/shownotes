@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+
+# files extension to create initial new directory and m3u
+EXT_INT="cue|gdi|chd|pbp"
+
+  # BIN/CUE - Cue sheets files
+  # ISO - Standard ISO image files
+  # CCD/SUB/IMG/CUE - CloneCD image files
+  # IMG - Raw Disk Image File
+  # MDF/MDS - Media Descriptor File
+  # PBP - Playstation Portable files
+  # BIN/CUE/SBI - PAL copy protected games need a SBI Subchannel file (for PSX)
+  # GDI/BIN - Sega Dreamcast GD-ROM disc
+  # M3U - Playlist file
+
+helpmsg() {
+  printf "%s\n" "desc: create m3u playlist for multi disc games [$EXT_INT]"
+  printf "%s\n" "      e.g playstation, pc engine cd/turbografx cd, panasonic 3do,"
+  printf "%s\n" "          sega dreamcast, sega saturn, sega cd/mega cd, ...etc"
+  printf "%s\n" "demo: https://youtu.be/Ye5cxCDB3yo"
+  printf "%s\n" "depend: coreutils findutils sed"
+  printf "\n"
+  printf "%s\n" "usage: ${0##*/} [options]"
+  printf "\n"
+  printf "%s\n" "options:"
+  printf "%s\n" "  -d, --dir                  create directory and m3u playlist"
+  printf "%s\n" "      from"
+  printf "%s\n" "          Novastorm (USA) (Disc 1).bin"
+  printf "%s\n" "          Novastorm (USA) (Disc 1).cue"
+  printf "%s\n" "          Novastorm (USA) (Disc 2).bin"
+  printf "%s\n" "          Novastorm (USA) (Disc 2).cue"
+  printf "%s\n" "          Metal Gear Solid (USA) (Disc 1) (Rev 1).chd"
+  printf "%s\n" "          Metal Gear Solid (USA) (Disc 2) (Rev 1).chd"
+  printf "%s\n" "      to"
+  printf "%s\n" "          Novastorm (USA).m3u"
+  printf "%s\n" "          Metal Gear Solid (USA) (Rev 1).m3u"
+  printf "%s\n" "          /Novastorm (USA)/Novastorm (USA) (Disc 1).bin"
+  printf "%s\n" "          /Novastorm (USA)/Novastorm (USA) (Disc 1).cue"
+  printf "%s\n" "          /Novastorm (USA)/Novastorm (USA) (Disc 2).bin"
+  printf "%s\n" "          /Novastorm (USA)/Novastorm (USA) (Disc 2).cue"
+  printf "%s\n" "          /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 1) (Rev 1).chd"
+  printf "%s\n" "          /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 2) (Rev 1).chd"
+  printf "\n"
+  printf "%s\n" "  -m, --m3u                  create m3u playlist only"
+  printf "%s\n" "      from"
+  printf "%s\n" "          Heart of Darkness (USA) (Disc 1).bin"
+  printf "%s\n" "          Heart of Darkness (USA) (Disc 1).cue"
+  printf "%s\n" "          Heart of Darkness (USA) (Disc 2).bin"
+  printf "%s\n" "          Heart of Darkness (USA) (Disc 2).cue"
+  printf "%s\n" "          Lunar 2 - Eternal Blue Complete (USA) (Disc 1).chd"
+  printf "%s\n" "          Lunar 2 - Eternal Blue Complete (USA) (Disc 2).chd"
+  printf "%s\n" "          Lunar 2 - Eternal Blue Complete (USA) (Disc 3).chd"
+  printf "%s\n" "      to"
+  printf "%s\n" "          Heart of Darkness (USA).m3u"
+  printf "%s\n" "          Lunar 2 - Eternal Blue Complete (USA).m3u"
+  printf "\n"
+  printf "%s\n" "  -h, --help                 display this help message"
+  printf "\n"
+  printf "%s\n" "Swap Disc: Retroarch > [Load Your Game] > Quick Menu > Disc Control"
+}
+if [ $# -lt 1 ]; then
+  helpmsg
+  exit 1
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+  helpmsg
+  exit 0
+elif [ "$1" = -d ] || [ "$1" = --dir ]; then
+  ### TYPE 1: TitleOfGame (USA) (Disc 1).chd
+  #---------------------------------------------------------------------------------
+  find . -maxdepth 1 -type f -iname "*(Disc 1).*[$EXT_INT]" | while read -r line
+  do
+    # create new directory
+    # Heart of Darkness (USA) (Disc 1).chd --> Heart of Darkness (USA)
+    DIR_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
+    DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
+    mkdir -vp "$DIR_NAME"
+    find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "$DISC_NAME.*" -exec mv -n -- '{}' "$DIR_NAME" \;
+    # create m3u playlist
+    # /Heart of Darkness (USA)/Heart of Darkness (USA) (Disc 1).chd
+    # /Heart of Darkness (USA)/Heart of Darkness (USA) (Disc 2).chd
+    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' > "$DIR_NAME".m3u
+  done
+
+  ### TYPE 2: AnotherTitleOfGame (USA) (Disc 1) (Rev 2).chd
+  #---------------------------------------------------------------------------------
+  find . -maxdepth 1 -type f -iname "*(Disc 1) *.*[$EXT_INT]" | while read -r line
+  do
+    # create new directory
+    # Metal Gear Solid (USA) (Disc 1) (Rev 1).chd --> Metal Gear Solid (USA) (Rev 1)
+    DIR_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
+    DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
+    mkdir -vp "$DIR_NAME"
+    # move matching files to directory
+    find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "$DISC_NAME.*" -exec mv -n -- '{}' "$DIR_NAME" \;
+    # create m3u playlist
+    # /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 1) (Rev 1).chd
+    # /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 2) (Rev 1).chd
+    # find "$DIR_NAME" -type f -iname "*.*[cue|gdi|chd|iso|pbp]" | sed -e 's/^/\//' > "$DIR_NAME".m3u
+    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' > "$DIR_NAME".m3u
+  done
+elif [ "$1" = -m ] || [ "$1" = --m3u ]; then
+  ### METHOD A: TitleOfGame (USA) (Disc 1).cue
+  #---------------------------------------------------------------------------------
+  find . -maxdepth 1 -type f -iname "*(Disc 1).*[$EXT_INT]" | while read -r line
+  do
+    # Heart of Darkness (USA) (Disc 1).chd --> Heart of Darkness (USA).m3u
+    FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
+    DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
+    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' > "$FILE_NAME".m3u
+  done
+
+  ### METHOD B: AnotherTitleOfGame (USA) (Disc 1) (Rev 2).cue
+  #---------------------------------------------------------------------------------
+  find . -maxdepth 1 -type f -iname "*(Disc 1) *.*[$EXT_INT]" | while read -r line
+  do
+    # Metal Gear Solid (USA) (Disc 1) (Rev 1).chd --> Metal Gear Solid (USA) (Rev 1).m3u
+    FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
+    DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
+    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' > "$FILE_NAME".m3u
+  done
+fi
