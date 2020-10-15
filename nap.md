@@ -9,15 +9,14 @@ Nap is a console napster client written by Kevin Sullivan. It runs on Linux, Ope
 ### configuration
     vim ~/.nap/napconf
     
-    servers=share-it.loginto.me:3456;108.19.45.179:7777;95.248.174.8:8888;108.19.45.179:8888;spica.sytes.net:8888;84.24.69.59:6436;98.202.75.0:8877;79.103.115.248:5995;82.53.30.153:3456;80.181.212.54:8888
+    servers=sanctuary.darkservers.net:3456;johnson1.linkpc.net:5995:z3n.overflow.biz:8888:share-it.loginto.me:3456
 
-- http://gotnap.com/index.php/list
-
+- https://web.archive.org/web/*/http://gotnap.com/index.php/list
 
 
 ### connect to a server
     nap -r -s ipaddress:port
-    nap -r -s 79.103.107.173:5995 -s 98.202.75.0:8877
+    nap -r -s sanctuary.darkservers.net:3456 -s johnson1.linkpc.net:5995
     
 ### commands
     /help
@@ -48,22 +47,21 @@ Nap is a console napster client written by Kevin Sullivan. It runs on Linux, Ope
     Tab               # [results/dlul window] toggle switch windows
 
 ### references
-- http://nap.sourceforge.net/userguide.html#4.
-- http://gotnap.com/index.php/list
+- http://nap.sourceforge.net/userguide.html
+- [list of old opennap server list](https://web.archive.org/web/*/http://gotnap.com/index.php/list)
 
+### Contact
 
-### contact
-
-                 _   _     _      _         
-      __ _  ___ | |_| |__ | | ___| |_ _   _ 
+                 _   _     _      _
+      __ _  ___ | |_| |__ | | ___| |_ _   _
      / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
     | (_| | (_) | |_| |_) | |  __/ |_| |_| |
      \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
-     |___/                                  
+     |___/
 
-- http://www.youtube.com/user/gotbletu
+- https://www.youtube.com/user/gotbletu
+- https://lbry.tv/@gotbletu
 - https://twitter.com/gotbletu
-- https://plus.google.com/+gotbletu
 - https://github.com/gotbletu
 - gotbletu@gmail.com
 
