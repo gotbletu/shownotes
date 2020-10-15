@@ -6,6 +6,18 @@ Nap is a console napster client written by Kevin Sullivan. It runs on Linux, Ope
 ### install requirements
     nap
 
+### how to compile manually and installing
+    wget http://nap.sourceforge.net/dist/nap-1.5.4.tar.gz
+    tar xvzf nap-1.5.4.tar.gz
+    cd nap-1.5.4/
+    ./configure
+    make -j
+    sudo cp ./src/nap /usr/local/bin/
+    sudo cp ./src/napping /usr/local/bin/
+    sudo chmod +x /usr/local/bin/nap
+    sudo chmod +x /usr/local/bin/napping
+    sudo chmod u+s /usr/local/bin/napping
+    
 ### configuration
     vim ~/.nap/napconf
     
