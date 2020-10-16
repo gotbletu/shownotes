@@ -21,9 +21,18 @@ Nap is a console napster client written by Kevin Sullivan. It runs on Linux, Ope
 ### configuration
     vim ~/.nap/napconf
     
-    servers=sanctuary.darkservers.net:3456;johnson1.linkpc.net:5995:z3n.overflow.biz:8888:share-it.loginto.me:3456
+    servers=sanctuary.darkservers.net:3456;ringoffire.darkservers.net:8888;janor.darkservers.net:8888;johnson1.linkpc.net:5995;z3n.overflow.biz:8888;northernlights.no-ip.org:7777;classrock.servemp3.com:3456;primula.no-ip.com:3456;divxdiyceap.homeip.net:8888
+    
+    autorestart=1
+    
+    
 
 - https://web.archive.org/web/*/http://gotnap.com/index.php/list
+
+### note
+    If You Get Kicked Or Fail To Connect To A Server That You Know Works For Sure.
+    Try Changing Your Username In The Configs.
+    Then Reconnect
 
 
 ### connect to a server
@@ -61,6 +70,10 @@ Nap is a console napster client written by Kevin Sullivan. It runs on Linux, Ope
 ### references
 - http://nap.sourceforge.net/userguide.html
 - [list of old opennap server list](https://web.archive.org/web/*/http://gotnap.com/index.php/list)
+- [WinMX WSX Server List](https://archive.winmxworld.com/WSX_Files/)
+- [Japan OpenNap Server List](http://serverlist.run.buttobi.net/)
+- [Japan OpenNap Server List from BBS Post](http://notban.bbs.fc2.com/)
+- https://en.wikipedia.org/wiki/OpenNap
 
 ### Contact
 
