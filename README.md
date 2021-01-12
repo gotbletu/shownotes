@@ -5,17 +5,22 @@
      \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
      |___/                                  
 
-- http://www.youtube.com/user/gotbletu
+- https://www.youtube.com/user/gotbletu
+- https://lbry.tv/@gotbletu
 - https://twitter.com/gotbletu
-- https://plus.google.com/+gotbletu
 - https://github.com/gotbletu
 - gotbletu@gmail.com
+
 
 
 ### About
 This is the **shownotes** for my youtube tutorial videos. All hail the opensource powers. Come join the darkside lols.
 Hit me up on social media, youtube or email if you got any tips or question.
 If you find my videos feature on other site let me know also, I always need an Ego Boost from time to time LMAO. Thanks
+
+### What License Are My Scripts Under If Not Stated?
+- We live in a world of copyright and copyleft, so i have to use a license to anger or please you, your choice =)
+- License GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt
 
 ## My Videos has Been Feature On:
 
@@ -28,14 +33,15 @@ If you find my videos feature on other site let me know also, I always need an E
 - [inxi](https://code.google.com/p/inxi/) - a full featured system information script
 - [package converter](https://code.google.com/p/foxoman/wiki/PackageConverter) - frontend to Alien
 - [pacmixer](https://github.com/KenjiTakahashi/pacmixer) - an alsamixer alike for pulseaudio
+- [pipe-viewer](https://github.com/trizen/pipe-viewer) - a command-line interface to YouTube (fork of straw-viewer)
 - [pkm](https://github.com/silvernode/pkm) - a shell script wrapper for package managers originally by gotbletu
 - [sunflower-fm](https://code.google.com/p/sunflower-fm/) - lightweight file manager with dual pane
+- [straw-viewer](https://github.com/trizen/straw-viewer) - a command-line interface to YouTube (fork of youtube-viewer) 
 - [torrent-search](http://torrent-search.sourceforge.net) - search for torrents
 - [turses](https://pypi.python.org/pypi/turses) - console twitter client
 - [veromix](http://kde-look.org/content/show.php?content=116676) - KDE mixer for pulseaudio
 - [weechat-vimode](https://github.com/GermainZ/weechat-vimode) - A WeeChat script that adds vi-like modes, commands and keybindings.
 - [youtube-viewer](https://github.com/trizen/youtube-viewer) - a command-line interface to YouTube
-
 
 #### Blogs/Wikis/SocialMedia:
 
@@ -63,6 +69,5 @@ If you find my videos feature on other site let me know also, I always need an E
 - [KarynBryant](https://www.youtube.com/user/KarynBryant) - MMA Heat, Interviewer, TV host [Link](https://www.youtube.com/watch?v=Y8aJC_92tRU#t=3m27s)
 - [InfinitelyGalactic](https://www.youtube.com/user/InfinitelyGalactic) - Linux, Android, Tech Reviewer [Link](https://www.youtube.com/watch?v=2Dg7eQK_pn0#t=5m5s)
 - [PC-Addicts](https://www.youtube.com/user/PCAddictsLive) - Windows, Linux, MacOS, Tech Reviewer [Link](https://www.youtube.com/watch?v=ewZnY-pBAdg)
-
-
-
+- [budlabs](https://www.youtube.com/c/dubbeltumme) - Linux, Open Source, Tech Reviewer [Link](https://www.youtube.com/watch?v=dKaqY5kENPQ#t=13m31s)
+- [DistroTube](https://www.youtube.com/c/DistroTube) - Linux, Open Source, Tech Reviewer [Link](https://www.youtube.com/watch?v=u_SIXD9SQCk#t=8m22s)

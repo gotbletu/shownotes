@@ -1,6 +1,7 @@
 #!/bin/bash
 # any_term_dropdown.sh - turns any terminal into a dropdown terminal
 # tutorial video: https://www.youtube.com/watch?v=mVw2gD9iiOg
+# License GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt
 #             _   _     _      _         
 #  __ _  ___ | |_| |__ | | ___| |_ _   _ 
 # / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
@@ -9,8 +10,6 @@
 # |___/                                  
 #       http://www.youtube.com/user/gotbletu
 #       https://twitter.com/gotbletu
-#       https://www.facebook.com/gotbletu
-#       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
 
 # requires:
