@@ -1,28 +1,37 @@
 #!/usr/bin/env sh
-###             _   _     _      _         
-###  __ _  ___ | |_| |__ | | ___| |_ _   _ 
-### / _` |/ _ \| __| '_ \| |/ _ \ __| | | |
-###| (_| | (_) | |_| |_) | |  __/ |_| |_| |
-### \__, |\___/ \__|_.__/|_|\___|\__|\__,_|
-### |___/                                  
-###       https://www.youtube.com/user/gotbletu
-###       https://twitter.com/gotbletu
-###       https://github.com/gotbletu
-###       gotbletu@gmail.com
-###
-### Author          : gotbletu
-### Name            : goto_tmux_clipboard.cgi
-### Version         : 0.1
-### Date            : 2020-04-26
-### Description     : paste and go feature for w3m web browser using tmux clipboard
-### Depends On      : w3m  tmux
-### Video Demo      : https://youtu.be/p5NZb8f8AHA
-### References      : https://github.com/felipesaa/A-vim-like-firefox-like-configuration-for-w3m
-### Install         : put this script in /usr/lib/w3m/cgi-bin/
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   paste and go feature for w3m web browser using tmux clipboard
+# DEMO:   https://youtu.be/p5NZb8f8AHA | updated https://youtu.be/0j3pUfZjCeQ
+# DEPEND: w3m  tmux
+# RQMTS:  1. allow permissions and put this script in /usr/lib/w3m/cgi-bin/
+#
+#         2. $EDITOR ~/.w3m/keymap
+#                       # paste url and go (current tab)
+#                       keymap  pp      GOTO        /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi
+#
+#                       # paste url and go (new tab)
+#                       keymap  PP      TAB_GOTO    /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi
+#
+#         3. set the default open-url to current url
+#               sed -i 's:default_url.*:default_url 1:g' ~/.w3m/config
+#
+# REFF:   https://github.com/felipesaa/A-vim-like-firefox-like-configuration-for-w3m
+# CLOG:   2021-02-05 version 0.2 reset url back to 1 (aka edit current url)
+#         2020-04-26 version 0.1
+
+
+# set open-url value to zero (aka empty url line)
+printf "%s\r\n" "W3m-control: SET_OPTION default_url=0";
 
 #GOTO url in clipboard in current page. If the clipboard has a 
 #"non url string/nothing" an blank page is shown.
 printf "%s\r\n" "W3m-control: GOTO $(tmux paste-buffer)";
+
 #delete the buffer (element in history) created between the current page and 
 #the searched page by calling this script.
 printf "W3m-control: DELETE_PREVBUF\r\n"
+
+# set default open-url value to one (aka current url)
+printf "%s\r\n" "W3m-control: SET_OPTION default_url=1";
+

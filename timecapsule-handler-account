@@ -40,8 +40,11 @@ Yellow='\e[0;33m'       # Yellow
 
 # sudo mkdir -p /mnt/timecapsule && sudo mount.cifs //192.168.1.207/Data /mnt/timecapsule -o user=XXXXX,password=XXXXX,sec=ntlm,vers=1.0
 
+# You can use the ip address if the basestation name fails
 # https://i.imgur.com/LEgaW1M.png
 CAPSULE_BASESTATION_NAME="TC2TB"
+# CAPSULE_BASESTATION_NAME="TC2TB.local"
+# CAPSULE_BASESTATION_NAME="192.168.X.XXX"
 
 # https://i.imgur.com/h7slYTL.png
 CAPSULE_PARTITION="Data"
