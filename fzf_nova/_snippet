@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   copy text snippet to clipboard
+# DEMO:   https://www.youtube.com/watch?v=Zew0mgJwAh8
+# DEPEND: fzf sed coreutils xsel (or tmux)
+
+# sort, delete empty line, remove tags, leading and trailing spaces, also no newline
+selected="$(sort -n ~/.snippetrc | sed '/^$/d' | fzf -e -i --reverse | sed -e s/\;\;\.\*\$// | sed 's/^[ \t]*//;s/[ \t]*$//' | tr -d '\n')"
+[ -z "$selected" ] && exit
+printf "%s" "$selected" | xsel -b
+printf "%s" "$selected" | tmux load-buffer -

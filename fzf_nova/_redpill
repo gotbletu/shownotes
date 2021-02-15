@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   open a cheatsheet to read notes
+# DEPEND: fzf findutils coreutils
+
+selected="$(find ~/.config/redpill/ -type f | sort | fzf -e -i --reverse --delimiter / --with-nth -1 --preview 'cat {}')"
+[ -z "$selected" ] && exit
+"$EDITOR" "$selected"

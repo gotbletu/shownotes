@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   locate files in home or media folder only
+# DEMO:   https://www.youtube.com/watch?v=AbveiTAymy0
+# DEPEND: fzf mlocate xdg-utils util-linux
+# REQD:   # update system database
+#         sudo updatedb
+#
+#         # optional: include external hdd or other mounted partition to be in the database
+#         1. sudo vim /etc/updatedb.conf
+#         2. Remove /media from PRUNEPATHS
+#         3. sudo updatedb
+
+selected="$(locate home media | fzf -e -i -m --reverse --delimiter / --with-nth -3,-2,-1)"
+[ -z "$selected" ] && exit
+echo "$selected" | while read -r line ; do setsid xdg-open "$line" ; done

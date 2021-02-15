@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   open surfraw bookmarks with your deafult web browser ($BROWSER)
+# DEPEND: fzf surfraw grep gawk coreutils
+# REQD:   make sure to set your browser variable in your shellrc
+#           vim ~/.bashrc
+#           export BROWSER=chromium
+
+selected="$(grep -E '^([[:alnum:]])' ~/.config/surfraw/bookmarks | sort -n | fzf -e -i -m --reverse | awk '{print $1}')"
+[ -z "$selected" ] && exit
+echo "$selected" | while read -r line ; do surfraw -browser="$BROWSER" "$line" ; done

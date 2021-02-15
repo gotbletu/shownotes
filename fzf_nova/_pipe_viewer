@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# youtube viewer not using API
+pipe-viewer

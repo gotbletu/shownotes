@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   launch playonlinux programs (winehq)
+# DEMO:   https://www.youtube.com/watch?v=AbveiTAymy0
+# DEPEND: fzf nohup playonlinux coreutils findutils
+
+selected="$(find ~/.PlayOnLinux/shortcuts -type f -exec basename {} \; | fzf -e -i --reverse )"
+[ -z "$selected" ] && exit
+# nohup playonlinux --run "$selected" >/dev/null 2>&1 & disown
+# setsid playonlinux --run "$selected" >/dev/null 2>&1 & disown
+setsid playonlinux --run "$selected" >/dev/null & disown

@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   open surfraw bookmarks with your deafult web browser private mode ($BROWSER_PRIVATE)
+# DEPEND: fzf surfraw grep gawk coreutils util-linux
+# REQD:   make sure to set your private browser variable in your shellrc
+#           $EDITOR ~/.bashrc
+#             export BROWSER_PRIVATE="chromium --incognito"
+
+selected="$(grep -E '^([[:alnum:]])' ~/.config/surfraw/bookmarks | sort -n | fzf -e -i -m --reverse | awk '{print $1}')"
+[ -z "$selected" ] && exit
+echo "$selected" | while read -r line ; do URL="$(surfraw -p "$line")" && setsid -f $BROWSER_PRIVATE "$URL" ; done

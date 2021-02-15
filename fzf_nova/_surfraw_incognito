@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   search internet from a list of search engines (private/incognito mode)
+# DEPEND: fzf surfraw grep gawk coreutils util-linux
+# REQD:   make sure to set your private browser variable in your shellrc
+#           vim ~/.bashrc
+#           export BROWSER_PRIVATE="chromium --incognito"
+
+# select your elvi
+PREFIX=$(surfraw -elvi | grep -v 'LOCAL\|GLOBAL'| fzf -e -m --reverse | awk '{print $1}')
+[ -z "$PREFIX" ] && exit
+echo "Search Engine(s): $PREFIX" | tr '\n' ' '
+echo
+read -r -e -p "[Private Mode] Enter Keywords: " INPUT
+
+# workaround: surfraw does not like multiple flags in -browser option
+# e.g surfraw -browser="chromium --incognito" "$PREFIX" $INPUT
+echo "$PREFIX" | while read -r line; do URL="$(surfraw -p "$line" $INPUT)" && setsid -f $BROWSER_PRIVATE "$URL" ; done

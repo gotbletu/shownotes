@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   open only calibre ebooks
+# DEPEND: fzf mlocate xdg-utils util-linux
+
+selected="$(locate -ir 'calibre.*\.\(cbz\|cbr\|epub\|pdf\|mobi\|azw3\)$' | fzf -e -i -m --reverse --delimiter / --with-nth -4,-3,-2,-1)"
+[ -z "$selected" ] && exit
+echo "$selected" | while read -r line ; do setsid xdg-open "$line" ; done

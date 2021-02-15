@@ -16,10 +16,19 @@
 ### Date            : 20190626
 ### Description     : menu interface to mount, unmount, eject, clone, exactcopy, format, LUKS encryption
 ### Depends On      : bash  sudo  grep  gawk  coreutils  udisks2  util-linux
-###                   gptfdisk  dosfstools  ntfs-3g  hfsprogs  exfat-utils  e2fsprogs
+###                   gptfdisk  dosfstools  ntfs-3g  hfsprogs  exfatprogs  e2fsprogs
 ###                   cryptsetup  clonezilla  partclone  partimage  vlc  cdw  f3  smartmontools
 ###                   dvdbackup  libdvdread  libdvdcss  cdrdao  cdrtools(or cdrkit)
 ### Video Demo      : https://www.youtube.com/watch?v=jipILuNW5Ks
+
+### 2021-01-16      : change to exfatprogs, exFAT 32KB or 64KB cluster
+
+# Next improvements: 1) delete MBR on format https://www.cyberciti.biz/faq/linux-clearing-out-master-boot-record-dd-command/
+#                    clear out leftover label and fstype
+#                    $ sudo dd if=/dev/zero of=/dev/sdX bs=446 count=1
+
+#                    2) blinking text warning
+
 
 #-------- Bash Color Code {{{
 #------------------------------------------------------
@@ -391,6 +400,112 @@ format2usb-exfat() {
     # w    write table to disk and exit
   echo -e "${Red}>>>Formatting the device ${Color_Off}"
     sudo mkfs.exfat -n "$DEVICE_LABEL" /dev/"$DEVICE_NAME"1
+  echo -e "${Red}>>>Changing permission of the filesystem ${Color_Off}"
+    mkdir -p -v /tmp/testmount
+    sudo mount /dev/"$DEVICE_NAME"1 /tmp/testmount
+    sudo chmod -R 777 /tmp/testmount
+    sudo umount /tmp/testmount
+    rmdir -v /tmp/testmount
+}
+
+format2usb-exfat-32kbcluster() {
+  if [ $# -lt 2 ]; then
+    echo -e "format and create a partition that fills up the whole device"
+    echo -e "exFAT label max is 15 character and is all uppercase"
+    echo -e "\nUsage: $0 <label> <device>"
+    echo -e "Example: $0 MY_USB sdx"
+    return 1
+  fi
+  # exFat likes the labels to be in uppercase
+  DEVICE_LABEL=$(echo "$1" | tr '[:lower:]' '[:upper:]')
+  DEVICE_NAME="$2"
+  echo -e "${Yellow}>>>Checking if device is mounted ${Color_Off}"
+    MOUNT_STATUS=$(mount | grep /dev/"$DEVICE_NAME" | wc -l)
+    if [ "$MOUNT_STATUS" -ne 0 ]
+    then
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$DEVICE_NAME"
+      echo -e "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount the device and all of its partitions then try again ${Color_Off}"
+      return 1
+    fi
+  echo -e "${Yellow}>>>Please double check the device you are about to FORMAT ${Color_Off}"
+    lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
+  echo -ne "${Red}>>>WARNING: You are about to FORMAT a device at /dev/$DEVICE_NAME. Do you want to continue? [y/n] ${Color_Off}"
+    read REPLY
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      echo -e "${Green}>>>You chose to continue ${Color_Off}"
+    else
+      return 1
+    fi
+  echo -e "${Red}>>>Delete any existing partition then create a new single partition ${Color_Off}"
+    echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nt\n7\nw" | sudo fdisk /dev/"$DEVICE_NAME"
+    # delete partiton x8 using d\n\n
+    # d    delete a partition
+    #      default, partition
+    # o    create a new empty DOS partition table
+    # n    add a new partition
+    # p    print the partition table
+    # 1    partition number 1
+    #      default, start immediately after preceding partition
+    #      default, extend partition to end of disk
+    # t    change a partition type (L to list all types)
+    # 7    HPFS/NTFS/exFAT
+    # w    write table to disk and exit
+  echo -e "${Red}>>>Formatting the device ${Color_Off}"
+    sudo mkfs.exfat -c 32K -n "$DEVICE_LABEL" /dev/"$DEVICE_NAME"1
+  echo -e "${Red}>>>Changing permission of the filesystem ${Color_Off}"
+    mkdir -p -v /tmp/testmount
+    sudo mount /dev/"$DEVICE_NAME"1 /tmp/testmount
+    sudo chmod -R 777 /tmp/testmount
+    sudo umount /tmp/testmount
+    rmdir -v /tmp/testmount
+}
+
+format2usb-exfat-64kbcluster() {
+  if [ $# -lt 2 ]; then
+    echo -e "format and create a partition that fills up the whole device"
+    echo -e "exFAT label max is 15 character and is all uppercase"
+    echo -e "\nUsage: $0 <label> <device>"
+    echo -e "Example: $0 MY_USB sdx"
+    return 1
+  fi
+  # exFat likes the labels to be in uppercase
+  DEVICE_LABEL=$(echo "$1" | tr '[:lower:]' '[:upper:]')
+  DEVICE_NAME="$2"
+  echo -e "${Yellow}>>>Checking if device is mounted ${Color_Off}"
+    MOUNT_STATUS=$(mount | grep /dev/"$DEVICE_NAME" | wc -l)
+    if [ "$MOUNT_STATUS" -ne 0 ]
+    then
+      lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep "$DEVICE_NAME"
+      echo -e "${Red}>>>/dev/$DEVICE_NAME is mounted. You have to unmount the device and all of its partitions then try again ${Color_Off}"
+      return 1
+    fi
+  echo -e "${Yellow}>>>Please double check the device you are about to FORMAT ${Color_Off}"
+    lsblk -o "NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID" | grep --color -E "$2|$"
+  echo -ne "${Red}>>>WARNING: You are about to FORMAT a device at /dev/$DEVICE_NAME. Do you want to continue? [y/n] ${Color_Off}"
+    read REPLY
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      echo -e "${Green}>>>You chose to continue ${Color_Off}"
+    else
+      return 1
+    fi
+  echo -e "${Red}>>>Delete any existing partition then create a new single partition ${Color_Off}"
+    echo -e "d\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\nd\n\no\nn\np\n1\n\n\nt\n7\nw" | sudo fdisk /dev/"$DEVICE_NAME"
+    # delete partiton x8 using d\n\n
+    # d    delete a partition
+    #      default, partition
+    # o    create a new empty DOS partition table
+    # n    add a new partition
+    # p    print the partition table
+    # 1    partition number 1
+    #      default, start immediately after preceding partition
+    #      default, extend partition to end of disk
+    # t    change a partition type (L to list all types)
+    # 7    HPFS/NTFS/exFAT
+    # w    write table to disk and exit
+  echo -e "${Red}>>>Formatting the device ${Color_Off}"
+    sudo mkfs.exfat -c 64K -n "$DEVICE_LABEL" /dev/"$DEVICE_NAME"1
   echo -e "${Red}>>>Changing permission of the filesystem ${Color_Off}"
     mkdir -p -v /tmp/testmount
     sudo mount /dev/"$DEVICE_NAME"1 /tmp/testmount
@@ -1326,6 +1441,7 @@ main_list() {
 MENU_FORMATDEVICE="
 ,${Green}m2|m3|m4|mx|mn|mh${Color_Off}, FORMAT MBR:, ext2 <=> ext3 <=> ext4 <=> exfat <=> ntfs <=> hfs+
 ,${Green}mt|mf|c3|c6${Color_Off}, FORMAT MBR:, fat16 <=> fat32 <=> fat32-32KB <=> fat32-64KB
+,${Green}x3|x6${Color_Off}, FORMAT MBR:, exfat-32KB <=> exfat-64KB
 ,${Green}g2|g3|g4|gx|gn${Color_Off}, FORMAT GPT:, ext2 <=> ext3 <=> ext4 <=> exfat <=> ntfs
 ,${Green}l2|l3|l4${Color_Off}, FORMAT LUKS:, ext2 <=> ext3 <=> ext4
 ,${Green}cd|rd|cp|rp${Color_Off}, CLONING:, clone drive <=> restore drive <=> clone part <=> restore part
@@ -1345,14 +1461,15 @@ HELP="
     ${Green}mountjutsu${Color_Off}: simple menu to mount, unmount, format, eject, restore, clone drives and many other features.
 
     dependencies: bash sudo grep gawk coreutils udisks2 util-linux
-                  gptfdisk dosfstools ntfs-3g hfsprogs exfat-utils e2fsprogs
+                  gptfdisk dosfstools ntfs-3g hfsprogs exfatprogs e2fsprogs
                   cryptsetup clonezilla partclone partimage vlc cdw f3 smartmontools
                   dvdbackup libdvdread libdvdcss cdrdao cdrtools(or cdrkit)
 
-    FORMAT MBR: format drive ${Red}[util-linux dosfstools exfat-utils e2fsprogs ntfs-3g hfsprogs]${Color_Off}
-                - FAT32 32KB Cluster (Wii, Gamecube, 3DS ...etc)
+    FORMAT MBR: format drive ${Red}[util-linux dosfstools exfatprogs e2fsprogs ntfs-3g hfsprogs]${Color_Off}
+                - FAT32 32KB Cluster (Wii, Gamecube, 3DS/DS/DSi/R4Card ...etc)
+                - exFAT 64KB Cluster (PSVita/PSTV)
                 - HFS+ (Mac OSX non-journal HFS+. Linux can write in HFS+ non-journaling mode only)
-    FORMAT GPT: format drive GREATER THAN 2TB ${Red}[gptfdisk exfat-utils e2fsprogs ntfs-3g]${Color_Off}
+    FORMAT GPT: format drive GREATER THAN 2TB ${Red}[gptfdisk exfatprogs e2fsprogs ntfs-3g]${Color_Off}
     FORMAT LUKS: setup encryption and password, formats to different file systems ${Red}[cryptsetup e2fsprogs]${Color_Off}
     CLONING: clone/restore drive or partition image ${Red}[clonezilla partclone partimage ntfs-3g coreutils]${Color_Off}
     EXACT COPY DVDMovie: backup dvdmovie to ISO and bypass disc protection ${Red}[dvdbackup libdvdread libdvdcss]${Color_Off}
@@ -1362,7 +1479,7 @@ HELP="
     BURNING: CD/DVD/ISO Ncurses Burning Tool ${Red}[cdw]${Color_Off}
     HDD HEALTH: display info, enable or disable S.M.A.R.T ${Red}[smartmontools]${Color_Off}
     HDD TEST: run a S.M.A.R.T test to check for Hard Drive Failures ${Red}[smartmontools]${Color_Off}
-    HDD STATS: show progress of S.M.A.R.T test. keep Hard Drive alive from entering sleep mode${Red}[smartmontools]${Color_Off}
+    HDD STATS: show progress of S.M.A.R.T test. keep Hard Drive alive from entering sleep mode ${Red}[smartmontools]${Color_Off}
     MOUNTING: mount, unmount devices ${Red}[udisks2]${Color_Off}
     EJECTING: unmount and eject devices, toggle disc tray ${Red}[udisks2 util-linux]${Color_Off}
     PLAYBACK: play dvdmovie or audiocd (using cvlc and nvlc) ${Red}[vlc]${Color_Off}
@@ -1502,6 +1619,22 @@ while true; do
       echo -n "What label name do you want to assign to $DEVICE ? (11 char): "
       read LABELNAME
       format2usb-fat32-32kbcluster "$LABELNAME" "$DEVICE"
+      read -rsp $'Press any key to return to main menu\n' -n1 key
+    ;;
+    x6)
+      echo -n "Which device do you want to format to exFAT 64KB Cluster MBR? (e.g sdx): "
+      read DEVICE
+      echo -n "What label name do you want to assign to $DEVICE ? (11 char): "
+      read LABELNAME
+      format2usb-exfat-64kbcluster "$LABELNAME" "$DEVICE"
+      read -rsp $'Press any key to return to main menu\n' -n1 key
+    ;;
+    x3)
+      echo -n "Which device do you want to format to exFAT 32KB Cluster MBR? (e.g sdx): "
+      read DEVICE
+      echo -n "What label name do you want to assign to $DEVICE ? (11 char): "
+      read LABELNAME
+      format2usb-exfat-32kbcluster "$LABELNAME" "$DEVICE"
       read -rsp $'Press any key to return to main menu\n' -n1 key
     ;;
     mt)

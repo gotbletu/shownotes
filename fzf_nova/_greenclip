@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   copy from your clipboard history
+# DEMO:   https://www.youtube.com/watch?v=Vzt0tVNrJ0A
+# DEPEND: fzf greenclip coreutils xsel (or tmux)
+# REFF:   https://github.com/erebe/greenclip
+# NOTE:   not good with multiline at the moment
+
+selected="$(greenclip print | fzf -e -i --reverse)"
+[ -z "$selected" ] && exit
+printf "%s" "$selected" | xsel -b
+printf "%s" "$selected" | tmux load-buffer -

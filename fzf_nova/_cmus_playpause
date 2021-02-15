@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# toggle pause/play
+cmus-remote --pause

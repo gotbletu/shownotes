@@ -1,0 +1,8 @@
+#!/bin/bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   locate a file and go to that directory with ranger file manager
+# DEMO:   https://www.youtube.com/watch?v=C64LKCZFzME
+# DEPEND: ranger locate
+
+ranger --cmd=fzf_locate

@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   fuzzy find a song in cmus library and play
+# DEPEND: fzf cmus coreutils
+
+selected="$( sort ~/.cmus/lib.pl | fzf -e -i +s -m --reverse --delimiter / --with-nth -2,-1 )"
+[ -z "$selected" ] && exit
+
+# clear cmus queue
+cmus-remote -c -q
+
+# add songs
+echo "$selected" | while read -r line ; do cmus-remote -q "$line" ; done
+
+# play queued song
+cmus-remote -n -p
