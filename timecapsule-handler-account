@@ -9,7 +9,6 @@
 ###       https://lbry.tv/@gotbletu
 ###       https://twitter.com/gotbletu
 ###       https://github.com/gotbletu
-###       gotbletu@gmail.com
 ###
 ### Author          : gotbletu
 ### Name            : timecapsule-handler-account
@@ -19,6 +18,7 @@
 ### Depends On      : cifs-utils sudo grep util-linux coreutils
 ### Video Demo      : https://youtu.be/CmFrqBrNCNM
 ### References      : https://gist.github.com/dgraziotin/4487187
+###                 : sudo mkdir -p /mnt/timecapsule && sudo mount.cifs //192.168.1.xxx/Data /mnt/timecapsule -o user=XXXXX,password=XXXXX,sec=ntlm,vers=1.0
 
 # script requires root access
 [ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
@@ -29,31 +29,38 @@ Green='\e[0;32m'        # Green
 Yellow='\e[0;33m'       # Yellow
 
 
-# Time Capsule Settings
-# https://i.imgur.com/bTvDdAG.jpg
-# https://i.imgur.com/DbFvkDT.png
-# https://i.imgur.com/LEgaW1M.png
-# https://i.imgur.com/OUJDyCJ.png
-# https://i.imgur.com/21jaA00.png
-# https://i.imgur.com/fNnWQgG.png
-# https://i.imgur.com/h7slYTL.png
+# Time Capsule Settings with Accounts:
+# 01_airport_main.png                   https://i.imgur.com/XJXCEgd.png
+# 02_airport_deviceinfo.png             https://i.imgur.com/ktFEX3J.png
+# 03_basestation_tab.png                https://i.imgur.com/4kClCzf.png
+# 04_internet_tab.png                   https://i.imgur.com/R6KK6b0.png
+# 05_internet_tab_opts.png              https://i.imgur.com/mjAGIM4.png
+# 06_wireless_tab.png                   https://i.imgur.com/ThskCXp.png
+# 07_network_tab.png                    https://i.imgur.com/LqT4hSw.png
+# 08_disks_tab.png                      https://i.imgur.com/ATG8QQi.png
+# 09_disks_tab_visitor_account.png      https://i.imgur.com/gVdrucO.png
+# 10_disks_tab_admin_account.png        https://i.imgur.com/ihqpUlx.png
 
-# sudo mkdir -p /mnt/timecapsule && sudo mount.cifs //192.168.1.207/Data /mnt/timecapsule -o user=XXXXX,password=XXXXX,sec=ntlm,vers=1.0
+# ONLY CHANGE THIS SECTION
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# Use IP Address or Basestation Name (Recommended: IP Address)
+# 03_basestation_tab.png                https://i.imgur.com/4kClCzf.png
+# CAPSULE_BASESTATION_NAME="TC2TB"
+CAPSULE_BASESTATION_NAME="192.168.1.XXX"
 
-# You can use the ip address if the basestation name fails
-# https://i.imgur.com/LEgaW1M.png
-CAPSULE_BASESTATION_NAME="TC2TB"
-# CAPSULE_BASESTATION_NAME="TC2TB.local"
-# CAPSULE_BASESTATION_NAME="192.168.X.XXX"
-
-# https://i.imgur.com/h7slYTL.png
+# Name of Partition
+# 08_disks_tab.png                      https://i.imgur.com/ATG8QQi.png
 CAPSULE_PARTITION="Data"
 
-# Time Capsule Account Password (Stick With Basic Letter And Numbers To Make It Easy , Else Use \ To Escape Special Characters)
-# https://i.imgur.com/h7slYTL.png
+# Time Capsule Account Password
+# (Stick With Basic Letter And Numbers To Make It Easy , Else Use \ To Escape Special Characters)
+# 09_disks_tab_visitor_account.png      https://i.imgur.com/gVdrucO.png
+# 10_disks_tab_admin_account.png        https://i.imgur.com/ihqpUlx.png
 ACCOUNT_USER="visitor"
 ACCOUNT_PASS="0123456789"
-
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # Where To Mount Time Capsule (Dont Use Spaces In Path, It Will Auto Create Folder)
 MOUNT_POINT_PARTITION="/mnt/${CAPSULE_BASESTATION_NAME}_${CAPSULE_PARTITION}"
