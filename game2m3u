@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
 
 # files extension to create initial new directory and m3u
-EXT_INT="cue|gdi|chd|pbp"
+EXT_INT="cue|gdi|chd|pbp|iso"
 
   # BIN/CUE - Cue sheets files
   # ISO - Standard ISO image files
@@ -79,7 +80,7 @@ elif [ "$1" = -d ] || [ "$1" = --dir ]; then
     # create m3u playlist
     # /Heart of Darkness (USA)/Heart of Darkness (USA) (Disc 1).chd
     # /Heart of Darkness (USA)/Heart of Darkness (USA) (Disc 2).chd
-    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' > "$DIR_NAME".m3u
+    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
   done
 
   ### TYPE 2: AnotherTitleOfGame (USA) (Disc 1) (Rev 2).chd
@@ -96,8 +97,8 @@ elif [ "$1" = -d ] || [ "$1" = --dir ]; then
     # create m3u playlist
     # /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 1) (Rev 1).chd
     # /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 2) (Rev 1).chd
-    # find "$DIR_NAME" -type f -iname "*.*[cue|gdi|chd|iso|pbp]" | sed -e 's/^/\//' > "$DIR_NAME".m3u
-    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' > "$DIR_NAME".m3u
+    # find "$DIR_NAME" -type f -iname "*.*[cue|gdi|chd|iso|pbp]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
+    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
   done
 elif [ "$1" = -m ] || [ "$1" = --m3u ]; then
   ### METHOD A: TitleOfGame (USA) (Disc 1).cue
@@ -107,7 +108,7 @@ elif [ "$1" = -m ] || [ "$1" = --m3u ]; then
     # Heart of Darkness (USA) (Disc 1).chd --> Heart of Darkness (USA).m3u
     FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
     DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
-    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' > "$FILE_NAME".m3u
+    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
   done
 
   ### METHOD B: AnotherTitleOfGame (USA) (Disc 1) (Rev 2).cue
@@ -117,6 +118,6 @@ elif [ "$1" = -m ] || [ "$1" = --m3u ]; then
     # Metal Gear Solid (USA) (Disc 1) (Rev 1).chd --> Metal Gear Solid (USA) (Rev 1).m3u
     FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
     DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
-    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' > "$FILE_NAME".m3u
+    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
   done
 fi
