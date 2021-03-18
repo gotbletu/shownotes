@@ -3,7 +3,7 @@
 #         https://www.youtube.com/user/gotbletu
 
 # files extension to create initial new directory and m3u
-EXT_INT="cue|gdi|chd|pbp|iso"
+EXT_INT="cue|gdi|chd|pbp|iso|dsk"
 
   # BIN/CUE - Cue sheets files
   # ISO - Standard ISO image files
@@ -69,7 +69,7 @@ elif [ "$1" = -h ] || [ "$1" = --help ]; then
 elif [ "$1" = -d ] || [ "$1" = --dir ]; then
   ### TYPE 1: TitleOfGame (USA) (Disc 1).chd
   #---------------------------------------------------------------------------------
-  find . -maxdepth 1 -type f -iname "*(Disc 1).*[$EXT_INT]" | while read -r line
+  find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "*(Disc 1).*[$EXT_INT]" | while read -r line
   do
     # create new directory
     # Heart of Darkness (USA) (Disc 1).chd --> Heart of Darkness (USA)
@@ -80,12 +80,12 @@ elif [ "$1" = -d ] || [ "$1" = --dir ]; then
     # create m3u playlist
     # /Heart of Darkness (USA)/Heart of Darkness (USA) (Disc 1).chd
     # /Heart of Darkness (USA)/Heart of Darkness (USA) (Disc 2).chd
-    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
+    find "$DIR_NAME" ! -iname '*.m3u' -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
   done
 
   ### TYPE 2: AnotherTitleOfGame (USA) (Disc 1) (Rev 2).chd
   #---------------------------------------------------------------------------------
-  find . -maxdepth 1 -type f -iname "*(Disc 1) *.*[$EXT_INT]" | while read -r line
+  find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "*(Disc 1) *.*[$EXT_INT]" | while read -r line
   do
     # create new directory
     # Metal Gear Solid (USA) (Disc 1) (Rev 1).chd --> Metal Gear Solid (USA) (Rev 1)
@@ -98,26 +98,55 @@ elif [ "$1" = -d ] || [ "$1" = --dir ]; then
     # /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 1) (Rev 1).chd
     # /Metal Gear Solid (USA) (Rev 1)/Metal Gear Solid (USA) (Disc 2) (Rev 1).chd
     # find "$DIR_NAME" -type f -iname "*.*[cue|gdi|chd|iso|pbp]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
-    find "$DIR_NAME" -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
+    find "$DIR_NAME" ! -iname '*.m3u' -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
   done
+
+  ### TYPE 3: AmstradMSXTitleOfGame (19xx)(Developer)(Disc 1 of 3).dsk
+  #---------------------------------------------------------------------------------
+  find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "*(Disc 1 of ?).*[$EXT_INT]" | while read -r line
+  do
+    DIR_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1 of .*)@@g')"
+    DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1 of .*)@@g')"
+    mkdir -vp "$DIR_NAME"
+    find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "$DISC_NAME*.*" -exec mv -n -- '{}' "$DIR_NAME" \;
+    # create m3u playlist
+    # /Game (19xx)(Developer)/Game (19xx)(Developer)(Disc 1 of 3).dsk
+    # /Game (19xx)(Developer)/Game (19xx)(Developer)(Disc 2 of 3)(Data A).dsk
+    # /Game (19xx)(Developer)/Game (19xx)(Developer)(Disc 2 of 3)(Data B).dsk
+    find "$DIR_NAME" ! -iname '*.m3u' -type f -iname "*.*[$EXT_INT]" | sed -e 's/^/\//' | sort > "$DIR_NAME".m3u
+  done
+
 elif [ "$1" = -m ] || [ "$1" = --m3u ]; then
   ### METHOD A: TitleOfGame (USA) (Disc 1).cue
   #---------------------------------------------------------------------------------
-  find . -maxdepth 1 -type f -iname "*(Disc 1).*[$EXT_INT]" | while read -r line
+  find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "*(Disc 1).*[$EXT_INT]" | while read -r line
   do
     # Heart of Darkness (USA) (Disc 1).chd --> Heart of Darkness (USA).m3u
     FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
     DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
-    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
+    find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
   done
 
   ### METHOD B: AnotherTitleOfGame (USA) (Disc 1) (Rev 2).cue
   #---------------------------------------------------------------------------------
-  find . -maxdepth 1 -type f -iname "*(Disc 1) *.*[$EXT_INT]" | while read -r line
+  find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "*(Disc 1) *.*[$EXT_INT]" | while read -r line
   do
     # Metal Gear Solid (USA) (Disc 1) (Rev 1).chd --> Metal Gear Solid (USA) (Rev 1).m3u
     FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@ (Disc 1)@@g')"
     DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1)@(Disc ?)@g')"
-    find . -maxdepth 1 -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
+    find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "$DISC_NAME.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
+  done
+
+  ### METHOD C: AmstradMSXTitleOfGame (19xx)(Developer)(Disc 1 of 3).dsk
+  # Game (19xx)(Developer)(Disc 1 of 3).dsk
+  # Game (19xx)(Developer)(Disc 2 of 3)(Data A).dsk
+  # Game (19xx)(Developer)(Disc 2 of 3)(Data B).dsk
+  # Game (19xx)(Developer).m3u
+  #---------------------------------------------------------------------------------
+  find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "*(Disc 1 of ?).*[$EXT_INT]" | while read -r line
+  do
+    FILE_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1 of .*)@@g')"
+    DISC_NAME="$(echo "${line%.*}" | sed 's@./@@g' | sed 's@(Disc 1 of .*)@@g')"
+    find . -maxdepth 1 ! -iname '*.m3u' -type f -iname "$DISC_NAME*.*[$EXT_INT]" | sed 's@./@@g' | sort > "$FILE_NAME".m3u
   done
 fi
