@@ -35,21 +35,20 @@ Download at [cgi-bin](w3m_plugins/cgi-bin)
     vim ~/.w3m/keymap
     
     # for x sessions
-    keymap  xs      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi"
-    keymap  XS      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi"
-    # keymap  xs      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
-    # keymap  XS      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
+    keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
+    keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
     
     # for tmux users
-    # keymap  xs      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi"
-    # keymap  XS      COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi"
+    # keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
+    # keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
+    
     
 ### set the default open-url to current url
     sed -i 's:default_url.*:default_url 1:g' ~/.w3m/config
 
 ### usage example
     $ w3m google.com
-    then press XS to use surfraw for smart search
+    then press xs or XS to use surfraw for smart search
 
 ### references
 - https://youtu.be/0j3pUfZjCeQ

@@ -15,10 +15,11 @@ Given a html document, it pulls out the main body text and cleans it up.
     
     keymap  L       NEXT
     keymap  H       PREV
-    keymap  \\\R    COMMAND "SHELL 'python3 -m readability.readability -u $W3M_URL > /tmp/readability.html' ; LOAD /tmp/readability.html"
+    keymap  \\\r    COMMAND "READ_SHELL 'python3 -m readability.readability -u $W3M_URL 2> /dev/null 1> /tmp/readability.html' ; LOAD /tmp/readability.html"
+    
 
 ### usage
-    press \R on a webpage while running w3m web browser
+    press \r on a webpage while running w3m web browser
 
 ### references
 - W3M playlist https://www.youtube.com/playlist?list=PLqv94xWU9zZ35Yv0s6zMID5JoS8qu19Kh

@@ -7,13 +7,27 @@ Text-to-speech engine used on Android phones. Works on linux also.
     aur/svox-pico-bin   # archlinux
     libttspico-utils    # ubuntu / debian
     picospeaker         # https://gitlab.com/ky1e/picospeaker
+    toggle-process.zsh  # https://github.com/chimay/scripts/blob/master/zsh/toggle-process.zsh
+    rdrview             # https://github.com/eafer/rdrview
     
 ### configuration
     vim ~/.w3m/keymap
     
-    keymap  \\\s    COMMAND "SHELL 'picospeaker $W3M_CURRENT_WORD 2>/dev/null'"
+    # say current word
+    keymap  \\\s    COMMAND "READ_SHELL 'picospeaker $W3M_CURRENT_WORD 2>/dev/null' ; BACK"
+    
+    # read current page
     keymap  \\\a    COMMAND "PRINT /tmp/picospeaker.txt ; SHELL 'picospeaker < /tmp/picospeaker.txt 2>/dev/null &'"
-    keymap  \\\k    COMMAND "SHELL 'killall play'"
+    
+    # strip junk from current page and read current page
+    keymap  \\\R    COMMAND "READ_SHELL 'rdrview -H $W3M_URL 2> /dev/null 1> /tmp/rdrview.html' ; LOAD /tmp/rdrview.html ; PRINT /tmp/picospeaker.txt ; SHELL 'picospeaker < /tmp/picospeaker.txt 2>/dev/null &'"
+    
+    # stop current text to speech process
+    keymap  \\\k    COMMAND "READ_SHELL 'killall play' ; BACK"
+    
+    # toggle (pause/play) current text to speech process
+    keymap  \\\p    COMMAND "READ_SHELL 'toggle-process.zsh /usr/bin/play' ; BACK"
+    
 
 ### usage
     press \a on a webpage for the pico tts program to read it aloud
@@ -24,6 +38,7 @@ Text-to-speech engine used on Android phones. Works on linux also.
 - https://aur.archlinux.org/packages/svox-pico-bin/
 - https://android.googlesource.com/platform/external/svox/+/master
 - https://youtu.be/BijKHsvOvxc
+- https://github.com/chimay/scripts/blob/master/zsh/toggle-process.zsh
 
 ### contact
 

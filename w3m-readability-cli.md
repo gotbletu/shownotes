@@ -13,7 +13,8 @@ readability-cli (aka readable) takes any HTML page and strips out unnecessary bl
     
     keymap  L       NEXT
     keymap  H       PREV
-    keymap  \\\r    COMMAND "SHELL 'readable $W3M_URL -p html-title,html-content > /tmp/readable.html' ; LOAD /tmp/readable.html"
+    keymap  \\\r    COMMAND "READ_SHELL 'readable $W3M_URL -p html-title,html-content > /tmp/readable.html' ; LOAD /tmp/readable.html"
+    
 
 ### usage
     press \r on a webpage while running w3m web browser

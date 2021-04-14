@@ -25,7 +25,9 @@ Using macros automate toggling settings like images display or table borders on 
 ### references
 - https://youtu.be/lL73xWsaJP8
 - https://raw.githubusercontent.com/felipesaa/A-vim-like-firefox-like-configuration-for-w3m/master/documentation/functions.txt
-- https://ntmlabs.com/w3m-tricks/
+- https://vitalyparnas.com/posts/2018/08/on-w3m/ 
+- https://vitalyparnas.com/posts/2019/07/w3m-redux/
+- https://vitalyparnas.com/guides/w3m/
 - https://developers.whatismybrowser.com/useragents/explore/
 - [W3M Playlist](https://www.youtube.com/playlist?list=PLqv94xWU9zZ35Yv0s6zMID5JoS8qu19Kh)
 
