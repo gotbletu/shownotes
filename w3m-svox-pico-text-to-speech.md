@@ -17,10 +17,10 @@ Text-to-speech engine used on Android phones. Works on linux also.
     keymap  \\\s    COMMAND "READ_SHELL 'picospeaker $W3M_CURRENT_WORD 2>/dev/null' ; BACK"
     
     # read current page
-    keymap  \\\a    COMMAND "PRINT /tmp/picospeaker.txt ; SHELL 'picospeaker < /tmp/picospeaker.txt 2>/dev/null &'"
+    keymap  \\\a    COMMAND "READ_SHELL 'rm /tmp/picospeaker.txt' ; BACK ; PRINT /tmp/picospeaker.txt ; SHELL 'picospeaker < /tmp/picospeaker.txt 2>/dev/null &'"
     
     # strip junk from current page and read current page
-    keymap  \\\R    COMMAND "READ_SHELL 'rdrview -H $W3M_URL 2> /dev/null 1> /tmp/rdrview.html' ; LOAD /tmp/rdrview.html ; PRINT /tmp/picospeaker.txt ; SHELL 'picospeaker < /tmp/picospeaker.txt 2>/dev/null &'"
+    keymap  \\\R    COMMAND "READ_SHELL 'rdrview -H $W3M_URL 2> /dev/null 1> /tmp/rdrview.html' ; BACK ; LOAD /tmp/rdrview.html ; READ_SHELL 'rm /tmp/picospeaker.txt' ; BACK ; PRINT /tmp/picospeaker.txt ; SHELL 'picospeaker < /tmp/picospeaker.txt 2>/dev/null &'"
     
     # stop current text to speech process
     keymap  \\\k    COMMAND "READ_SHELL 'killall play' ; BACK"
