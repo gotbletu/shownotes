@@ -18,6 +18,5 @@ elif [ "$1" = -h ] || [ "$1" = --help ]; then
 else
   selected="$(khinsider -s "$@" | tail -n +2 | fzf -e -i -m)"
   [ -z "$selected" ] && exit
-  # echo "$selected" | while read -r line ; do khinsider -f mp3 "$line" ; done
   echo "$selected" | while read -r line ; do printf "%s\n" ">>> $line" && khinsider -f mp3 "$line" ; done
 fi
