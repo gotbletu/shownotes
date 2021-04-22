@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+
+helpmsg() {
+  printf "%s\n" "desc: search for video game soundtracks and download (https://downloads.khinsider.com)"
+  printf "%s\n" "demo: https://youtu.be/ZSIJdNQBoJw"
+  printf "%s\n" "depend: fzf khinsider (https://github.com/obskyr/khinsider)"
+  printf "\n"
+  printf "%s\n" "usage: ${0##*/} <keywords>"
+}
+if [ $# -lt 1 ]; then
+  helpmsg
+  exit 1
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+  helpmsg
+  exit 0
+else
+  selected="$(khinsider -s "$@" | tail -n +2 | fzf -e -i -m)"
+  [ -z "$selected" ] && exit
+  # echo "$selected" | while read -r line ; do khinsider -f mp3 "$line" ; done
+  echo "$selected" | while read -r line ; do printf "%s\n" ">>> $line" && khinsider -f mp3 "$line" ; done
+fi
