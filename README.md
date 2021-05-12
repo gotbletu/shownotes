@@ -35,6 +35,7 @@ If you find my videos feature on other site let me know also, I always need an E
 - [pacmixer](https://github.com/KenjiTakahashi/pacmixer) - an alsamixer alike for pulseaudio
 - [pipe-viewer](https://github.com/trizen/pipe-viewer) - a command-line interface to YouTube (fork of straw-viewer)
 - [pkm](https://github.com/silvernode/pkm) - a shell script wrapper for package managers originally by gotbletu
+- [shellnium](https://github.com/Rasukarusan/shellnium) - selenium webdriver for Bash. Automate the web using shell scripts
 - [sunflower-fm](https://code.google.com/p/sunflower-fm/) - lightweight file manager with dual pane
 - [straw-viewer](https://github.com/trizen/straw-viewer) - a command-line interface to YouTube (fork of youtube-viewer) 
 - [torrent-search](http://torrent-search.sourceforge.net) - search for torrents
