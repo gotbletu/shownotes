@@ -3,7 +3,7 @@
 #         https://www.youtube.com/user/gotbletu
 # DESC:   generate a script for your last w3m session then you can run script to restore all urls in new tabs
 # DEMO:   https://youtu.be/qYhNJ3itqWw
-# DEPEND: coreutils gawk
+# DEPEND: coreutils gawk sed
 # CLOG:   2021-04-17 first draft, no option to jump to tab 1 at the moment
 # REQD:   1. Allow executable permissions and put script in ~/.w3m/cgi-bin/restore_session.cgi 
 #
@@ -24,15 +24,23 @@
 #               $ w3mlastsession
 
 ## ---------------------------------------------
-mkdir -p "$HOME/.w3m/bin"
 # location of generated script of last session
+mkdir -p "$HOME/.w3m/bin"
 RESTORE_SESSSION="$HOME/.w3m/bin/w3mlastsession"
+
 # add shell header
 echo "#!/usr/bin/env sh" > "$RESTORE_SESSSION"
 echo "w3m \\" >> "$RESTORE_SESSSION"
+
 # remove dupes without sorting, add -N flag at beginning and append trailing slash to each url
 awk '!x[$0]++' "$HOME/.w3m/RestoreSession.txt" | while read -r line ; do echo "-N '$line' \\" >> "$RESTORE_SESSSION" ; done
-echo "2>/dev/null" >> "$RESTORE_SESSSION"
+
+# remove last trailing slash of the last line
+sed -i '$ s-.$--' "$RESTORE_SESSSION"
+
+# note: dont use /dev/null it prevents fzf_surfraw.cgi
+# echo "2>/dev/null" >> "$RESTORE_SESSSION"
+
 chmod +x "$RESTORE_SESSSION"
 
 ## OUTPUT SCRIPT FILE EXAMPLE ~/.w3m/bin/w3mlastsession
@@ -44,6 +52,5 @@ chmod +x "$RESTORE_SESSSION"
 ##  -N 'https://www.reddit.com/r/linux/.mobile' \
 ##  -N 'http://lite.cnn.com/en' \
 ##  -N 'https://raw.githubusercontent.com/tats/w3m/master/ChangeLog' \
-##  -N 'https://github.com/gotbletu/shownotes' \
-##  2>/dev/null
+##  -N 'https://github.com/gotbletu/shownotes'
 ## --------------------------------------------------
