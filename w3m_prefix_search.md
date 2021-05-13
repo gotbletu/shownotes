@@ -35,11 +35,11 @@ Download at [cgi-bin](w3m_plugins/cgi-bin)
     vim ~/.w3m/keymap
     
     # for x sessions
-    keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
+    keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
     keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
     
     # for tmux users
-    # keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
+    # keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
     # keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
     
     

@@ -9,11 +9,11 @@
 #         3. $EDITOR ~/.w3m/keymap
 #
 #            # for x session
-#            keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
+#            keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
 #            keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
 #            # for tmux users
-#            # keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
-#            # keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
+#            # keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
+#            # keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
 
 
 # CLOG:   2021-04-11 version 0.4 remove read command for posix compatible (good idea by https://github.com/NapoleonWils0n)
