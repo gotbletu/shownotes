@@ -9,6 +9,5 @@
 #         4. sed -i 's@cgi_bin.*@cgi_bin ~/.w3m/cgi-bin:/usr/lib/w3m/cgi-bin:/usr/local/libexec/w3m/cgi-bin@g' ~/.w3m/config
 #         5. sed -i 's@urimethodmap.*@urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap@g' ~/.w3m/config
 
-printf "%s\r\n" "W3m-control: READ_SHELL transmission-remote --add '$QUERY_STRING'"
-printf "%s\r\n" "W3m-control: DELETE_PREVBUF"
+transmission-remote --add "$QUERY_STRING"
 printf "%s\r\n" "W3m-control: BACK"
