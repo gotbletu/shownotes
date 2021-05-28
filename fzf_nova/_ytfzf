@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# A posix script that helps you find Youtube videos (with out API) and opens/downloads using mpv/youtube-dl.
+# https://github.com/pystardust/ytfzf
+
+ytfzf -l

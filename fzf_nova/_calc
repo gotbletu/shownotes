@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+
+helpmsg() {
+  printf "%s\n" "desc: commandline calculator (ctrl+d to exit)"
+  printf "%s\n" "demo: http://www.youtube.com/watch?v=JkyodHenTuc"
+  printf "%s\n" "depends: python2, python3 or bc"
+  printf "\n"
+  printf "%s\n" "usage: ${0##*/}"
+}
+if [ "$1" = -h ] || [ "$1" = --help ]; then
+  helpmsg
+  exit 0
+elif command -v python3 >/dev/null; then
+  python3 -ic "from math import *; import cmath"
+elif command -v python2 >/dev/null; then
+  python2 -ic "from __future__ import division; from math import *; from random import *"
+elif command -v bc >/dev/null; then
+  bc -q -l
+else
+  printf "%s\n" "missing python2, python3 or bc"
+  exit 1
+fi
