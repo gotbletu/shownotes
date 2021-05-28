@@ -8,8 +8,8 @@
 set -o vi
 while true
 do
-    read -rep ">>> Translate English to Spanish: " INPUT
-    history -s "$INPUT"
-    trans en:es "$INPUT"
-    printf "\n"
+  read -rep ">>> Translate English to Spanish: " INPUT
+  history -s "$INPUT"
+  trans en:es "$INPUT"
+  printf "\n"
 done
