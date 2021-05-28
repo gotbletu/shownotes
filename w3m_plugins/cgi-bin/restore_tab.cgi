@@ -2,13 +2,11 @@
 # AUTHOR: felipesaa (https://github.com/felipesaa)
 # DESC:   restore a closed tab in w3m
 # DEMO:   https://youtu.be/e5_q3-r6PAU
-# DEPEND: coreutils
-# REFF:   https://github.com/felipesaa/A-vim-like-firefox-like-configuration-for-w3m
-#         http://w3m.sourceforge.net/MANUAL#LocalCGI
-# RQMTS:  1. allow executable permissions and put this script in /usr/lib/w3m/cgi-bin/
-#         2. vim ~/.w3m/keymap
+# RQMTS:  1. chmod +x ~/.w3m/cgi-bin/restore_tab.cgi
+#         2. sed -i 's@cgi_bin.*@cgi_bin ~/.w3m/cgi-bin:/usr/lib/w3m/cgi-bin:/usr/local/libexec/w3m/cgi-bin@g' ~/.w3m/config
+#         3. $EDITOR ~/.w3m/keymap
 #               keymap  d      COMMAND     "EXTERN 'echo %s >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
-#               keymap  u      TAB_GOTO    /usr/lib/w3m/cgi-bin/restore_tab.cgi
+#               keymap  u      TAB_GOTO    file:/cgi-bin/restore_tab.cgi
 
 #Open the last closed tab
 last_tab=$(tail -n 1 ~/.w3m/RestoreTab.txt);

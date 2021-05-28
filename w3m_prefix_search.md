@@ -7,43 +7,43 @@ improving w3m by having a quick way to search multiple search engines or even cu
 tags: linux w3m omnibar address bar quick w3m smart search fzf fuzzy finder surfraw tmux workaround current url
 
 ### install requirements
-    w3m surfraw fzf gawk coreutils grep (xsel or tmux)
-    
-### install scripts to root directory
-Download at [root-cgi-bin](w3m_plugins/root-cgi-bin)
-    
----- 
-    # save it to 
-    
-    /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi
-    /usr/lib/w3m/cgi-bin/goto_clipboard.cgi
-    /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi
----- 
-    chmod +x <script.cgi>
+    w3m surfraw fzf gawk coreutils grep
     
 ### install script to local directory
-Download at [cgi-bin](w3m_plugins/cgi-bin)
+[Download at cgi-bin](w3m_plugins/cgi-bin)
     
 ---- 
-    # save it to 
     
     ~/.w3m/cgi-bin/fzf_surfraw.cgi
+    ~/.w3m/cgi-bin/goto_clipboard.cgi
+    ~/.w3m/cgi-bin/goto_clipboard_primary.cgi
+    ~/.w3m/cgi-bin/goto_tmux_clipboard.cgi
+    ~/.w3m/cgi-bin/goto_w3m_clipboard.cgi
+    
 ---- 
-    chmod +x <script.cgi>
+    chmod +x ~/.w3m/cgi-bin/*.cgi
 
 ### configuration
     vim ~/.w3m/keymap
     
-    # for x sessions
-    keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
-    keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi ; REDRAW"
+    # search with surfraw (no clipboard required)
+    keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO file:/cgi-bin/goto_w3m_clipboard.cgi"
+    keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO file:/cgi-bin/goto_w3m_clipboard.cgi"
     
-    # for tmux users
-    # keymap  xs      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
-    # keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi; BACK ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi ; REDRAW"
+    # yank url to multiple clipboard
+    keymap  yy      EXTERN_LINK "url=%s ; echo "$url" > /tmp/w3m_clipboard.txt ; echo "$url" | xsel -b ; echo "$url" | tmux load-buffer -"
+    keymap  YY      EXTERN      "url=%s ; echo "$url" > /tmp/w3m_clipboard.txt ; echo "$url" | xsel -b ; echo "$url" | tmux load-buffer -"
     
+    # paste url and go
+    keymap  pp      GOTO        file:/cgi-bin/goto_clipboard.cgi
+    keymap  PP      TAB_GOTO    file:/cgi-bin/goto_clipboard.cgi
+    keymap  pt      GOTO        file:/cgi-bin/goto_tmux_clipboard.cgi
+    keymap  PT      TAB_GOTO    file:/cgi-bin/goto_tmux_clipboard.cgi
+    keymap  pw      GOTO        file:/cgi-bin/goto_w3m_clipboard.cgi
+    keymap  PW      TAB_GOTO    file:/cgi-bin/goto_w3m_clipboard.cgi
     
-### set the default open-url to current url
+### change config settings
+    sed -i 's@cgi_bin.*@cgi_bin ~/.w3m/cgi-bin:/usr/lib/w3m/cgi-bin:/usr/local/libexec/w3m/cgi-bin@g' ~/.w3m/config
     sed -i 's:default_url.*:default_url 1:g' ~/.w3m/config
 
 ### usage example
