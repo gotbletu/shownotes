@@ -12,3 +12,4 @@
 W3M_CURRENT_LINK="$(printf "%s" "$W3M_CURRENT_LINK" | grep -oP '(?<=google.com\/url\?q=)[^&]*(?=&)' | sed -e "s/%\([0-9A-F][0-9A-F]\)/\\\\\x\1/g" | xargs -0 echo -e)"
 printf "%s\r\n" "W3m-control: GOTO $W3M_CURRENT_LINK"
 printf "%s\r\n" "W3m-control: DELETE_PREVBUF"
+

@@ -15,12 +15,9 @@ custom keybindings for the terminal web browser w3m
         # EXTERN_LINK = under cursor
         # EXTERN      = current page
         
-        # yank url to clipboard
-        keymap  yy      EXTERN_LINK   '(echo -n %s | xsel -b)'
-        keymap  YY      EXTERN        '(echo -n %s | xsel -b)'
-        # yank url to tmux clipboard
-        keymap  ys      EXTERN_LINK   'tmux set-buffer'
-        keymap  YS      EXTERN        'tmux set-buffer'
+        # yank url to multiple clipboard
+        keymap  yy      EXTERN_LINK "url=%s ; printf '%s\n' "$url" > /tmp/clipbrd.txt ; printf "$url" | xsel -b ; printf "$url" | tmux load-buffer -"
+        keymap  YY      EXTERN_LINK "url=%s ; printf '%s\n' "$url" > /tmp/clipbrd.txt ; printf "$url" | xsel -b ; printf "$url" | tmux load-buffer -"
         
         # open gui browser
         keymap  xw      EXTERN_LINK   '$BROWSER'

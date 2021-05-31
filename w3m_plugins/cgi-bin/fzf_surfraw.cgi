@@ -39,4 +39,4 @@ fi
 # surfraw -p "$PREFIX" $INPUT | xsel -p                     # xsel primary (aka shift-insert or middle click to paste)
 # surfraw -p "$PREFIX" $INPUT | xsel -b                     # xsel system (aka ctrl-v to paste)
 # surfraw -p "$PREFIX" $INPUT | tmux load-buffer -
-surfraw -p "$PREFIX" $INPUT > /tmp/w3m_clipboard.txt      # w3m clipboard using tmpfile
+surfraw -p "$PREFIX" $INPUT > /tmp/clipbrd.txt              # clipboard using tmpfile

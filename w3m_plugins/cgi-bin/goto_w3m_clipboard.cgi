@@ -17,7 +17,7 @@ printf "%s\r\n" "W3m-control: SET_OPTION default_url=0"
 
 #GOTO url in clipboard in current page. If the clipboard has a 
 #"non url string/nothing" an blank page is shown.
-printf "%s\r\n" "W3m-control: GOTO $(cat /tmp/w3m_clipboard.txt)"
+printf "%s\r\n" "W3m-control: GOTO $(cat /tmp/clipbrd.txt)"
 
 #delete the buffer (element in history) created between the current page and 
 #the searched page by calling this script.
