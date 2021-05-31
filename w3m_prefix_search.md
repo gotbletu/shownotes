@@ -31,8 +31,8 @@ tags: linux w3m omnibar address bar quick w3m smart search fzf fuzzy finder surf
     keymap  XS      COMMAND "READ_SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; BACK ; TAB_GOTO file:/cgi-bin/goto_w3m_clipboard.cgi"
     
     # yank url to multiple clipboard
-    keymap  yy      EXTERN_LINK "url=%s ; printf '%s\n' "$url" > /tmp/clipbrd.txt ; printf "$url" | xsel -b ; printf "$url" | tmux load-buffer -"
-    keymap  YY      EXTERN_LINK "url=%s ; printf '%s\n' "$url" > /tmp/clipbrd.txt ; printf "$url" | xsel -b ; printf "$url" | tmux load-buffer -"
+    keymap  yy      EXTERN_LINK "url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
+    keymap  YY      EXTERN_LINK "url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
     
     # paste url and go
     keymap  pp      GOTO        file:/cgi-bin/goto_clipboard.cgi
