@@ -176,52 +176,105 @@ xterm looks like sh/t so time to style and profile it lols. Turn it into a dropd
     !####################
     ! http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/
     
-    !-------- Theme: Solarized {{{
+    !-------- Theme: Argonaut {{{
     !------------------------------------------------------
-    
-    !!Source http://github.com/altercation/solarized
-    
-    *background: #002b36
-    *foreground: #657b83
-    !!*fading: 40
-    *fadeColor: #002b36
-    *cursorColor: #93a1a1
-    *pointerColorBackground: #586e75
-    *pointerColorForeground: #93a1a1
-    
-    !! black dark/light
-    *color0: #073642
-    *color8: #002b36
-    
-    !! red dark/light
-    *color1: #dc322f
-    *color9: #cb4b16
-    
-    !! green dark/light
-    *color2: #859900
-    *color10: #586e75
-    
-    !! yellow dark/light
-    *color3: #b58900
-    *color11: #657b83
-    
-    !! blue dark/light
-    *color4: #268bd2
-    *color12: #839496
-    
-    !! magenta dark/light
-    *color5: #d33682
-    *color13: #6c71c4
-    
-    !! cyan dark/light
-    *color6: #2aa198
-    *color14: #93a1a1
-    
-    !! white dark/light
-    *color7: #eee8d5
-    *color15: #fdf6e3
-    
+
+    !!Source https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/Xresources/Argonaut
+
+    !
+    ! Generated with :
+    ! XRDB2Xreources.py
+    !
+    *.foreground:  #fffaf4
+    *.background:  #0e1019
+    *.cursorColor: #ff0018
+    !
+    ! Black
+    *.color0:      #232323
+    *.color8:      #444444
+    !
+    ! Red
+    *.color1:      #ff000f
+    *.color9:      #ff2740
+    !
+    ! Green
+    *.color2:      #8ce10b
+    *.color10:     #abe15b
+    !
+    ! Yellow
+    *.color3:      #ffb900
+    *.color11:     #ffd242
+    !
+    ! Blue
+    *.color4:      #008df8
+    *.color12:     #0092ff
+    !
+    ! Magenta
+    *.color5:      #6d43a6
+    *.color13:     #9a5feb
+    !
+    ! Cyan
+    *.color6:      #00d8eb
+    *.color14:     #67fff0
+    !
+    ! White
+    *.color7:      #ffffff
+    *.color15:     #ffffff
+    !
+    ! Bold, Italic, Underline
+    *.colorBD:     #9e9c9a
+    !*.colorIT:
+    !*.colorUL:
+
     ! }}}
+
+    ! !-------- Theme: Solarized {{{
+    ! !------------------------------------------------------
+
+    ! !Source http://github.com/altercation/solarized
+
+    ! *background: #002b36
+    ! *foreground: #657b83
+    ! !!*fading: 40
+    ! *fadeColor: #002b36
+    ! *cursorColor: #93a1a1
+    ! *pointerColorBackground: #586e75
+    ! *pointerColorForeground: #93a1a1
+
+    ! !! black dark/light
+    ! *color0: #073642
+    ! *color8: #002b36
+    !
+    ! !! red dark/light
+    ! *color1: #dc322f
+    ! *color9: #cb4b16
+    !
+    ! !! green dark/light
+    ! *color2: #859900
+    ! *color10: #586e75
+    !
+    ! !! yellow dark/light
+    ! *color3: #b58900
+    ! *color11: #657b83
+    !
+    ! !! blue dark/light
+    ! *color4: #268bd2
+    ! *color12: #839496
+    !
+    ! !! magenta dark/light
+    ! *color5: #d33682
+    ! *color13: #6c71c4
+    !
+    ! !! cyan dark/light
+    ! *color6: #2aa198
+    ! *color14: #93a1a1
+    !
+    ! !! white dark/light
+    ! *color7: #eee8d5
+    ! *color15: #fdf6e3
+    !
+    ! !}}}
+
     ! !-------- Theme: Rezza {{{
     ! !------------------------------------------------------
     ! !!colors ripped from rezza: http://metawire.org/~rezza/index.php
