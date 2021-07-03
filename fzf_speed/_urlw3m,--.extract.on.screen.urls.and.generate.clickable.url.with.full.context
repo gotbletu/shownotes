@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+tmux new-window -n 'urlw3mcontext' -c "$HOME"
+tmux send-keys 'w3m -o mark_all_pages=1 /tmp/tmux-buffer && tmux kill-pane' C-m

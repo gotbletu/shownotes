@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+tmux delete-buffer
+tmux display-message "deleted current tmux clipboard from history"
+
+

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# Window Name from filename (e.g _tmux_goto_name,-- description --> name)
+WIN_NAME="$(echo "${0##*/}" | cut -d ',' -f1 | cut -d '_' -f4)"
+LINE=$(tmux list-windows -a -F "#{session_name}:#{window_id}: #{window_name}" | grep ": ${WIN_NAME}$") || exit 0
+SESSION="$(echo "$LINE" |  cut -d ':' -f1)"
+WINDOW_NUM="$(echo "$LINE" |  cut -d ':' -f2)"
+tmux select-window -t "$WINDOW_NUM" && tmux switch-client -t "$SESSION"

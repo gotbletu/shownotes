@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+tmux select-window -t:14

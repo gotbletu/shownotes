@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   google top answers to your questions
+# DEMO:   https://youtu.be/mWJBlkHwZy8
+# DEPEND: tuxi (https://github.com/Bugswriter/tuxi)
+# REFF:   read with history https://unix.stackexchange.com/a/302923/430298
+
+set -o vi
+while true
+do
+  read -rep ">>> Ask Google A Question: " INPUT
+  history -s "$INPUT"
+  tuxi -r "$INPUT"
+  printf "\n"
+done

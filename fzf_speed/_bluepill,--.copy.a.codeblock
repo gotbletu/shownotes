@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+selected="$(find ~/.config/bluepill/ -type f | sort | fzf -e -i --delimiter / --with-nth -1 --preview 'cat {}' --prompt="Copy a codeblock to clipboard: " --info=default --layout=reverse --tiebreak=index)"
+[ -z "$selected" ] && exit
+
+# copy to X11 (linux,bsd)
+xsel -b < "$selected" || xclip -selection clipboard "$selected"
+# copy to Wayland (linux,bsd)
+wl-copy < "$selected"
+# copy to WindowsOS (Vista+)
+clip < "$selected"
+# copy to Cygwin (WindowsOS)
+cat "$selected" > /dev/clipboard
+# copy to MacOS
+pbcopy < "$selected"
+# copy to Termux (Android)
+cat "$selected" | termux-clipboard-set
+# copy to tmux
+tmux load-buffer "$selected"
+tmux display-message "Copied codeblock to clipboard"

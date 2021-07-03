@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+tmux paste-buffer -b "$(tmux list-buffers | fzf -e -i | cut -d ':' -f1)"

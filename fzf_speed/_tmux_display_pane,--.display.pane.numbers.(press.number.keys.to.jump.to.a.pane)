@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+tmux command-prompt -p "Press {Enter} then {Number} to jump to pane:" "display-panes"

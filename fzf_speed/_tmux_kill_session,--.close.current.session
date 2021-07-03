@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ "$(tmux list-sessions | wc -l)" = 1 ]; then
+  tmux confirm-before -p "Only single session active, kill-server instead (y/n)?" kill-server
+else 
+  tmux confirm-before -p "Kill #S session (y/n)?" "run-shell 'tmux switch-client -p \; kill-session -t \"#S\"'"
+  # tmux confirm-before -p "Kill #S session (y/n)?" "run-shell 'tmux switch-client -l \; kill-session -t \"#S\"'"
+fi

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   open surfraw bookmarks with your deafult web browser ($BROWSER)
+# DEPEND: fzf surfraw grep gawk coreutils
+# REQD:   1. set default terminal web browser
+#           $EDITOR ~/.bashrc
+#             export BROWSERCLI=w3m
+#         2. add new bookmark to surfraw
+#           $EDITOR ~/.config/surfraw/bookmarks
+#             # <bookmark_name(20char_max)> <url> <tags|tag2|tag3|tag4|...>
+#             hackernews https://news.ycombinator.com/ textonly|news|tech|linux
+#             npr https://text.npr.org/ textonly|news|world|politics|current|events
+#             cnn http://lite.cnn.io/en textonly|news|world|politics|current|events|main|stories
+
+# display order <bookmark_name> <tags> and <url> last
+selected=$(grep -E '^([[:alnum:]])' ~/.config/surfraw/bookmarks | sort | awk -F' ' '{printf "%-20.20s %-80.80s %s \n", $1,$3,$2}' | tr '|' ' ' | fzf -e -i -m --delimiter=' ' --prompt="Select bookmark(s) to open: " --info=default --layout=reverse --tiebreak=index | awk '{print $1}')
+[ -z "$selected" ] && exit
+echo "$selected" | while read -r line; do
+  tmux new-window -n "www-${line}" "surfraw -browser=$BROWSERCLI $line"
+done

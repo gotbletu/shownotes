@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# Set Session Name
+# Session Name from filename (e.g _tmux_workspace_name,-- description --> name)
+SESSION="$(echo "${0##*/}" | cut -d ',' -f1 | cut -d '_' -f4)"
+SESSIONEXISTS=$(tmux list-sessions | grep "$SESSION")
+
+# Only create tmux session if it doesn't already exist
+if [ "$SESSIONEXISTS" = "" ]; then
+  # create new session
+  tmux new-session -d -s "$SESSION" -c "$HOME"
+
+  tmux rename-window -t "$SESSION":0 'rss'
+  tmux send-keys -t "$SESSION":0 "newsboat-viewer" C-m
+  
+  tmux new-window -t "$SESSION":1 -n 'email' -c "$HOME"
+  tmux send-keys -t "$SESSION":1 'mutt' C-m
+
+  tmux new-window -t "$SESSION":2 -n 'irc' -c "$HOME"
+  tmux send-keys -t "$SESSION":2 'weechat' C-m
+
+  tmux new-window -t "$SESSION":3 -n 'im' -c "$HOME"
+  tmux send-keys -t "$SESSION":3 'finch' C-m
+
+  # jump to session and window 0
+  tmux switch-client -t "$SESSION":0
+else
+  # if exist then jump to session
+  tmux switch-client -t "$SESSION"
+fi

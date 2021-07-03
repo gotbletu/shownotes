@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+
+# Session Name from filename (e.g _tmux_workspace_name,-- description --> name)
+SESSION="$(echo "${0##*/}" | cut -d ',' -f1 | cut -d '_' -f4)"
+SESSIONEXISTS=$(tmux list-sessions | grep "$SESSION")
+
+# Only create tmux session if it doesn't already exist
+if [ "$SESSIONEXISTS" = "" ]; then
+  # create new session
+  tmux new-session -d -s "$SESSION" -c "$HOME"
+
+  tmux rename-window -t "$SESSION":0 'vid'
+  # tmux send-keys -t "$SESSION":0 'ranger ~/.Torrent' C-m
+  tmux send-keys -t "$SESSION":0 'while true; do ranger ~/.Torrent ; done' C-m
+  
+  tmux new-window -t "$SESSION":1 -n 'music' -c "$HOME"
+  tmux send-keys -t "$SESSION":1 'cmus' C-m
+
+  tmux new-window -t "$SESSION":2 -n 'radio' -c "$HOME"
+  tmux send-keys -t "$SESSION":2 'pyradio' C-m
+  tmux split-window -t "$SESSION":2 -v -c "$HOME"
+  tmux send-keys -t "$SESSION":2 'pianobar'
+  tmux split-window -t "$SESSION":2 -fh -p 70 -c "$HOME"
+  tmux send-keys -t "$SESSION":2 "w3m -N 'https://www.internet-radio.com/stations/90s/' 'https://www.internet-radio.com/stations/japanese/' 'https://www.internet-radio.com/stations/kpop/' 'https://www.internet-radio.com/stations/bollywood/' 'https://www.internet-radio.com/stations/bhangra/' 'https://dir.xiph.org/genres/DANCE'" C-m
+
+  tmux new-window -t "$SESSION":3 -n 'pod' -c "$HOME"
+  tmux send-keys -t "$SESSION":3 'newsboat-viewer' C-m
+  tmux split-window -t "$SESSION":3 -v -c "$HOME"
+  tmux send-keys -t "$SESSION":3 'while true; do podboat ; done' C-m
+  tmux select-pane -t 0
+
+  tmux new-window -t "$SESSION":4 -n 'aubk' -c "$HOME"
+  # tmux send-keys -t "$SESSION":4 'while true; do ranger ~/Audiobooks ; done' C-m
+  tmux send-keys -t "$SESSION":4 'while true; do tmux rename-window -t "$SESSION":4 'aubk' && ranger ~/Audiobooks ; done' C-m
+
+  # jump to session and window 0
+  tmux switch-client -t "$SESSION":0
+else
+  # if exist then jump to session
+  tmux switch-client -t "$SESSION"
+fi

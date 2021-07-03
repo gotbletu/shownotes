@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry|odysee)
+#         https://www.youtube.com/user/gotbletu
+
+# tmux list-windows formating
+TARGET_SPEC="#{session_name}:#{window_id}:"
+LIST_DATA="#{window_name} #{pane_title} #{pane_current_path} #{pane_current_command}"
+
+FZF_COMMAND() {
+  fzf -e -i --prompt="Select a window (current session): " --info=default --layout=reverse --tiebreak=index
+}
+
+# select window
+LINE="$(tmux list-windows -F "$TARGET_SPEC $LIST_DATA" | FZF_COMMAND)" || exit 0
+SESSION="$(echo "$LINE" |  cut -d ':' -f1)"
+WINDOW_NUM="$(echo "$LINE" |  cut -d ':' -f2)"
+
+tmux select-window -t "$WINDOW_NUM" && tmux switch-client -t "$SESSION"

@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+tmux command-prompt -p "Rename session:" "rename-session '%%'"

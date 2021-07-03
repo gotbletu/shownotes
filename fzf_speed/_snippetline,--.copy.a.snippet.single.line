@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   copy text snippet to clipboard
+# DEMO:   https://www.youtube.com/watch?v=Zew0mgJwAh8
+# REQD:   add some snippets
+#           $EDITOR ~/.config/snippetline/snippetrc"
+#             # <your line> ;; tags
+#             Negative In The Freedom Dimension ;; RMS Richard Stallman GNU linux Freedom Software Open Source
+#             A Ninja Must See Through Deception  ;; Anime Naruto Ninja Kakashi Hatake
+#             Rule Of Acquisition #106  There is no honor in poverty.  ;; star trek deep space nine ds9 ferengi quark tvshow series
+
+FILE="$HOME/.config/snippetline/snippetrc"
+FZF_ARG() {
+  fzf -e -i --prompt="Copy a snippet to clipboard: " --info=default --layout=reverse --tiebreak=index
+}
+
+# sort, delete empty line, remove tags, leading and trailing spaces, also no newline
+selected="$(sort -n "$FILE" | sed '/^$/d' | FZF_ARG | sed -e s/\;\;\.\*\$// | sed 's/^[ \t]*//;s/[ \t]*$//' | tr -d '\n' )"
+[ -z "$selected" ] && exit
+
+# copy to X11 (linux,bsd)
+printf '%s' "$selected" | xsel -b || printf '%s' "$selected" | xclip -selection clipboard
+# copy to Wayland (linux,bsd)
+printf '%s' "$selected" | wl-copy
+# copy to WindowsOS (Vista+)
+printf '%s' "$selected" | clip
+# copy to Cygwin (WindowsOS)
+printf '%s' "$selected" > /dev/clipboard
+# copy to MacOS
+printf '%s' "$selected" | pbcopy
+# copy to Termux (Android)
+printf '%s' "$selected" | termux-clipboard-set
+# copy to tmux
+printf '%s' "$selected" | tmux load-buffer -
+tmux display-message "Copied to clipboard"

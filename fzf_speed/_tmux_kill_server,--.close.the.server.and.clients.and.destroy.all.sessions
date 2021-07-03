@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+tmux confirm-before -p "kill the tmux server, clients and destroy all sessions? (y/n)" kill-server

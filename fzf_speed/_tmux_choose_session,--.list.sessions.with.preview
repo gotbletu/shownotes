@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+tmux choose-tree -Z -s

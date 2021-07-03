@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+tmux new-window -n 'urlscan' -c "$HOME"
+tmux send-keys 'urlscan --compact /tmp/tmux-buffer && tmux kill-pane' C-m

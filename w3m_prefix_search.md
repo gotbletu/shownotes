@@ -32,7 +32,7 @@ tags: linux w3m omnibar address bar quick w3m smart search fzf fuzzy finder surf
     
     # yank url to multiple clipboard
     keymap  yy      EXTERN_LINK "url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
-    keymap  YY      EXTERN_LINK "url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
+    keymap  YY      EXTERN      "url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
     
     # paste url and go
     keymap  pp      GOTO        file:/cgi-bin/goto_clipboard.cgi

@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   locate a file and go to that directory with ranger file manager
+# DEMO:   https://www.youtube.com/watch?v=C64LKCZFzME
+# REQD:   add code to ranger file manager
+#         $EDITOR ~/.config/ranger/commands.py
+#           class fzf_locate(Command):
+#               """
+#               :fzf_locate
+#               Locate a file using fzf.
+#               """
+#               def execute(self):
+#                   import subprocess
+#                   if self.quantifier:
+#                       command="locate home media | fzf -e -i --prompt='Select to open with ranger: ' --info=default --layout=reverse --tiebreak=index"
+#                   else:
+#                       command="locate home media | fzf -e -i --prompt='Select to open with ranger: ' --info=default --layout=reverse --tiebreak=index"
+#                   fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+#                   stdout, stderr = fzf.communicate()
+#                   if fzf.returncode == 0:
+#                       fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
+#                       if os.path.isdir(fzf_file):
+#                           self.fm.cd(fzf_file)
+#                       else:
+#                           self.fm.select_file(fzf_file)
+
+tmux new-window -n locate 'ranger --cmd=fzf_locate'

@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   open a cheatsheet to read notes
+# DEPEND: fzf findutils coreutils
+
+selected="$(find ~/.config/redpill/ -type f | sort | fzf -e -i -m --delimiter / --with-nth -1 --preview 'cat {}' --prompt="Select cheatsheet(s) to open: " --info=default --layout=reverse --tiebreak=index)"
+[ -z "$selected" ] && exit
+echo "$selected" | while read -r line; do
+  filename="$(basename "$line")"
+  tmux new-window -n "${filename}-pill"
+  tmux send-keys -t "${filename}-pill" "$EDITOR $line && tmux kill-pane" C-m
+done

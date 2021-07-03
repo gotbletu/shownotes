@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+set -o vi
+while true
+do
+  read -rep ">>> Translate Text: " INPUT
+  history -s "$INPUT"
+  trans "$INPUT"
+  printf "\n"
+done
+

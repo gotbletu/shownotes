@@ -48,6 +48,7 @@ If you find my videos feature on other site let me know also, I always need an E
 
 - Archwiki: xbacklight / xcalib - backlight utilities [Link](https://wiki.archlinux.org/index.php/backlight)
 - FZF Fuzzy Finder - A command-line fuzzy finder written in Go [Link](http://junegunn.kr/2015/02/fzf-in-go/)
+- Hackaday: linux-fu running commands [Link](https://hackaday.com/2017/07/07/linux-fu-running-commands/)
 - Linuxaria: poor mans sportify [Link](http://linuxaria.com/pills/linux-terminal-poor-mans-spotify?lang=en)
 - Linuxaria: Reptyr attach a running process to a new terminal [Link](https://linuxaria.com/pills/linux-terminal-reptyr-attach-a-running-process-to-a-new-terminal)
 - nixCraft: vim as a manpager [Link](https://twitter.com/nixcraft/status/973221210589925385)
