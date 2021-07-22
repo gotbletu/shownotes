@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry)
+#         https://www.youtube.com/user/gotbletu
+# DESC:   locate a file and go to that directory with ranger file manager
+# DEMO:   https://www.youtube.com/watch?v=C64LKCZFzME
+# REQD:   add code to ranger file manager
+#         $EDITOR ~/.config/ranger/commands.py
+
+tmux new-window -n nnnlocate 'nnn -a $(locate home media | fzf -e -i --prompt="Select to open with nnn: " --info=default --layout=reverse --tiebreak=index)'
