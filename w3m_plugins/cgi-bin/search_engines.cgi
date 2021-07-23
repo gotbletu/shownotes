@@ -79,7 +79,7 @@ case $PREFIX in
   ya)
     echo "W3m-control: GOTO https://search.yahoo.com/search?p=$INPUT"
     ;;
-  yt) # youtube via indivious
+  yt) # youtube via invidious (more instances @ https://redirect.invidious.io )
     echo "W3m-control: GOTO https://yewtu.be/search?q=$INPUT"
     ;;
 esac
