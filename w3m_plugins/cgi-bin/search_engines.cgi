@@ -27,14 +27,17 @@
 #         4. sed -i 's@cgi_bin.*@cgi_bin ~/.w3m/cgi-bin:/usr/lib/w3m/cgi-bin:/usr/local/libexec/w3m/cgi-bin@g' ~/.w3m/config
 #         5. sed -i 's@urimethodmap.*@urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap@g' ~/.w3m/config
 #         6. sed -i 's@space_autocomplete.*@space_autocomplete 0@g' ~/.w3m/config
-# USAGE:  <SearchEngine>:<Keywords;Use;SemiColon;As;Spaces>
+# USAGE:  <SearchEngine>:<Keywords>
 #         1. $ w3m -v
 #         2. press Shift-u (the default GOTO key) to access the addressbar
 #         3. press Ctrl-u to clear addressbar
 #         4. to search duckduckgo type in dd:cool linux wallpapers
 #         5. to search google type in gg:cool anime wallpapers
+# CLI:    $ w3m dd:archlinux
+#         $ w3m "gg:linux mint iso download"
 # CLOG:   
 #         2021-07-24 remove semicolon requirements, use spaces instead by enabling (space_autocomplete 0)
+#                    add optional direct cli usage info
 #         2021-05-24 turn @felipesaa script into posix, use case statement looks prettier
 
 # search engine alias
