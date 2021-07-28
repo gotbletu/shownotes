@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # AUTHOR: gotbletu (@gmail|twitter|youtube|github|lbry|odysee)
 #         https://www.youtube.com/user/gotbletu
-# DESC:   w3m search engine alias (aka smart keywords search)
+# DESC:   w3m search engine alias (aka omnibar smart keywords search)
 # DEMO:   https://youtu.be/bWlPpacFPlI
 #         W3M Playlist https://www.youtube.com/playlist?list=PLqv94xWU9zZ35Yv0s6zMID5JoS8qu19Kh
 # REFF:   https://github.com/felipesaa/A-vim-like-firefox-like-configuration-for-w3m/blob/master/cgi-bin/search_engines.cgi
@@ -34,8 +34,10 @@
 #         4. to search duckduckgo type in dd:cool linux wallpapers
 #         5. to search google type in gg:cool anime wallpapers
 # CLI:    $ w3m dd:archlinux
+#         $ w3m ya:debian,stable,iso
 #         $ w3m "gg:linux mint iso download"
 # CLOG:   
+#         2021-07-28 add comma as space holder for cli (eg $ w3m ya:debian,stable,iso )
 #         2021-07-24 remove semicolon requirements, use spaces instead by enabling (space_autocomplete 0)
 #                    add optional direct cli usage info
 #         2021-05-24 turn @felipesaa script into posix, use case statement looks prettier
@@ -44,7 +46,7 @@
 PREFIX=$(echo "$QUERY_STRING" | cut -d ':' -f1)
 
 # user input keywords
-INPUT=$(echo "$QUERY_STRING" | cut -d ':' -f2-)
+INPUT=$(echo "$QUERY_STRING" | cut -d ':' -f2- | sed 's/,/%20/g')
 
 # check if w3m version has native gopher support
 GOPHER_PROTOCOL_ENABLE=$(w3m -version | grep -c "gopher")
