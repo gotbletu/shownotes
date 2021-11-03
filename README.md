@@ -30,7 +30,7 @@ If you find my videos feature on other site let me know also, I always need an E
 - [curseofwar](https://github.com/a-nikolaev/curseofwar/wiki) - fast action terminal RTS game with vim hotkeys
 - [fzf](https://github.com/junegunn/fzf/wiki) - fuzzy finder for your shell
 - [greenclip](https://github.com/erebe/greenclip) - simple clipboard manager to be integrated with rofi
-- [inxi](https://code.google.com/p/inxi/) - a full featured system information script
+- [inxi](https://github.com/smxi/inxi) - a full featured system information script
 - [package converter](https://code.google.com/p/foxoman/wiki/PackageConverter) - frontend to Alien
 - [pacmixer](https://github.com/KenjiTakahashi/pacmixer) - an alsamixer alike for pulseaudio
 - [pipe-viewer](https://github.com/trizen/pipe-viewer) - a command-line interface to YouTube (fork of straw-viewer)
