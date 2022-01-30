@@ -19,9 +19,10 @@ my_term="xterm"
 # my_term="alacritty"
 # my_term=terminator
 # my_term=gnome-terminal
+# my_term=kitty # for kitty to work uncomment line 28 and comment line 31
 
 # option 2: auto detect terminal emulator (note: make sure to only open one)
-# my_term="urxvt|xterm|uxterm|termite|sakura|lxterminal|terminator|mate-terminal|pantheon-terminal|konsole|gnome-terminal|xfce4-terminal"
+# my_term="urxvt|kitty|xterm|uxterm|termite|sakura|lxterminal|terminator|mate-terminal|pantheon-terminal|konsole|gnome-terminal|xfce4-terminal"
 
 # get terminal emulator pid ex: 44040485
 # pid=$(xdotool search --class "$my_term" | tail -n1)
