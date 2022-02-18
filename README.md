@@ -7,6 +7,7 @@
 
 - https://www.youtube.com/user/gotbletu
 - https://lbry.tv/@gotbletu
+- https://odysee.com/@gotbletu
 - https://twitter.com/gotbletu
 - https://github.com/gotbletu
 - gotbletu@gmail.com
@@ -54,6 +55,7 @@ If you find my videos feature on other site let me know also, I always need an E
 - nixCraft: vim as a manpager [Link](https://twitter.com/nixcraft/status/973221210589925385)
 - OMGUbuntu: veromix - mixer for pulseaudio [Link](http://www.omgubuntu.co.uk/2012/02/how-to-increase-volume-over-100-in-kde/)
 - Phoenixts: 9 YouTube Channels to Learn Linux Online [Link](http://phoenixts.com/blog/9-youtube-channels-to-learn-linux-online/)
+- PS2-Home: Manage PlayStation 2 IDE Hard Drive on Linux with HDL Dump Helper [Link](https://www.ps2-home.com/forum/viewtopic.php?f=52&t=7240)
 - Softpedia: Video Clip of the Week: Workspaces & How We Use Them [Link](http://news.softpedia.com/news/Softpedia-Linux-Weekly-Issue-95-141165.shtml)
 - Softpedia: Video Clip of the Week: KDE SC 4.7 [Link](http://news.softpedia.com/news/Softpedia-Linux-Weekly-Issue-164-221159.shtml)
 - UbuntuBuzz: doc2pdf - convert microsoft doc or docx files to pdf [Link](http://www.ubuntubuzz.com/2012/12/cli-convert-microsoft-word-document-to.html)
