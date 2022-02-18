@@ -184,9 +184,9 @@ WRAP_TOGGLE#@WRAP_TOGGLE\$#-- Toggle wrapping mode in searches
 /usr/share/doc/w3m/MANUAL.html#@README_MANUAL&#-- Readme manual page
 /usr/share/doc/w3m/STORY.html#@README_STORY&#-- Readme story history of W3M page
 fn_click_next.cgi#@CLICK_NEXT&#-- Click next page button 'Next'
-fn_click_prev.cgi#@CLICK_PREV&#-- Click next page button 'Previous'
+fn_click_prev.cgi#@CLICK_PREV&#-- Click previous page button 'Previous'
 fn_click_next_arrow.cgi#@CLICK_NEXT_ARROW&#-- Click next page button '>'
-fn_click_prev_arrow.cgi#@CLICK_PREV_ARROW&#-- Click next page button '<'
+fn_click_prev_arrow.cgi#@CLICK_PREV_ARROW&#-- Click previous page button '<'
 fn_closetab_stash.cgi#@CLOSE_TAB_STASH&#-- Close tab (Stash URL to ~/.w3m/RestoreTab.txt)
 fn_dict_curl.cgi#@DICT_WORD_CURL&#-- Online dictionary for word at cursor
 fn_display_borders.cgi#@BORDERS&#-- Toggle table boarders
