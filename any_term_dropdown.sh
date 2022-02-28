@@ -29,6 +29,20 @@ my_term="xterm"
 # get terminal emulator and matching name pid ex: 44040485 
 pid=$(comm -12 <(xdotool search --name "$my_term" | sort) <(xdotool search --class "$my_term" | sort))
 
+# start a new terminal if none is currently running
+if [[ -z "$pid" ]]; then
+    while IFS='|' read -ra TERMS; do
+        for candidate_term in "${TERMS[@]}"; do
+            if command -v "$candidate_term" &>/dev/null; then
+                ${candidate_term} &>/dev/null &
+                disown
+                pid=$!
+                break
+            fi
+        done
+    done <<<"$my_term"
+fi
+
 # get windows id from pid ex: 0x2a00125%
 wid=$(printf 0x%x "$pid")
 
