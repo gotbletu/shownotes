@@ -4,7 +4,9 @@
 # DESC:   turn any terminal into a dropdown terminal
 # DEMO:   https://www.youtube.com/watch?v=mVw2gD9iiOg
 # DEPEND: coreutils xdotool wmutils (https://github.com/wmutils/core | https://aur.archlinux.org/packages/wmutils-git/)
-# CLOG:   2021-02-10   use comm to match window name and class, this avoids terminal windows with different names
+# CLOG:   2022-03-05   else statement to allow terminal to jump to current virtual desktop if is visible on another desktop 
+#         2022-02-28   added auto launch terminal if none running by https://github.com/aaccioly
+#         2021-02-10   use comm to match window name and class, this avoids terminal windows with different names
 #         2015-02-15   0.1
 
 # get screen resolution width and height
@@ -42,13 +44,13 @@ if [[ -z "$pid" ]]; then
             fi
         done
     done <<<"$my_term"
+  else
+    # get windows id from pid ex: 0x2a00125%
+    wid=$(printf 0x%x "$pid")
+    
+    # maximize terminal emulator
+    wrs "$width" "$height" "$wid"
+    
+    # toggle show/hide terminal emulator
+    mapw -t "$wid"
 fi
-
-# get windows id from pid ex: 0x2a00125%
-wid=$(printf 0x%x "$pid")
-
-# maximize terminal emulator
-wrs "$width" "$height" "$wid"
-
-# toggle show/hide terminal emulator
-mapw -t "$wid"
