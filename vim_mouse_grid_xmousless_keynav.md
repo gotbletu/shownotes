@@ -4,8 +4,8 @@ GUI vimium style hinting mode grid with mouse hotkeys navigation using keynav an
 * tutorial video: [Link](https://youtu.be/h080D6-dgt4)
 
 ### install requirements
-    [xmouseless](https://github.com/jbensmann/xmouseless)
-    [keynav](https://github.com/jordansissel/keynav)
+- [xmouseless](https://github.com/jbensmann/xmouseless)
+- [keynav](https://github.com/jordansissel/keynav)
 
 ### xmouseless config ( config.h )
 ----
@@ -105,6 +105,7 @@ GUI vimium style hinting mode grid with mouse hotkeys navigation using keynav an
 - https://github.com/jordansissel/keynav
 - https://github.com/jbensmann/xmouseless
 - list of keysym by name https://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
+- Keyboard Ninja Playlist: https://www.youtube.com/playlist?list=PLqv94xWU9zZ1cXfg3ED24G6RSt4NbFBfO
 
 ### Contact
 
