@@ -1,0 +1,85 @@
+#!/usr/bin/env sh
+# author: gotbletu (@gmail|twitter|youtube|github|lbry|odysee)
+#         https://www.youtube.com/user/gotbletu
+# desc:   toggle mount and unmount apple timecapsule with account setup (works on linux kernel 5.15+)
+# demo:   https://youtu.be/miHxtIqp94w
+# depend: afpfs-ng sudo grep util-linux coreutils
+# reff:   https://www.linuxadictos.com/en/how-to-access-an-afp-server-in-linux-with-afpfs-ng-valid-for-airport-extreme.html
+#         sudo mkdir /mnt/myapplefiles && sudo chmod 777 /mnt/myapplefiles
+#         sudo --user=$USER mount_afp afp://AFP_USER:AFP_PASS@192.168.1.XX/Data /mnt/myapplefiles
+#         umount /mnt/myapplefiles
+#         sudo rmdir /mnt/myapplefiles
+# clog:   2022-06-24 use afpfs-ng instead of cifs-utils
+# tags:   apple timecapsule, airport extreme, afp, apple filing protocol, smb, samba share, linux mounting, macos
+
+# script requires root access
+[ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
+
+# get current username (for non-root user)
+CURRENT_USER=$(logname)
+# CURRENT_USER=$(logname 2>/dev/null)
+
+Color_Off='\e[0m'       # Text Reset
+Red='\e[0;31m'          # Red
+# Green='\e[0;32m'        # Green
+Yellow='\e[0;33m'       # Yellow
+
+
+# Time Capsule Settings with Accounts:
+# 01_airport_main.png                   https://i.imgur.com/XJXCEgd.png
+# 02_airport_deviceinfo.png             https://i.imgur.com/ktFEX3J.png
+# 03_basestation_tab.png                https://i.imgur.com/4kClCzf.png
+# 04_internet_tab.png                   https://i.imgur.com/R6KK6b0.png
+# 05_internet_tab_opts.png              https://i.imgur.com/mjAGIM4.png
+# 06_wireless_tab.png                   https://i.imgur.com/ThskCXp.png
+# 07_network_tab.png                    https://i.imgur.com/LqT4hSw.png
+# 08_disks_tab.png                      https://i.imgur.com/ATG8QQi.png
+# 09_disks_tab_visitor_account.png      https://i.imgur.com/gVdrucO.png
+# 10_disks_tab_admin_account.png        https://i.imgur.com/ihqpUlx.png
+
+# ONLY CHANGE THIS SECTION
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# Device IP Address
+# list all currently connected device:
+# sudo nmap -sn 192.168.1.0/24
+# or
+# sudo nmap -sn 192.168.0.0/24
+CAPSULE_IP_ADDR="192.168.X.XX"
+
+# name to remember what this is sharing
+CAPSULE_NICKNAME="mymovies"
+
+# Name of Partition
+# 08_disks_tab.png                      https://i.imgur.com/ATG8QQi.png
+CAPSULE_PARTITION="Data"
+
+# Time Capsule Account Password
+# (Stick With Basic Letter And Numbers To Make It Easy , Else Use \ To Escape Special Characters)
+# 09_disks_tab_visitor_account.png      https://i.imgur.com/gVdrucO.png
+# 10_disks_tab_admin_account.png        https://i.imgur.com/ihqpUlx.png
+ACCOUNT_USER="YOUR-USER-HERE"
+ACCOUNT_PASS="YOUR-PASS-HERE"
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# Where To Mount Time Capsule (Dont Use Spaces In Path, It Will Auto Create Folder)
+MOUNT_POINT_PARTITION="/mnt/afp_${CAPSULE_NICKNAME}_${CAPSULE_IP_ADDR}_${CAPSULE_PARTITION}"
+MOUNT_POINT_USER="/mnt/afp_${CAPSULE_NICKNAME}_${CAPSULE_IP_ADDR}_${ACCOUNT_USER}"
+
+# toggle mount and unmount of Time Capsule
+IS_MOUNTED=$(mount 2> /dev/null | grep "$MOUNT_POINT_PARTITION" | cut -d' ' -f3)
+if [ "$IS_MOUNTED" ]; then
+  umount "$MOUNT_POINT_PARTITION"
+  umount "$MOUNT_POINT_USER"
+  rmdir "$MOUNT_POINT_PARTITION"
+  rmdir "$MOUNT_POINT_USER"
+  printf "%b\n" ">>> ${Red}Your Apple Time Capsule Is Unmounted${Color_Off}"
+  printf "%b\n" ">>> ${Yellow}Run Script Again If You Wish To Mount${Color_Off}"
+else
+  mkdir -p "$MOUNT_POINT_PARTITION" && chmod 777 "$MOUNT_POINT_PARTITION"
+  mkdir -p "$MOUNT_POINT_USER" && chmod 777 "$MOUNT_POINT_USER"
+  # reference: sudo --user=$USER mount_afp afp://AFP_USER:AFP_PASS@192.168.1.XX/Data /mnt/myapplefiles
+  sudo --user="$CURRENT_USER" mount_afp afp://"$ACCOUNT_USER":"$ACCOUNT_PASS"@"$CAPSULE_IP_ADDR/$CAPSULE_PARTITION" "$MOUNT_POINT_PARTITION"
+  sudo --user="$CURRENT_USER" mount_afp afp://"$ACCOUNT_USER":"$ACCOUNT_PASS"@"$CAPSULE_IP_ADDR/$ACCOUNT_USER" "$MOUNT_POINT_USER"
+fi
