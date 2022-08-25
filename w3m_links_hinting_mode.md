@@ -16,7 +16,7 @@ tags: w3m links hinting hint mode commandline linux terminal internet web browse
     #### open current cursor link in new tab and hide hinting mode
     keymap  ft      COMMAND "SET_OPTION display_link_number=0 ; RESHAPE ; TAB_LINK"
     #### copy link to clipboard (e.g press f-SPC then 4fy to yank url)
-    keymap  fy      COMMAND "SET_OPTION display_link_number=toggle ; RESHAPE ; LINK_BEGIN ; EXTERN_LINK 'url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b 2>/dev/null ; printf "%b" "$url" | tmux load-buffer - ; printf '%s' "$url" | wl-copy 2>/dev/null  ; printf '%s' "$url" | clip 2>/dev/null ; printf '%s' "$url" > /dev/clipboard 2>/dev/null ; printf '%s' "$url" | pbcopy 2>/dev/null ; printf '%s' "$url" | termux-clipboard-set 2>/dev/null'"
+    keymap  fy      COMMAND "SET_OPTION display_link_number=0 ; RESHAPE ; LINK_BEGIN ; EXTERN_LINK 'url=%s ; printf "%b" "$url" > /tmp/clipbrd.txt ; printf "%b" "$url" | xsel -b 2>/dev/null ; printf "%b" "$url" | tmux load-buffer - ; printf '%s' "$url" | wl-copy 2>/dev/null  ; printf '%s' "$url" | clip 2>/dev/null ; printf '%s' "$url" > /dev/clipboard 2>/dev/null ; printf '%s' "$url" | pbcopy 2>/dev/null ; printf '%s' "$url" | termux-clipboard-set 2>/dev/null'"
     #### jump to link number and open it
     keymap  fo       COMMAND "SET_OPTION display_link_number=0 ; RESHAPE ; LINK_BEGIN ; GOTO_LINK"
     #### jump to link number and open it in new tab
