@@ -18,6 +18,7 @@ add read aloud features to w3m terminal web browser, with hotkeys to pause, stop
     
     ########################### Text to speech TTS (SVOX Pico) {{{
     # https://aur.archlinux.org/packages/svox-pico-bin/
+    # https://web.archive.org/web/20230729001652/https://aur.archlinux.org/packages/svox-pico-bin
     keymap \\\s    COMMAND "READ_SHELL 'echo $W3M_CURRENT_WORD | pico2wave -w /tmp/pico2wave.wav' ; BACK ; READ_SHELL 'mpv --no-video /tmp/pico2wave.wav >/dev/null 2>&1 &' ; BACK" ## Text to Speech - Svox Pico - Read aloud word on cursor
     keymap \\\a    COMMAND "READ_SHELL 'rm /tmp/pico2wave.txt' ; BACK ; PRINT /tmp/pico2wave.txt ; READ_SHELL 'pico2wave -w /tmp/pico2wave.wav < /tmp/pico2wave.txt' ; BACK ; READ_SHELL 'mpv --no-video /tmp/pico2wave.wav >/dev/null 2>&1 &'; BACK" ## Text to Speech - Svox Pico - Read aloud page
     keymap \\\t    COMMAND "READ_SHELL 'rdrview -H $W3M_CURRENT_LINK 2>/dev/null' ; VIEW ; DELETE_PREVBUF ; READ_SHELL 'rm /tmp/pico2wave.txt' ; BACK ; PRINT /tmp/pico2wave.txt ; READ_SHELL 'pico2wave -w /tmp/pico2wave.wav < /tmp/pico2wave.txt' ; BACK ; READ_SHELL 'mpv --no-video /tmp/pico2wave.wav >/dev/null 2>&1 &'; BACK" ## Text to Speech - Svox Pico - Clean page with rdrview then read aloud page (cursor link)
