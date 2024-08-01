@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+
+helpmsg() {
+cat <<EOF
+desc: set aMule download bandwidth speed limit (0 = unlimited)"
+
+usage: ${0##*/} [speed in kB\\s]"
+
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} 5000
+  ${0##*/} 0
+  ${0##*/} 2000 -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    helpmsg
+    exit
+elif [ "$2" = -c ] || [ "$2" = --config ]; then
+    source "$3"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+else
+    source ~/.aMule/amulecmd.conf
+fi
+
+domule() { amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null | grep '^ >' ; }
+domule "set bwlimit down $1"

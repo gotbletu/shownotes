@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# demo:   https://youtu.be/IpHdH1mCUVc
+# reff:   https://www.verot.net/amule_monitor.htm?lang=en-GB
+#         http://wiki.amule.org/wiki/Making_a_handy_amulecmd_script
+# usage:  $ amule-list
+#         $ watch -t amule-list
+#         $ viddy -t amule-list
+
+helpmsg() {
+cat <<EOF
+desc:   list amule status of download, paused, waiting and upload
+depend: amule sed grep coreutils ncurses
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null | grep "^ >"
+}
+echo " > aMulecmd: Listens on [$amu_host:$amu_port]"
+domule "status"
+domule "get bwlimits" # show bandwidth limits
+domule "statistics" | grep 'Shared Files:' | sed 's/  \+/ /g'
+echo " > ===== Downloading =============="
+domule "show dl" | cut -d' ' -f4- | sed -e 's/  \+/ /g' -e '1~2s/^/@ /' -e 's/\/ /\//g' -e '2~2s/-/ @ /g' -e '2~2s/^/ > /g' | tac | paste -d " "  - - | grep "Downloading" | cut -d'@' -f1,2,5- | column -t -s'@' | cut -c-"$(tput cols)"
+echo " > ===== InActive ================="
+domule "show dl" | cut -d' ' -f4- | sed -e 's/  \+/ /g' -e '1~2s/^/@ /' -e 's/\/ /\//g' -e '2~2s/-/ @ /g' -e '2~2s/^/ > /g' | tac | paste -d " "  - - | grep "Waiting\|Paused" | cut -d'@' -f1,2,5- | column -t -s'@' | cut -c-"$(tput cols)"
+echo " > ===== Uploading ================"
+domule "show ul" | sed -e 's/  \+/ /g' -e 's@http.*emule-project....@eMule@gi' -e 's@http.*aMule....@aMule@gi' -e 's@http.*adunanza....@AdunanzA@gi'

@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+
+helpmsg() {
+cat <<EOF
+desc: fzf change amule ed2k server
+depend: amule fzf coreutils
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+export FZF_DEFAULT_OPTS="-e -i --info=hidden --layout=reverse --scroll-off=5 --tiebreak=index --bind 'home:first,end:last,tab:down,shift-tab:up,ctrl-p:half-page-up,ctrl-n:half-page-down,ctrl-b:page-up,ctrl-f:page-down,ctrl-h:first,ctrl-l:last' --header 'C-j/k/n/p/f/b/h/l|Tab/Shift-Tab/End/Home:navigate'"
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null | grep "^ >"
+}
+
+selected="$(domule "show servers" | fzf --prompt="amulecmd - connect to server: " | cut -d '[' -f2 | cut -d ']' -f1)"
+[ -z "$selected" ] && exit
+domule "connect $selected"

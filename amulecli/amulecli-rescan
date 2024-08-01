@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+
+helpmsg() {
+cat <<EOF
+desc:   rescan amule shared directories
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null
+}
+domule "reload shared"

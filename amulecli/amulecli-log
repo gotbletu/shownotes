@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# usage:  $ amule-log | tail -20
+#         $ watch -t "amule-log | tail -20"
+#         $ viddy -t "amule-log | tail -20"
+
+helpmsg() {
+cat <<EOF
+desc:   display amule logs
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null | grep '^ >  [[:alnum:]]'
+}
+domule "show log" | grep -v -E 'New external connection accepted|Access granted.|External connection closed.|Connecting client: aMulecmd GIT'

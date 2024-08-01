@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# desc:   kill local amule daemon and webui
+
+killall -9 amuled 2>/dev/null
+killall -9 amuleweb 2>/dev/null

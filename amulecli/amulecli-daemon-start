@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# demo:   https://youtu.be/IpHdH1mCUVc
+# desc:   start amule daemon
+
+# using until loop because the daemon doesnt always start
+until [ "$(pidof -x amuled | wc -l)" = 1 ] ; do
+  amuled --full-daemon
+  sleep 8
+done

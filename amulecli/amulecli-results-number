@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# demo:   https://youtu.be/IpHdH1mCUVc
+# depend: amule awk grep sed coreutils fzf
+# usage:  $ amule-results
+#         $ viddy -t amule-results
+#         $ while true; do amule-results | less ; done
+#           ^ to kill a infinite while loop, use ctrl-z to suspend, kill %1
+
+helpmsg() {
+cat <<EOF
+desc:   display amule search results, sort by numbers (top-to-bottom)
+depend: amule sed grep coreutils ncurses
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null
+}
+### Note: not possible to send two commands 'Results' and 'Download <Num>' in the same session
+
+## sort by numbers (top-to-bottom)
+domule "results" | sed '1,4d'
+

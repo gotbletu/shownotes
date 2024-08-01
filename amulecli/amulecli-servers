@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# demo:   https://youtu.be/IpHdH1mCUVc
+# usage:  $ amule-servers
+#         $ viddy -t amule-servers
+
+helpmsg() {
+cat <<EOF
+desc:   display amule ed2k servers list
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null | grep "^ >"
+}
+domule "statistics" | grep 'Uptime\|Failed Servers\|Working Servers' | sed 's/  \+/ /g'
+domule "show servers"

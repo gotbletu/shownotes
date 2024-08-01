@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# demo:   https://youtu.be/IpHdH1mCUVc
+
+helpmsg() {
+cat <<EOF
+desc:   cancel amule selected file downloads using fzf
+depend: amule grep fzf coreutils
+
+options:
+  -c, --config          Use a different config
+  -h, --help            Show help page
+
+example:
+  ${0##*/} -c ~/.aMule/amulecmd-server.conf
+
+EOF
+}
+
+if [ $# -lt 1 ]; then
+    source ~/.aMule/amulecmd.conf
+elif [ "$1" = -c ] || [ "$1" = --config ]; then
+    source "$2"
+elif [ "$1" = -h ] || [ "$1" = --help ]; then
+    helpmsg
+    exit
+fi
+
+export FZF_DEFAULT_OPTS="--exact --ignore-case --no-sort --multi --tac --info=hidden --layout=reverse --scroll-off=5 --tiebreak=index --bind 'home:first,end:last,ctrl-p:half-page-up,ctrl-n:half-page-down,ctrl-b:page-up,ctrl-f:page-down,ctrl-h:first,ctrl-l:last' --header 'C-j/k/n/p/f/b/h/l:navigate Tab:mark/unmark Enter:select'"
+
+domule() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null \
+  | grep "^ >" | paste -d " "  - - | grep "Downloading\|Paused\|Waiting" | cut -d '>' -f2  | cut -c 2-
+}
+domulecmd() {
+  amulecmd --password "$amu_pass" --host "$amu_host" --port "$amu_port" --command "$@" 2>/dev/null
+}
+domule "show dl" | fzf --delimiter ' ' --with-nth='2..' --prompt="select amule file(s) to cancel: " \
+    | cut -d ' ' -f1 | while read -r line; do domulecmd "cancel $line" ; done
