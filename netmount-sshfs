@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+# author: gotbletu
+# desc: toggle mount/unmount sshfs
+# depend: sshfs fuse2 openssh coreutils grep
+# demo: https://youtu.be/nB31zZR2qy8
+# example: mkdir -vp /tmp/zinohd && sshfs root@192.168.1.120:/media/data /tmp/zinohd
+#           echo "mypass" | sshfs root@192.168.1.120:/media/data /tmp/zinohd -o password_stdin
+# unmount: fusermount -u /full/path/mountpoint
+
+#------Login-----------
+host_nickname=mancave
+host_server=username@192.168.1.120
+host_password="abcdefg"
+host_dir=/
+mount_point="$XDG_RUNTIME_DIR/sshfs/${host_nickname}_${host_server}"
+#----------------------
+
+color_off='\e[0m'
+red='\e[0;31m'
+green='\e[0;32m'
+if [ -d "$mount_point" ]; then
+  fusermount -u "$mount_point"
+  rmdir "$mount_point"
+  host_server=$(mount | grep -i "$host_server" | cut -d':' -f1)
+else
+  mkdir -p "$mount_point"
+
+  # auto login
+  echo "$host_password" | sshfs "$host_server":"$host_dir" "$mount_point" -o password_stdin
+
+  # prompt for password
+  # sshfs "$host_server":"$host_dir" "$mount_point"
+  
+  host_server=$(mount | grep -i "$host_server" | cut -d':' -f1)
+fi
+[ -z "$host_server" ] && printf "%b\n" "unmounted${red} $mount_point ${color_off}" || printf "%b\n" "mounted at${green} $mount_point ${color_off}"
+
