@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # author: gotbletu
 # desc: toggle mount/unmount sshfs
-# depend: sshfs fuse2 openssh coreutils grep
+# depend: sshfs fuse2 openssh coreutils grep util-linux
 # demo: https://youtu.be/nB31zZR2qy8
 # example: mkdir -vp /tmp/zinohd && sshfs root@192.168.1.120:/media/data /tmp/zinohd
 #           echo "mypass" | sshfs root@192.168.1.120:/media/data /tmp/zinohd -o password_stdin
