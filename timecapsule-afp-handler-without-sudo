@@ -1,0 +1,82 @@
+#!/usr/bin/env sh
+# author: gotbletu (@youtube|github|odysee)
+#         https://www.youtube.com/user/gotbletu
+# desc:   toggle mount and unmount apple timecapsule with account setup (works on linux kernel 5.15+)
+# demo:   https://www.youtube.com/watch?v=miHxtIqp94w
+# depend: afpfs-ng grep util-linux coreutils procps-ng
+# reff:   https://www.linuxadictos.com/en/how-to-access-an-afp-server-in-linux-with-afpfs-ng-valid-for-airport-extreme.html
+#         mkdir /run/user/$(id -u)/netmount/
+#         mount_afp afp://afp_user:afp_pass@192.168.1.xx/Data /run/user/$(id -u)/netmount/
+#         umount /run/user/$(id -u)/netmount/
+#         rmdir /run/user/$(id -u)/netmount/
+# clog:   2026-09-07 remove sudo requirements. Start afpfsd with nohup for proper daemon background process, this fix crashing on unmount
+#         2022-06-24 use afpfs-ng instead of cifs-utils
+# tags:   apple timecapsule, airport extreme, afp, apple filing protocol, smb, samba share, linux mounting, macos, nas, file sharing
+
+# Time Capsule Settings with Accounts:
+# 01_airport_main.png                   https://i.imgur.com/XJXCEgd.png
+# 02_airport_deviceinfo.png             https://i.imgur.com/ktFEX3J.png
+# 03_basestation_tab.png                https://i.imgur.com/4kClCzf.png
+# 04_internet_tab.png                   https://i.imgur.com/R6KK6b0.png
+# 05_internet_tab_opts.png              https://i.imgur.com/mjAGIM4.png
+# 06_wireless_tab.png                   https://i.imgur.com/ThskCXp.png
+# 07_network_tab.png                    https://i.imgur.com/LqT4hSw.png
+# 08_disks_tab.png                      https://i.imgur.com/ATG8QQi.png
+# 09_disks_tab_visitor_account.png      https://i.imgur.com/gVdrucO.png
+# 10_disks_tab_admin_account.png        https://i.imgur.com/ihqpUlx.png
+
+# ONLY CHANGE THIS SECTION
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# Device IP Address
+# list all currently connected device:
+# sudo nmap -sn 192.168.1.0/24
+# or
+# sudo nmap -sn 192.168.0.0/24
+capsule_ip_addr="192.168.X.XXX"
+
+# name to remember what this is sharing
+capsule_nickname="mymovies"
+
+# Name of Partition
+# 08_disks_tab.png                      https://i.imgur.com/ATG8QQi.png
+capsule_partition="Data"
+
+# Time Capsule Account Password
+# (Stick With Basic Letter And Numbers To Make It Easy , Else Use \ To Escape Special Characters)
+# 09_disks_tab_visitor_account.png      https://i.imgur.com/gVdrucO.png
+# 10_disks_tab_admin_account.png        https://i.imgur.com/ihqpUlx.png
+account_user="YOUR_USERNAME"
+account_pass="YOUR_PASSWORD"
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+#### run daemon if process does not exist
+### note: using nohup because the daemon kills itself when unmounting for some unknown reason
+pidof -qx afpfsd || nohup afpfsd >/dev/null 2>&1
+
+color_off='\e[0m'       # text reset
+red='\e[0;31m'          # red
+yellow='\e[0;33m'       # yellow
+
+#### where to mount time capsule (dont use spaces in path, it will auto create folder)
+mount_point_partition="/run/user/$(id -u)/netmount/afp_${capsule_nickname}_${capsule_ip_addr}_${capsule_partition}"
+mount_point_user="/run/user/$(id -u)/netmount/afp_${capsule_nickname}_${capsule_ip_addr}_${account_user}"
+
+#### toggle mount and unmount of time capsule
+is_mounted=$(mount 2>/dev/null | grep "$mount_point_partition" | cut -d' ' -f3)
+if [ "$is_mounted" ]; then
+  umount "$mount_point_partition"
+  umount "$mount_point_user"
+  rmdir "$mount_point_partition"
+  rmdir "$mount_point_user"
+  printf "%b\n" ">>> ${red}Your Apple Time Capsule Is Unmounted${color_off}"
+  printf "%b\n" ">>> ${yellow}Run Script Again If You Wish To Mount${color_off}"
+else
+  mkdir -p "$mount_point_partition"
+  mkdir -p "$mount_point_user"
+  # shellcheck disable=SC2140
+  mount_afp afp://"$account_user":"$account_pass"@"$capsule_ip_addr/$capsule_partition" "$mount_point_partition"
+  # shellcheck disable=SC2140
+  mount_afp afp://"$account_user":"$account_pass"@"$capsule_ip_addr/$account_user" "$mount_point_user"
+fi
