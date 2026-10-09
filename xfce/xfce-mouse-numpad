@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+# desc: toggle xfce numpad mouse emulation accessibility feature
+# demo: https://youtu.be/KcfCNbfhr-U
+# https://en.wikipedia.org/wiki/Mouse_keys
+# https://forum.xfce.org/viewtopic.php?id=8230
+# https://specifications.freedesktop.org/icon-naming/latest/#names
+# https://www.patrickmin.com/linux/images/keypad.jpg
+
+if [ "$(xfconf-query -c accessibility -p /MouseKeys)" = "false" ]; then
+  xfconf-query -c accessibility -p /MouseKeys -s true
+  notify-send --expire-time 2000 --icon=input-mouse "Enable Mouse Emulation"
+else
+  xfconf-query -c accessibility -p /MouseKeys -s false
+  notify-send --expire-time 2000 --icon=process-stop "Disable Mouse Emulation"
+fi
+
+# #### Enable Mouse Emulation via Numpad
+# xfce-settings-manager > accessibility > mouse > [x] use mouse emulation
+#
+#    ### default mouse emulation settings
+#    150   Acceleration delay (in milliseconds)
+#    20    Repeat interval (in milliseconds)
+#    3000  Acceleration time (in milliseconds)
+#    1000  Maximum speed (in pixels per second)
+#    0     Acceleration profile
+#
+#    ### Note: lower number means faster speed
+#    50   Acceleration delay (in milliseconds)
+#    20    Repeat interval (in milliseconds)
+#    100   Acceleration time (in milliseconds)
+#    1000  Maximum speed (in pixels per second)
+#    0     Acceleration profile
+
+#### Button Meaning
+#    / = select left click mode (primary)
+#    * = select middle click mode
+#    - = select right click mode (menu)
+#    5 = click
+#    + = double click
+#    0 = hold click
+#    . = release click
+
+#### No Scroll Wheel
+#    use pageup/pagedown/arrow keys instead
+
