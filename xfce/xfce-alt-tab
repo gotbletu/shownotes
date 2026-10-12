@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+# desc: toggle the behavior of XFCE alt-tab key for switching windows on all workspace and back to default
+# demo: https://youtu.be/Dkcfowwendc
+
+if [ "$(xfconf-query -c xfwm4 -p /general/cycle_workspaces)" = "false" ]; then
+  xfconf-query -c xfwm4 -p /general/cycle_workspaces -s true
+  xfconf-query -c xfwm4 -p /general/cycle_minimized -s true
+  xfconf-query -c xfwm4 -p /general/cycle_tabwin_mode -s 1
+  xfconf-query -c xfwm4 -p /general/cycle_raise -s true
+  notify-send --expire-time 2000 --icon=video-display "XFCE Alt-Tab All Workspaces"
+else
+  xfconf-query -c xfwm4 -p /general/cycle_workspaces -s false
+  xfconf-query -c xfwm4 -p /general/cycle_minimized -s false
+  xfconf-query -c xfwm4 -p /general/cycle_tabwin_mode -s 0
+  xfconf-query -c xfwm4 -p /general/cycle_raise -s false
+  notify-send --expire-time 2000 --icon=zoom-original "XFCE Alt-Tab Default"
+fi
+
+
+#### Better Alt+Tab cycle
+# xfce-settings-manager > windows manager tweaks > cycling > [x] cycling through windows on all workspace
+  # xfconf-query -c xfwm4 -p /general/cycle_workspaces -s true
+
+# xfce-settings-manager > windows manager tweaks > cycling > [x] cycling through minimized windows in most recently used order
+  # xfconf-query -c xfwm4 -p /general/cycle_minimized -s true
+
+# xfce-settings-manager > windows manager tweaks > cycling > [x] cycling through windows in a list
+  # xfconf-query -c xfwm4 -p /general/cycle_tabwin_mode -s 1
+
+# xfce-settings-manager > windows manager tweaks > cycling > [x] raise windows while cycling
+  # xfconf-query -c xfwm4 -p /general/cycle_raise -s true
+
